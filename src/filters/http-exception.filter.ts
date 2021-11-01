@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { Request, Response } from 'express';
 import { DiscordService } from 'src/services';
 import { ArgumentsHost, Catch, ExceptionFilter, HttpException } from '@nestjs/common';
@@ -7,6 +8,10 @@ export class HttpExceptionFilter implements ExceptionFilter {
   
   constructor(
     private discordService: DiscordService){ }
+
+  getExceptionName(exception: HttpException) {
+    return _.snakeCase(exception.name).toLocaleLowerCase();
+  }
 
   async catch(exception: HttpException, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
@@ -19,11 +24,12 @@ export class HttpExceptionFilter implements ExceptionFilter {
     }
 
     response.status(status).json({
+      timestamp: +new Date,
+      path: request.url,
       error: true,
       status: status,
-      timestamp: +new Date,
-      response: exception.getResponse(),
-      path: request.url,
+      code: this.getExceptionName(exception), 
+      response: exception.getResponse()
     });
   }
 

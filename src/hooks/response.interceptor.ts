@@ -12,10 +12,11 @@ export class ResponseInterceptor implements NestInterceptor {
 
     return next.handle().pipe(map(data => {
       return {
-        error: false,
-        status: response.status,
         timestamp: +new Date,
         path: request.path,
+        error: false,
+        status: response.statusCode,
+        code: 'status_success',
         response: data
       }
     }));
