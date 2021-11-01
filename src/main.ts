@@ -29,7 +29,7 @@ async function bootstrap() {
   
   app.setGlobalPrefix(Server.globalPreffix);
   app.enableCors();
-  app.enableVersioning()
+  
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
   app.useGlobalFilters(new HttpExceptionFilter(discord));
   app.useGlobalInterceptors(
