@@ -2,7 +2,7 @@ import { HttpService } from '@nestjs/axios';
 import { HttpException, Injectable } from '@nestjs/common';
 
 @Injectable()
-export class DiscordNotifyService {
+export class DiscordService {
 
   private m_DiscordWebhook: any = {
     Webhook: '<WebhookUrl>',

@@ -1,12 +1,12 @@
 import { Request, Response } from 'express';
-import { DiscordNotifyService } from 'src/services';
+import { DiscordService } from 'src/services';
 import { ArgumentsHost, Catch, ExceptionFilter, HttpException } from '@nestjs/common';
 
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
   
   constructor(
-    private discordService: DiscordNotifyService){ }
+    private discordService: DiscordService){ }
 
   async catch(exception: HttpException, host: ArgumentsHost) {
     const ctx = host.switchToHttp();

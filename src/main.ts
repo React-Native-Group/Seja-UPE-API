@@ -1,10 +1,42 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './modules/app.module';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { INestApplication, ValidationPipe } from '@nestjs/common';
+
+import Swagger from './docs/swagger.json';
+import { AppModule } from './modules';
+import { DiscordService } from './services';
+import { HttpExceptionFilter } from './filters';
+import { ResponseInterceptor, TimeoutInterceptor, VersionInterceptor } from './hooks';
 
 declare const module: any;
 
+function setupSwagger(app: INestApplication){
+  const config = new DocumentBuilder()
+    .setTitle(Swagger.title)
+    .setDescription(Swagger.description)
+    .setVersion(Swagger.version)
+    .addBearerAuth()
+    .addTag(Swagger.tag)
+    .build();
+  SwaggerModule.setup(Swagger.path, app, SwaggerModule.createDocument(app, config));
+}
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const discord = app.get<DiscordService>(DiscordService);
+  
+  app.setGlobalPrefix('/api/v1');
+  app.enableCors();
+  app.enableVersioning()
+  app.useGlobalPipes(new ValidationPipe({ transform: true }));
+  app.useGlobalFilters(new HttpExceptionFilter(discord));
+  app.useGlobalInterceptors(
+    new ResponseInterceptor(), 
+    new TimeoutInterceptor(), 
+    new VersionInterceptor());
+
+  setupSwagger(app);
+
   await app.listen(3000);
   
   if (module.hot) {

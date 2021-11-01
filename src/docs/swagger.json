@@ -1,0 +1,7 @@
+{
+  "path": "docs",
+  "title": "Seja UPE - Documentação API",
+  "description": "Documentação dos endpoints do Webservice Seja UPE.",
+  "version": "1.0",
+  "tag": "upe, cursos, documentação, api, endpoints, oas3, swagger, nestjs"
+}
