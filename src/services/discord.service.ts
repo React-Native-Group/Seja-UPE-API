@@ -1,3 +1,4 @@
+import Config from '../config/discord.json';
 import { HttpService } from '@nestjs/axios';
 import { HttpException, Injectable } from '@nestjs/common';
 
@@ -5,11 +6,11 @@ import { HttpException, Injectable } from '@nestjs/common';
 export class DiscordService {
 
   private m_DiscordWebhook: any = {
-    Webhook: '<WebhookUrl>',
-    IconUrl: '<IconUrl>',
-    ErrorTitle: "Exceção não tratada capturada!",
-    ErrorDescription: "O filtro de exceções detectou uma exceção não tratada na API Seja UPE Nest.",
-    ErrorFooter: "Copyright (c) 2021 Seja UPE"
+    Webhook: Config.webhookUrl,
+    IconUrl: Config.iconUrl,
+    ErrorTitle: Config.errorTitle,
+    ErrorDescription: Config.errorDescription,
+    ErrorFooter: Config.errorFooter
   };
 
   constructor(private http: HttpService) { }
@@ -30,7 +31,7 @@ export class DiscordService {
         embeds: [
           {
             "author": {
-              "name": "[Exception Filter] Seja UPE Webservice",
+              "name": Config.authorName,
               "icon_url": this.m_DiscordWebhook.IconUrl
             },
             "title": this.m_DiscordWebhook.ErrorTitle,

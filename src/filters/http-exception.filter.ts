@@ -10,7 +10,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
     private discordService: DiscordService){ }
 
   getExceptionName(exception: HttpException) {
-    return 'status_' + _.snakeCase(exception.name).toLowerCase();
+    return _.snakeCase('Status' + exception.name).toLowerCase();
   }
 
   async catch(exception: HttpException, host: ArgumentsHost) {
@@ -18,6 +18,9 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const request = ctx.getRequest<Request>();
     const response = ctx.getResponse<Response>();
     const status = exception.getStatus();
+    const payload = <any>exception.getResponse();
+
+    delete payload.statusCode;
 
     if (status >= 500 && status < 600){
       await this.discordService.sendNotification(exception);
@@ -29,7 +32,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
       error: true,
       status: status,
       code: this.getExceptionName(exception), 
-      response: exception.getResponse()
+      response: payload
     });
   }
 

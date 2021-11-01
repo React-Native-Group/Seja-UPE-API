@@ -2,7 +2,9 @@ import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 
+import Server from './config/server.json';
 import Swagger from './docs/swagger.json';
+
 import { AppModule } from './modules';
 import { DiscordService } from './services';
 import { HttpExceptionFilter } from './filters';
@@ -25,7 +27,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const discord = app.get<DiscordService>(DiscordService);
   
-  app.setGlobalPrefix('/api/v1');
+  app.setGlobalPrefix(Server.globalPreffix);
   app.enableCors();
   app.enableVersioning()
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
@@ -37,7 +39,7 @@ async function bootstrap() {
 
   setupSwagger(app);
 
-  await app.listen(3000);
+  await app.listen(Server.port);
   
   if (module.hot) {
     module.hot.accept();

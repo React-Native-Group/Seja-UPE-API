@@ -1,0 +1,8 @@
+{
+  "webhookUrl": "<WebhookUrl>",
+  "iconUrl": "<IconUrl>",
+  "errorTitle": "Exceção não tratada capturada!",
+  "errorDescription": "O filtro de exceções detectou uma exceção não tratada na API Seja UPE Nest.",
+  "errorFooter": "Copyright (c) 2021 Seja UPE",
+  "authorName": "[Exception Filter] Seja UPE Webservice"
+}
