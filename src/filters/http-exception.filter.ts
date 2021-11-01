@@ -10,7 +10,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
     private discordService: DiscordService){ }
 
   getExceptionName(exception: HttpException) {
-    return _.snakeCase(exception.name).toLocaleLowerCase();
+    return 'status_' + _.snakeCase(exception.name).toLowerCase();
   }
 
   async catch(exception: HttpException, host: ArgumentsHost) {
