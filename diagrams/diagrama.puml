@@ -1,0 +1,36 @@
+@startuml
+class OutdatedVersionException extends HttpException
+class DiscordService {
+    -m_DiscordWebhook: any
+    -http: any
+    -chunkString(str: any, length: any): string[]
+    -generateMessage(message: string): any[]
+    +sendNotification(err: any): Promise<unknown>
+}
+class HttpExceptionFilter implements ExceptionFilter {
+    -discordService: DiscordService
+    +getExceptionName(exception: any): any
+    +catch(exception: any, host: any): Promise<void>
+}
+class ResponseInterceptor implements NestInterceptor {
+    +intercept(context: any, next: any): any
+}
+class TimeoutInterceptor implements NestInterceptor {
+    +intercept(context: any, next: any): any
+}
+class VersionInterceptor implements NestInterceptor {
+    +intercept(context: any, next: any): any
+}
+class DatabaseModule
+class ServicesModule
+class AppModule
+class AuthorizeGuard implements CanActivate {
+    -reflector: any
+    +canActivate(context: any): any
+}
+class JwtAuthGuard {
+    +canActivate(context: any): any
+    +handleRequest(err: any, user: any, info: any): any
+}
+HttpExceptionFilter --> "1" DiscordService
+@enduml

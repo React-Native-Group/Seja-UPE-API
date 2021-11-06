@@ -2,6 +2,7 @@ import { Request } from 'express';
 import { Observable } from 'rxjs';
 import { compare } from 'compare-versions';
 import { OutdatedVersionException } from 'src/exceptions';
+import { requiredClientVersion } from 'src/config/app.json';
 import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nestjs/common';
 
 @Injectable()
@@ -11,8 +12,8 @@ export class VersionInterceptor implements NestInterceptor {
     const ctx = context.switchToHttp();
     const request = ctx.getRequest<Request>();
 
-    const [clientVersion] = request.headers['X-App-Version'];
-    const clientRequiredVersion = '0.0.1';
+    const clientVersion = request.get('x-app-version');
+    const clientRequiredVersion = requiredClientVersion;
 
     if (!!clientVersion){
       if (compare(clientVersion, clientRequiredVersion, '<')){
