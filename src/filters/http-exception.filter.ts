@@ -1,13 +1,9 @@
 import _ from 'lodash';
 import { Request, Response } from 'express';
-import { DiscordService } from 'src/services';
 import { ArgumentsHost, Catch, ExceptionFilter, HttpException } from '@nestjs/common';
 
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
-  
-  constructor(
-    private discordService: DiscordService){ }
 
   getExceptionName(exception: HttpException) {
     return _.snakeCase('Status' + exception.name).toLowerCase();
@@ -23,7 +19,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
     delete payload.statusCode;
 
     if (status >= 500 && status < 600){
-      await this.discordService.sendNotification(exception);
+      //Log de erro 5xx
     }
 
     response.status(status).json({

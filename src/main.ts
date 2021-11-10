@@ -6,7 +6,6 @@ import Server from './config/server.json';
 import Swagger from './docs/swagger.json';
 
 import { AppModule } from './modules';
-import { DiscordService } from './services';
 import { HttpExceptionFilter } from './filters';
 import { ResponseInterceptor, TimeoutInterceptor, VersionInterceptor } from './hooks';
 
@@ -25,13 +24,12 @@ function setupSwagger(app: INestApplication){
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const discord = app.get<DiscordService>(DiscordService);
   
   app.setGlobalPrefix(Server.globalPreffix);
   app.enableCors();
   
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
-  app.useGlobalFilters(new HttpExceptionFilter(discord));
+  app.useGlobalFilters(new HttpExceptionFilter());
   app.useGlobalInterceptors(
     new ResponseInterceptor(), 
     new TimeoutInterceptor(), 
