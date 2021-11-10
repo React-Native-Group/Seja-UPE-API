@@ -1,10 +1,10 @@
 import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
-import { DiscordService } from 'src/services';
+import { MailerService } from 'src/services';
 
 @Module({
   imports: [HttpModule],
-  providers: [DiscordService],
-  exports: [DiscordService]
+  providers: [MailerService],
+  exports: [MailerService]
 })
 export class ServicesModule {}

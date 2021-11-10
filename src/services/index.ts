@@ -1,1 +1,1 @@
-export * from './discord.service';
+export * from './mailer.service';
