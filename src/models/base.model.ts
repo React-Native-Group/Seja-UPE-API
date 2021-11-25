@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsInt, validate } from "class-validator";
-import { InvalidObjectException } from "src/exceptions/invalid-object.exception";
+import { InvalidObjectException } from "src/exceptions";
 import {
   BaseEntity,
   BeforeInsert,
