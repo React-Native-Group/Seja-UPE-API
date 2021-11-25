@@ -13,12 +13,15 @@ export class MailerService {
         if (!!err)
           return result(false);
 
+        const body = data.toString()
+          .replace("${{USER_NAME}}", userName);
+
         let mail = new Mailer()
           .key(mailerKey)
           .from(fromName, from)
           .to(userName, address)
           .subject(welcomeSubject)
-          .htmlBody(data.toString())
+          .htmlBody(body)
           .textBody('E-mail indisponível para o seu dispositivo. Tente acessar esse e-mail pelo seu computador.');
         
         return result(await mail.send());

@@ -2,12 +2,12 @@ import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 
-import Server from './config/server.json';
-import Swagger from './docs/swagger.json';
-
 import { AppModule } from './modules';
 import { HttpExceptionFilter } from './filters';
 import { ResponseInterceptor, TimeoutInterceptor, VersionInterceptor } from './hooks';
+
+import Server from './config/server.json';
+import Swagger from './docs/swagger.json';
 
 declare const module: any;
 

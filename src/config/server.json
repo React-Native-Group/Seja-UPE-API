@@ -4,5 +4,6 @@
   "OAuth2":{
     "expoClientId": "757374333766-0f3q2t3vgrprhpnn4o1k73l36qaet76t.apps.googleusercontent.com",
     "realClientId": "304456217456-o9c9e60p86pajmvrmhm38arfhs3f2dmv.apps.googleusercontent.com"
-  }
+  },
+  "jwtSecretKey": "Df]iHy>dM<Hr#AlAMbjRTmRfhr5QjfFKYp2(!ilPjwOXdvEPcSZWq8bEKIUI>M!c}5P<k$zdUZOCj}l0>*tIxrShL&E}O{N}]hCsM()v{uW)Akn7oM6Jpv78}QTJ#Cl[ARn!=bNe*Q[w7dVF#ExdLcUFfiBEMvPQ$iCj%H[QMo1@I=9kFMZT}NlA}!*$enEK30#k#kN7C6$3h7Cc}bBG@uBf(ixmZ>C#BjYSRwcF$Feg5T9nJ6*FAy[2FtE1jH$H"
 }

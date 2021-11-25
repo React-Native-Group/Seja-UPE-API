@@ -1,0 +1,1 @@
+export * from './authorization.auth.vld';
