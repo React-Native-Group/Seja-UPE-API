@@ -1,36 +1,39 @@
 @startuml
 class OutdatedVersionException extends HttpException
-class DiscordService {
-    -m_DiscordWebhook: any
-    -http: any
-    -chunkString(str: any, length: any): string[]
-    -generateMessage(message: string): any[]
-    +sendNotification(err: any): Promise<unknown>
-}
+class InvalidObjectException extends BadRequestException
+class ServerTimeoutException extends RequestTimeoutException
 class HttpExceptionFilter implements ExceptionFilter {
-    -discordService: DiscordService
-    +getExceptionName(exception: any): any
-    +catch(exception: any, host: any): Promise<void>
+    +getExceptionName(exception: HttpException): string
+    +catch(exception: HttpException, host: ArgumentsHost): Promise<void>
 }
 class ResponseInterceptor implements NestInterceptor {
-    +intercept(context: any, next: any): any
+    +intercept(context: ExecutionContext, next: CallHandler<any>): Observable<any>
 }
 class TimeoutInterceptor implements NestInterceptor {
-    +intercept(context: any, next: any): any
+    +intercept(context: ExecutionContext, next: CallHandler<any>): Observable<any>
 }
 class VersionInterceptor implements NestInterceptor {
-    +intercept(context: any, next: any): any
+    +intercept(context: ExecutionContext, next: CallHandler<any>): Observable<any>
 }
 class DatabaseModule
+class MailerService {
+    +sendWelcomeMail(userName: string, address: string): Promise<boolean | MailerResponse>
+}
 class ServicesModule
 class AppModule
+class BaseModel extends BaseEntity {
+    +id: number
+    +createdAt: number
+    +updatedAt?: number
+    +validate(): Promise<void>
+    +update(): Promise<void>
+}
 class AuthorizeGuard implements CanActivate {
-    -reflector: any
-    +canActivate(context: any): any
+    -reflector: Reflector
+    +canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean>
 }
 class JwtAuthGuard {
-    +canActivate(context: any): any
+    +canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean>
     +handleRequest(err: any, user: any, info: any): any
 }
-HttpExceptionFilter --> "1" DiscordService
 @enduml
