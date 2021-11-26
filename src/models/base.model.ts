@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsInt, validate } from "class-validator";
+import { IsInt, IsOptional, validate } from "class-validator";
 import { InvalidObjectException } from "src/exceptions";
 import {
   BaseEntity,
@@ -15,13 +15,14 @@ export class BaseModel extends BaseEntity {
   public id: number;
 
   @ApiProperty()
-  @Column()
   @IsInt()
+  @Column()
   public createdAt: number = +new Date;
 
   @ApiProperty()
-  @Column({ nullable: true })
+  @IsOptional()
   @IsInt()
+  @Column({ nullable: true })
   public updatedAt?: number = null;
 
   @BeforeInsert()

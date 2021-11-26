@@ -16,19 +16,19 @@ export class AuthController {
 
   @Post("authorize")
   async onAuthRequested(@Body() body: AuthorizationValidator){
-    let result = await this.oauth2Service.verifyIdToken(body.idToken);
-    if (!result)
+    let payload = await this.oauth2Service.verifyIdToken(body.idToken);
+    if (!payload)
       throw new OAuth2UnauthorizedException();
 
-    const { email, nonce, name } = result;
+    const { email, name } = payload;
 
-    if (await this.authService.getPreviousAuthorization(body.idToken, email, nonce)){
+    if (await this.authService.getPreviousAuthorization(body.idToken, payload)){
       await this.mailerService.sendWelcomeMail(name, email);
     }
 
     return {
-      bearer: await this.authService.buildToken(result),
-      payload: result
+      bearer: await this.authService.buildToken(payload),
+      payload
     };
   }
 

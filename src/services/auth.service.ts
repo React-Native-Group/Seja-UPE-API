@@ -1,8 +1,8 @@
-import { TokenPayload } from "google-auth-library";
-import { InjectRepository } from "@nestjs/typeorm";
-import { Injectable } from "@nestjs/common";
-import { JwtService } from "@nestjs/jwt";
 import { Repository } from "typeorm";
+import { JwtService } from "@nestjs/jwt";
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { TokenPayload } from "google-auth-library";
 import { AuthorizationModel } from "src/models";
 
 @Injectable()
@@ -25,13 +25,14 @@ export class AuthService {
   /**Função para verificar se já houve uma autorização realizada no passado.
    * 
    * @param idToken O token id do usuário.
-   * @param userEmail O e-mail do usuário.
-   * @param nonce Um nonce gerado pelos servidores da Google na autorização.
+   * @param payload A carga útil do objeto de retorno da api OAuth2 Google.
    * @returns Promise<boolean>
    */
-  async getPreviousAuthorization(idToken: string, userEmail: string, nonce: string){
-    let count = await this.authorizations.count({ userEmail });
-    await this.authorizations.save({ idToken, userEmail, nonce });
+  async getPreviousAuthorization(idToken: string, payload: TokenPayload){
+    const { email, sub, at_hash: atHash, iat, exp } = payload;
+    let count = await this.authorizations.count({ email });
+    let authorization = this.authorizations.create({ idToken, email, sub, atHash: atHash, iat, exp });
+    await this.authorizations.save(authorization);
     return !(count > 0); //Can send welcome mail?
   }
 

@@ -1,7 +1,8 @@
-import { Column } from "typeorm";
-import { IsDefined, IsEmail, IsNotEmpty, IsString } from "class-validator";
+import { Column, Entity } from "typeorm";
+import { IsDefined, IsEmail, IsInt, IsNotEmpty, IsString } from "class-validator";
 import { BaseModel } from "./base.model";
 
+@Entity({ name: 'tbl_authorization' })
 export class AuthorizationModel extends BaseModel {
 
   @IsString()
@@ -14,12 +15,30 @@ export class AuthorizationModel extends BaseModel {
   @IsDefined()
   @IsNotEmpty()
   @Column()
-  public userEmail: string;
+  public email: string;
 
   @IsString()
-  @IsDefined()
   @IsNotEmpty()
+  @IsDefined()
   @Column()
-  public nonce: string;
+  public sub: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @IsDefined()
+  @Column()
+  public atHash: string;
+
+  @IsInt()
+  @IsNotEmpty()
+  @IsDefined()
+  @Column()
+  public iat: number;
+
+  @IsInt()
+  @IsNotEmpty()
+  @IsDefined()
+  @Column()
+  public exp: number;
 
 }
