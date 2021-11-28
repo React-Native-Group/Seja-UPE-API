@@ -1,12 +1,19 @@
-import { Controller, Post } from "@nestjs/common";
+import { Controller, Param, ParseIntPipe, Post } from "@nestjs/common";
+import { Permission, Permissions } from "src/security";
 
 @Controller('evaluation')
 export class EvaluationController {
 
-  @Post("/rating")
-  onRatingSent(){}
+  @Permissions(Permission.DEFAULT_LEVEL)
+  @Post("/rating/survey/:note")
+  onRatingSent(@Param('note', ParseIntPipe) note: number){
+    console.log(note)
+  }
 
+  @Permissions(Permission.DEFAULT_LEVEL)
   @Post("popularity/:courseId")
-  onPopularitySent(){}
+  onPopularitySent(@Param('courseId', ParseIntPipe) courseId: number){
+    
+  }
 
 }
