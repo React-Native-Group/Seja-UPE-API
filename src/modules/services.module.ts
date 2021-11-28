@@ -3,8 +3,16 @@ import { JwtModule } from '@nestjs/jwt';
 import { HttpModule } from '@nestjs/axios';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { AuthService, CourseService, JwtStrategy, MailerService, OAuth2Service } from 'src/services';
 import { jwtSecretKey } from 'src/config/server.json';
+
+import {
+  AuthService,
+  CourseService,
+  EvaluationService,
+  JwtStrategy,
+  MailerService,
+  OAuth2Service
+} from 'src/services';
 
 import {
   AuthorizationModel,
@@ -12,7 +20,9 @@ import {
   ContactModel,
   CourseModel,
   EventModel,
+  PopularityModel,
   ProfessorModel,
+  RatingModel,
   SisuGradeModel,
   SocialModel,
   SsaGradeModel
@@ -29,7 +39,8 @@ import {
       CourseModel, CampusModel, 
       ProfessorModel, EventModel, 
       ContactModel, SocialModel, 
-      SisuGradeModel, SsaGradeModel
+      SisuGradeModel, SsaGradeModel,
+      RatingModel, PopularityModel
     ])
   ],
   providers: [
@@ -37,14 +48,16 @@ import {
     AuthService, 
     CourseService, 
     JwtStrategy, 
-    OAuth2Service
+    OAuth2Service,
+    EvaluationService
   ],
   exports: [
     MailerService, 
     AuthService, 
     CourseService, 
     JwtStrategy, 
-    OAuth2Service
+    OAuth2Service,
+    EvaluationService
   ]
 })
 export class ServicesModule {}
