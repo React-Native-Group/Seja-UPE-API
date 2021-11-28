@@ -5,7 +5,7 @@ import { AuthorizationValidator } from "src/validators";
 import { OAuth2UnauthorizedException } from "src/exceptions";
 import { AuthService, MailerService, OAuth2Service } from "src/services";
 
-@ApiTags("authentication")
+@ApiTags("Autenticação")
 @Controller("auth")
 export class AuthController {
 

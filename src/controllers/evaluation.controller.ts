@@ -1,9 +1,13 @@
-import { Body, Controller, Param, ParseIntPipe, Post } from "@nestjs/common";
-import { Permission, Permissions } from "src/security";
+import { Body, Controller, Param, ParseIntPipe, Post, UseGuards } from "@nestjs/common";
+import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { EvaluationService } from "src/services";
 import { PopularityValidator } from "src/validators";
+import { AuthorizeGuard, Permission, Permissions } from "src/security";
 
-@Controller('evaluation')
+@ApiBearerAuth()
+@ApiTags("Avaliações")
+@UseGuards(AuthorizeGuard)
+@Controller("evaluation")
 export class EvaluationController {
 
   constructor(private evaluationService: EvaluationService){}

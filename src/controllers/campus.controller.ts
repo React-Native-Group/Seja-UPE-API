@@ -1,10 +1,11 @@
 import { Controller, UseGuards } from "@nestjs/common";
-import { ApiBearerAuth } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { AuthorizeGuard } from "src/security";
 
-@Controller("campus")
-@UseGuards(AuthorizeGuard)
+@ApiTags("Campus")
 @ApiBearerAuth()
+@UseGuards(AuthorizeGuard)
+@Controller("campus")
 export class CampusController {
 
   
