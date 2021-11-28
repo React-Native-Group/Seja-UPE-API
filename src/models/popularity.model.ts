@@ -3,7 +3,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { CourseModel } from "./course.model";
 import { BaseModel } from "./base.model";
 
-type PopularityType = 'like' | 'dislike';
+export type PopularityType = 'like' | 'dislike';
 
 @Entity({ name: 'tbl_popularity' })
 export class PopularityModel extends BaseModel {
