@@ -3,6 +3,8 @@ import { ApiProperty } from "@nestjs/swagger";
 import { BaseModel } from "./base.model";
 import { CampusModel } from "./campus.model";
 
+export type EventField = keyof EventModel;
+
 @Entity({ name: 'tbl_event' })
 export class EventModel extends BaseModel {
   

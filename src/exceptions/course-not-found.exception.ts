@@ -1,5 +1,4 @@
 import { NotFoundException } from "@nestjs/common";
-import { ValidationError } from "class-validator";
 
 export class CourseNotFoundException extends NotFoundException {
 

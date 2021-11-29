@@ -3,6 +3,8 @@ import { ApiProperty } from "@nestjs/swagger";
 import { BaseModel } from "./base.model";
 import { CourseModel } from "./course.model";
 
+export type ProfessorField = keyof ProfessorModel;
+
 @Entity({ name: 'tbl_professor' })
 export class ProfessorModel extends BaseModel {
 

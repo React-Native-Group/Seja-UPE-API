@@ -6,6 +6,8 @@ import { BaseModel } from "./base.model";
 
 const GRADE_PATTERN = new RegExp(/^\d{1,2}(?:\.\d{1,2}$)?/);
 
+export type SsaGradeField = keyof SsaGradeModel;
+
 @Entity({ name: 'tbl_ssa_grade' })
 export class SsaGradeModel extends BaseModel {
 

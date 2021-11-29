@@ -8,6 +8,8 @@ import { ProfessorModel } from "./professor.model";
 import { SisuGradeModel } from "./sisu-grade.model";
 import { PopularityModel } from "./popularity.model";
 
+export type CourseField = keyof CourseModel;
+
 @Entity({ name: 'tbl_course' })
 export class CourseModel extends BaseModel {
 

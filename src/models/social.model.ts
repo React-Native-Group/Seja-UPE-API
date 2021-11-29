@@ -5,6 +5,8 @@ import { CampusModel } from "./campus.model";
 
 export type SocialNetwork = "instagram" | "facebook" | "youtube" | "twitter";
 
+export type SocialField = keyof SocialModel;
+
 @Entity({ name: 'tbl_social' })
 export class SocialModel extends BaseModel {
 

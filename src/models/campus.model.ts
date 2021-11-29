@@ -8,6 +8,8 @@ import { SocialModel } from "./social.model";
 import { CourseModel } from "./course.model";
 import { ContactModel } from "./contact.model";
 
+export type CampusField = keyof CampusModel;
+
 @Entity({ name: 'tbl_campus' })
 export class CampusModel extends BaseModel {
 
