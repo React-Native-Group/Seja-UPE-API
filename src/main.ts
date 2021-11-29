@@ -1,4 +1,5 @@
 import { NestFactory } from '@nestjs/core';
+import { WsAdapter } from '@nestjs/platform-ws';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 
@@ -24,10 +25,11 @@ function setupSwagger(app: INestApplication){
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  
+   
   app.setGlobalPrefix(Server.globalPreffix);
   app.enableCors();
   
+  app.useWebSocketAdapter(new WsAdapter(app));
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
   app.useGlobalFilters(new HttpExceptionFilter());
   app.useGlobalInterceptors(

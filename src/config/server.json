@@ -1,5 +1,6 @@
 {
   "port": 3000,
+  "websockPort": 3000,
   "globalPreffix": "/api/v1",
   "OAuth2":{
     "expoClientId": "757374333766-0f3q2t3vgrprhpnn4o1k73l36qaet76t.apps.googleusercontent.com",

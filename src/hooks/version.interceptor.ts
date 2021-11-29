@@ -1,9 +1,9 @@
+import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nestjs/common';
+import { compare } from 'compare-versions';
 import { Request } from 'express';
 import { Observable } from 'rxjs';
-import { compare } from 'compare-versions';
 import { OutdatedVersionException } from 'src/exceptions';
-import { requiredClientVersion } from 'src/config/app.json';
-import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nestjs/common';
+import { requiredClientVersion } from 'src/config/client.json';
 
 @Injectable()
 export class VersionInterceptor implements NestInterceptor {

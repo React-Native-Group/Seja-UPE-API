@@ -3,6 +3,7 @@ import { AuthModule } from './auth.module';
 import { CampusModule } from './campus.module';
 import { ServicesModule } from './services.module';
 import { DatabaseModule } from './database.module';
+import { WebsocketModule } from './websocket.module';
 import { EvaluationModule } from './evaluation.module';
 
 @Module({
@@ -11,7 +12,8 @@ import { EvaluationModule } from './evaluation.module';
     ServicesModule,
     AuthModule,
     CampusModule,
-    EvaluationModule
+    EvaluationModule,
+    WebsocketModule
   ]
 })
 export class AppModule {}

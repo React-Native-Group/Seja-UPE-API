@@ -22,9 +22,11 @@
     "@nestjs/jwt": "^8.0.0",
     "@nestjs/passport": "^8.0.1",
     "@nestjs/platform-express": "^8.0.0",
+    "@nestjs/platform-ws": "^8.2.3",
     "@nestjs/serve-static": "^2.2.2",
     "@nestjs/swagger": "^5.0.9",
     "@nestjs/typeorm": "^8.0.2",
+    "@nestjs/websockets": "^8.2.3",
     "bcrypt": "^5.0.1",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
@@ -41,7 +43,8 @@
     "sqlite3": "^5.0.2",
     "swagger-ui-express": "^4.1.6",
     "typeorm": "^0.2.37",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "ws": "^8.3.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.0.0",
