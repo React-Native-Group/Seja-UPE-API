@@ -1,19 +1,20 @@
-import { Server, WebSocket } from 'ws';
-import { WebSocketServer, MessageBody } from "@nestjs/websockets";
+import { WebSocket } from 'ws';
+import { MessageBody } from "@nestjs/websockets";
 import { SubscribeMessage, WebSocketGateway } from '@nestjs/websockets';
 import { OnGatewayConnection, OnGatewayDisconnect } from '@nestjs/websockets';
-import { websockPort } from 'src/config/server.json';
 
-@WebSocketGateway(websockPort)
+@WebSocketGateway()
 export class WebSockGateway implements OnGatewayConnection, OnGatewayDisconnect {
   
   public clients: WebSocket[] = [];
   
-  handleConnection(client: WebSocket, ...args: any[]) {
+  handleConnection(client: WebSocket, ...args: any[]) 
+  {
     this.clients.push(client);
   }
   
-  handleDisconnect(client: any) {
+  handleDisconnect(client: any) 
+  {
     let k = this.clients.indexOf(client);
     this.clients.splice(k, 1);
   }
