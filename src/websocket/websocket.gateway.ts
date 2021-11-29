@@ -7,8 +7,6 @@ import { websockPort } from 'src/config/server.json';
 @WebSocketGateway(websockPort)
 export class WebSockGateway implements OnGatewayConnection, OnGatewayDisconnect {
   
-  @WebSocketServer()
-  public server: Server;
   public clients: WebSocket[] = [];
   
   handleConnection(client: WebSocket, ...args: any[]) {
