@@ -17,6 +17,7 @@ function setupSwagger(app: INestApplication){
     .setTitle(Swagger.title)
     .setDescription(Swagger.description)
     .setVersion(Swagger.version)
+    .setContact(Swagger.authorName, Swagger.authorWebsite, Swagger.authorEmail)
     .addBearerAuth()
     .addTag(Swagger.tag)
     .build();

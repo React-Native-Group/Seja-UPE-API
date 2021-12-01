@@ -1,0 +1,231 @@
+@startuml Seja UPE
+class AuthorizationValidator {
+    +idToken: string
+}
+class CampusOptionsValidator {
+    +relations: string[]
+}
+class BaseModel extends BaseEntity {
+    +id: number
+    +createdAt: number
+    +updatedAt?: number
+    +validate(): Promise<void>
+    +update(): Promise<void>
+}
+class EventModel extends BaseModel {
+    +name: string
+    +link: string
+    +campus: CampusModel
+}
+class SocialModel extends BaseModel {
+    +name: SocialNetwork
+    +value: string
+    +campus: CampusModel
+}
+class SsaGradeModel extends BaseModel {
+    +year: number
+    +shareholderHighest: string
+    +shareholderLowest: string
+    +highest: string
+    +lowest: string
+    +concurrence: number
+    +course: CourseModel
+}
+class ProfessorModel extends BaseModel {
+    +name: string
+    +shortbio: string
+    +email: string
+    +lattesUrl: string
+    +photoUrl: string
+    +course: CourseModel
+}
+class SisuGradeModel extends BaseModel {
+    +year: number
+    +shareholderHighest: string
+    +shareholderLowest: string
+    +highest: string
+    +lowest: string
+    +course: CourseModel
+}
+class PopularityModel extends BaseModel {
+    +value: PopularityType
+    +course: CourseModel
+}
+class CourseModel extends BaseModel {
+    +name: string
+    +about: string
+    +profile: string
+    +history: string
+    +expertiseAreas: string
+    +jobMarket: string
+    +ingress: string
+    +ppcUrl: string
+    +campus: CampusModel
+    +ssaGrades: SsaGradeModel[]
+    +sisuGrades: SisuGradeModel[]
+    +popularity: PopularityModel[]
+    +professors: ProfessorModel[]
+}
+class ContactModel extends BaseModel {
+    +categoryName: string
+    +fieldIcon: string
+    +value: string
+    +campus: CampusModel
+}
+class CampusModel extends BaseModel {
+    +name: string
+    +description: string
+    +latitude: string
+    +longitude: string
+    +events: EventModel[]
+    +socialNetworks: SocialModel[]
+    +contacts: ContactModel[]
+    +courses: CourseModel[]
+}
+class RatingModel extends BaseModel {
+    +note: number
+}
+class AuthorizationModel extends BaseModel {
+    +idToken: string
+    +email: string
+    +sub: string
+    +atHash: string
+    +iat: number
+    +exp: number
+}
+class PopularityValidator {
+    +courseId: number
+    +value: PopularityType
+}
+class CourseService {
+    -campus: Repository<CampusModel>
+    -course: Repository<CourseModel>
+    -professor: Repository<ProfessorModel>
+    +fetchCampus(relations: string[]): Promise<CampusModel[]>
+    +fetchCourses(campusId: number): Promise<CourseModel[]>
+    +fetchProfessors(courseId: number): Promise<ProfessorModel[]>
+}
+class AuthService {
+    -authorizations: Repository<AuthorizationModel>
+    -jwtService: JwtService
+    +buildToken(payload: TokenPayload): Promise<string>
+    +getPreviousAuthorization(idToken: string, payload: TokenPayload): Promise<boolean>
+}
+class EvaluationService {
+    -courses: Repository<CourseModel>
+    -rating: Repository<RatingModel>
+    -popularity: Repository<PopularityModel>
+    +submitRating(note: number): Promise<RatingModel>
+    +submitCoursePopularity(__0: PopularityValidator): Promise<PopularityModel>
+}
+class OAuth2Service {
+    +verifyIdToken(token: string): Promise<false | TokenPayload>
+}
+class MailerService {
+    +sendWelcomeMail(userName: string, address: string): Promise<boolean>
+}
+class MiningService {
+    +capitalizeString(str: string): string
+    +getShortbioAreas(shortbio: string): string[]
+}
+class JwtStrategy {
+    +validate(payload: any): Promise<any>
+}
+class AuthController {
+    -oauth2Service: OAuth2Service
+    -authService: AuthService
+    -mailerService: MailerService
+    +onAuthRequested(body: AuthorizationValidator): Promise<{ bearer: string; payload: TokenPayload; }>
+}
+class JwtAuthGuard {
+    +canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean>
+    +handleRequest(err: any, user: any, info: any): any
+}
+class AuthorizeGuard implements CanActivate {
+    -reflector: Reflector
+    +canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean>
+}
+class CampusController {
+    -courseService: CourseService
+    +onCampusRequested(options: CampusOptionsValidator): Promise<CampusModel[]>
+    +onCourseRequested(campusId: number): Promise<CourseModel[]>
+    +onProfessorsRequested(courseId: number): Promise<ProfessorModel[]>
+}
+class EvaluationController {
+    -evaluationService: EvaluationService
+    +onRatingSent(note: number): Promise<RatingModel>
+    +onPopularitySent(data: PopularityValidator): Promise<PopularityModel>
+}
+class HttpExceptionFilter implements ExceptionFilter {
+    +getExceptionName(exception: HttpException): string
+    +catch(exception: HttpException, host: ArgumentsHost): Promise<void>
+}
+class ResponseInterceptor implements NestInterceptor {
+    +intercept(context: ExecutionContext, next: CallHandler<any>): Observable<any>
+}
+class TimeoutInterceptor implements NestInterceptor {
+    +intercept(context: ExecutionContext, next: CallHandler<any>): Observable<any>
+}
+class VersionInterceptor implements NestInterceptor {
+    +intercept(context: ExecutionContext, next: CallHandler<any>): Observable<any>
+}
+class WebSockGateway implements OnGatewayConnection, OnGatewayDisconnect {
+    +clients: WebSocket[]
+    +handleConnection(client: WebSocket, args: any[]): void
+    +handleDisconnect(client: any): void
+    +onBroadcast(data: any): void
+}
+class ServicesModule
+class AuthModule
+class CampusModule
+class DatabaseModule
+class WebsocketModule
+class EvaluationModule
+class AppModule
+class CampusNotFoundException extends NotFoundException
+class CourseNotFoundException extends NotFoundException
+class InvalidObjectException extends BadRequestException
+class OutdatedVersionException extends HttpException
+class ServerTimeoutException extends RequestTimeoutException
+class OAuth2UnauthorizedException extends UnauthorizedException
+CourseModel --> "1" CampusModel
+CourseModel --> "*" SsaGradeModel
+CourseModel --> "*" SisuGradeModel
+CourseModel --> "*" PopularityModel
+CourseModel --> "*" ProfessorModel
+ContactModel --> "1" CampusModel
+EventModel --> "1" CampusModel
+SocialModel --> "1" CampusModel
+SsaGradeModel --> "1" CourseModel
+ProfessorModel --> "1" CourseModel
+SisuGradeModel --> "1" CourseModel
+PopularityModel --> "1" CourseModel
+CampusModel --> "*" EventModel
+CampusModel --> "*" SocialModel
+CampusModel --> "*" ContactModel
+CampusModel --> "*" CourseModel
+CourseService --> "1" CampusModel
+CourseService --> "1" CourseModel
+CourseService --> "1" ProfessorModel
+CourseService --> "*" CampusModel
+CourseService --> "*" CourseModel
+CourseService --> "*" ProfessorModel
+AuthService --> "1" AuthorizationModel
+EvaluationService --> "1" CourseModel
+EvaluationService --> "1" RatingModel
+EvaluationService --> "1" PopularityModel
+EvaluationService --> "1" PopularityValidator
+EvaluationController --> "1" EvaluationService
+EvaluationController --> "1" RatingModel
+EvaluationController --> "1" PopularityValidator
+EvaluationController --> "1" PopularityModel
+AuthController --> "1" OAuth2Service
+AuthController --> "1" AuthService
+AuthController --> "1" MailerService
+AuthController --> "1" AuthorizationValidator
+CampusController --> "1" CourseService
+CampusController --> "1" CampusOptionsValidator
+CampusController --> "*" CampusModel
+CampusController --> "*" CourseModel
+CampusController --> "*" ProfessorModel
+@enduml
