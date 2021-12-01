@@ -50,7 +50,12 @@ export const OasDescriptionCampusProperty = () => ApiProperty({
   example: 'A Universidade de Pernambuco – Campus Garanhuns foi criada pelo Dec. nº 1357 de 28/12/1966, pelo então Governador do Estado, Exmo. Sr. Dr. Paulo Guerra. Desde aquela época, o Campus Garanhuns, que ficou vinculada à Fundação de Ensino Superior de Pernambuco ­- FESP/PE – hoje Universidade de Pernambuco, foi autorizada pelo Conselho Estadual de Educação pela Resolução nº 10 de 24/05/1967.'
 })
 
-export const EXEMPLO = () => ApiProperty({
-  description: '',
-  example: ''
+export const OasLatitudePropery = () => ApiProperty({
+  description: 'Latitude referente a localicação de um Campus.',
+  example: -8.88307519594599
+})
+
+export const OasLongitudePropery = () => ApiProperty({
+  description: 'Longitude referente a localicação de um Campus.',
+  example: -36.4964357460306
 })

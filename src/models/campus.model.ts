@@ -7,7 +7,7 @@ import { EventModel } from "./event.model";
 import { SocialModel } from "./social.model";
 import { CourseModel } from "./course.model";
 import { ContactModel } from "./contact.model";
-import { OasDescriptionCampusProperty, OasNameCampusProperty } from "src/docs/decorators";
+import { OasDescriptionCampusProperty, OasLatitudePropery, OasLongitudePropery, OasNameCampusProperty } from "src/docs/decorators";
 
 export type CampusField = keyof CampusModel;
 
@@ -24,12 +24,12 @@ export class CampusModel extends BaseModel {
   @Column()
   public description: string;
 
-  @ApiProperty()
+  @OasLatitudePropery()
   @IsLatitude()
   @Column()
   public latitude: string;
 
-  @ApiProperty()
+  @OasLongitudePropery()
   @IsLongitude()
   @Column()
   public longitude: string;
