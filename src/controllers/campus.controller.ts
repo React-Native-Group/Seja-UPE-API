@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, ParseIntPipe, Post, UseGuards } from "@nestjs/common";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
-import { OasAppVersionHeader, OasCampusOperation } from "src/docs/decorators";
+import { OasAppVersionHeader, OasCampusOperation, OasCourseOperation, OasProfessorsOperation } from "src/docs/decorators";
 import { AuthorizeGuard, Permission, Permissions } from "src/security";
 import { CourseService } from "src/services";
 import { CampusOptionsValidator } from "src/validators";
@@ -22,12 +22,14 @@ export class CampusController {
     return await this.courseService.fetchCampus(options.relations);
   }
 
+  @OasCourseOperation()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get(":campusId/course")
   async onCourseRequested(@Param('campusId', ParseIntPipe) campusId: number){
     return await this.courseService.fetchCourses(campusId);
   }
 
+  @OasProfessorsOperation()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get("all/course/:courseId/professors")
   async onProfessorsRequested(@Param('courseId', ParseIntPipe) courseId: number){

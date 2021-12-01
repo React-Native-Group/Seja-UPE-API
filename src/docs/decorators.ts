@@ -1,4 +1,4 @@
-import { ApiBearerAuth, ApiHeader, ApiOperation, ApiProperty, ApiTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiHeader, ApiOperation, ApiProperty } from "@nestjs/swagger";
 
 export const OasBearerAuth = () => ApiBearerAuth();
 
@@ -17,14 +17,24 @@ export const OasRatingOperation = () => ApiOperation({
   description: 'Esta API captura avaliação imposta pelo usuário pelas sugestões inferidas após realização do questionario.'
 })
 
+export const OasPopularityOperation = () => ApiOperation({
+  summary: '[Avaliações] Realiza a avaliação de um curso.',
+  description: 'Esta API captura avaliação imposta pelo usuário após entrar em um curso.'
+})
+
 export const OasCampusOperation = () => ApiOperation({
   summary: '[Campus] Realiza a requisição das infos do Campus.',
   description: 'Esta API realiza a requisição das determinadas informações de um curso escolhido.'
 })
 
-export const OasPopularityOperation = () => ApiOperation({
-  summary: '[Avaliações] Realiza a avaliação de um curso.',
-  description: 'Esta API captura avaliação imposta pelo usuário após entrar em um curso.'
+export const OasCourseOperation = () => ApiOperation({
+  summary: '[Campus] Realiza a requisição dos cursos de um campus.',
+  description: 'Esta API realiza a requisição das informações de um determinado curso escolhido.'
+})
+
+export const OasProfessorsOperation = () => ApiOperation({
+  summary: '[Campus] Realiza a requisição dos docentes de um curso.',
+  description: 'Esta API realiza a requisição dos professores (docentes) de um determinado curso escolhido.'
 })
 
 export const OasIdTokenProperty = () => ApiProperty({
