@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, ParseIntPipe, Post, UseGuards } from "@nestjs/common";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
-import { OasAppVersionHeader } from "src/docs/decorators";
+import { OasAppVersionHeader, OasCampusOperation } from "src/docs/decorators";
 import { AuthorizeGuard, Permission, Permissions } from "src/security";
 import { CourseService } from "src/services";
 import { CampusOptionsValidator } from "src/validators";
@@ -15,6 +15,7 @@ export class CampusController {
   constructor(
     private courseService: CourseService){}
 
+  @OasCampusOperation()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Post()
   async onCampusRequested(@Body() options: CampusOptionsValidator){

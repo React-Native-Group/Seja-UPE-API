@@ -17,6 +17,11 @@ export const OasRatingOperation = () => ApiOperation({
   description: 'Esta API captura avaliação imposta pelo usuário pelas sugestões inferidas após realização do questionario.'
 })
 
+export const OasCampusOperation = () => ApiOperation({
+  summary: '[Campus] Realiza a requisição das infos do Campus.',
+  description: 'Esta API realiza a requisição das determinadas informações de um curso escolhido.'
+})
+
 export const OasPopularityOperation = () => ApiOperation({
   summary: '[Avaliações] Realiza a avaliação de um curso.',
   description: 'Esta API captura avaliação imposta pelo usuário após entrar em um curso.'
