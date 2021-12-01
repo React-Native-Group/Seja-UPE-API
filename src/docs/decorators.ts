@@ -59,3 +59,18 @@ export const OasLongitudePropery = () => ApiProperty({
   description: 'Longitude referente a localicação de um Campus.',
   example: -36.4964357460306
 })
+
+export const OasCategoryNamePropery = () => ApiProperty({
+  description: 'Nome referente a área em que o contato atende.',
+  example: 'Administração'
+})
+
+export const OasFieldIconPropery = () => ApiProperty({
+  description: 'Ícone que define o tipo de contato podendo ser email ou telefone.',
+  example: 'phone-square-alt'
+})
+
+export const OasValueContactPropery = () => ApiProperty({
+  description: 'valor que define o contato podendo ser email ou telefone.',
+  example: '(87) 3866-6487'
+})

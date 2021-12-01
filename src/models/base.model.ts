@@ -1,4 +1,3 @@
-import { ApiProperty } from "@nestjs/swagger";
 import { IsInt, IsOptional, validate } from "class-validator";
 import { OasCreatedAtProperty, OasUpdatedAtProperty } from "src/docs/decorators";
 import { InvalidObjectException } from "src/exceptions";

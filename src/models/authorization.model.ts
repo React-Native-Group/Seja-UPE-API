@@ -1,5 +1,5 @@
 import { Column, Entity } from "typeorm";
-import { IsDefined, IsEmail, IsInt, IsNotEmpty, IsString } from "class-validator";
+import { IsEmail, IsInt, IsNotEmpty, IsString } from "class-validator";
 import { BaseModel } from "./base.model";
 
 @Entity({ name: 'tbl_authorization' })

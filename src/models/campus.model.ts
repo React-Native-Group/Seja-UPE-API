@@ -1,6 +1,5 @@
 import { Column, Entity, JoinColumn, OneToMany } from "typeorm";
 import { IsLatitude, IsLongitude, IsString } from "class-validator";
-import { ApiProperty } from "@nestjs/swagger";
 
 import { BaseModel } from "./base.model";
 import { EventModel } from "./event.model";
