@@ -10,6 +10,14 @@ export const OasAuthOperation = () => ApiOperation({
   description: 'Esta API verifica se um determinado Token ID é válido e retorna um Bearer token que possa ser utilizado para realizar requisições futuras ao Seja UPE API.'
 });
 
+
+
+
+
 export const OasCreatedAtProperty = () => ApiProperty({
   description: 'Momento em que o objeto foi criado no banco de dados.'
+})
+
+export const OasUpdtaedAtProperty = () => ApiProperty({
+  description: 'Momento em que o objeto é atualizado no banco de dados.'
 })
