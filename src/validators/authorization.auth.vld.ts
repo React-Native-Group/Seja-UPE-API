@@ -1,9 +1,11 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsDefined, IsNotEmpty, IsString } from "class-validator";
+import { OasIdTokenProperty } from "src/docs/decorators";
 
 export class AuthorizationValidator {
 
-  @ApiProperty()
+  
+  @OasIdTokenProperty()
   @IsString()
   @IsDefined()
   @IsNotEmpty()

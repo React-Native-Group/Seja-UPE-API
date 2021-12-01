@@ -12,7 +12,13 @@ export const OasAuthOperation = () => ApiOperation({
 
 
 
+export const OasIdTokenProperty = () => ApiProperty({
+  description: 'Token enviado pelo Google ao autenticar.'
+})
 
+export const OasEmailProperty = () => ({
+  description: 'Email enviado pelo Google ao autenticar.'
+})
 
 export const OasCreatedAtProperty = () => ApiProperty({
   description: 'Momento em que o objeto foi criado no banco de dados.'
