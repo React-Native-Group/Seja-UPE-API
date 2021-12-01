@@ -1,5 +1,4 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from "typeorm";
-import { ApiProperty } from "@nestjs/swagger";
 
 import { BaseModel } from "./base.model";
 import { CampusModel } from "./campus.model";

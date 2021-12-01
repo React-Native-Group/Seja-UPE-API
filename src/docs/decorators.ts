@@ -114,3 +114,13 @@ export const OasPpcCourseProperty = () => ApiProperty({
   description: 'Projeto pedagógico de um curso da Universidade de Pernambuco.',
   example: 'http://www.upe.br/petrolina/wp-content/uploads/2019/11/PPC_ENFERMAGEM_IMPLEMENTADO_2020_2.pdf'
 })
+
+export const OasNameEventProperty = () => ApiProperty({
+  description: 'Nome de um evento de um determinado Campus.',
+  example: 'SECAP'
+})
+
+export const OasLinkEventProperty = () => ApiProperty({
+  description: 'Link de acesso a um evento de um determinado Campus.',
+  example: 'http://www.upe.br/garanhuns/semanas-cientificas-do-agreste-pernambucano/'
+})

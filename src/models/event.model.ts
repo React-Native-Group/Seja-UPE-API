@@ -1,18 +1,18 @@
 import { Column, Entity, ManyToOne } from "typeorm";
-import { ApiProperty } from "@nestjs/swagger";
 import { BaseModel } from "./base.model";
 import { CampusModel } from "./campus.model";
+import { OasLinkEventProperty, OasNameEventProperty } from "src/docs/decorators";
 
 export type EventField = keyof EventModel;
 
 @Entity({ name: 'tbl_event' })
 export class EventModel extends BaseModel {
   
-  @ApiProperty()
+  @OasNameEventProperty()
   @Column()
   public name: string;
 
-  @ApiProperty()
+  @OasLinkEventProperty()
   @Column()
   public link: string;
 
