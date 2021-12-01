@@ -7,18 +7,19 @@ import { EventModel } from "./event.model";
 import { SocialModel } from "./social.model";
 import { CourseModel } from "./course.model";
 import { ContactModel } from "./contact.model";
+import { OasDescriptionCampusProperty, OasNameCampusProperty } from "src/docs/decorators";
 
 export type CampusField = keyof CampusModel;
 
 @Entity({ name: 'tbl_campus' })
 export class CampusModel extends BaseModel {
 
-  @ApiProperty()
+  @OasNameCampusProperty()
   @IsString()
   @Column()
   public name: string;
 
-  @ApiProperty()
+  @OasDescriptionCampusProperty()
   @IsString()
   @Column()
   public description: string;
