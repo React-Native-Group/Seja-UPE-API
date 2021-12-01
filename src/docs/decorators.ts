@@ -22,6 +22,16 @@ export const OasRelationsProperty = () => ApiProperty({
   example: ['courses', 'courses.professors']
 })
 
+export const OasCourseIdProperty = () => ApiProperty({
+  description: 'Referência de um curso pelo seu ID.',
+  example: 2
+})
+
+export const OasValueProperty = () => ApiProperty({
+  description: 'Avaliação referente a popularidade de curso.',
+  example: 'like'
+})
+
 export const OasCreatedAtProperty = () => ApiProperty({
   description: 'Momento em que o objeto foi criado no banco de dados.',
   example: 1638377733776

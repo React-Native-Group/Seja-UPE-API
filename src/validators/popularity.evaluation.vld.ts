@@ -1,16 +1,16 @@
-import { ApiProperty } from "@nestjs/swagger";
 import { IsDefined, IsIn, IsInt, IsNotEmpty, IsPositive, IsString } from "class-validator";
+import { OasCourseIdProperty, OasValueProperty } from "src/docs/decorators";
 import { PopularityType } from "src/models";
 
 export class PopularityValidator {
 
-  @ApiProperty()
+  @OasCourseIdProperty()
   @IsInt()
   @IsDefined()
   @IsPositive()
   public courseId: number;
 
-  @ApiProperty()
+  @OasValueProperty()
   @IsNotEmpty()
   @IsString()
   @IsIn(['like', 'dislike'])
