@@ -7,41 +7,42 @@ import { SsaGradeModel } from "./ssa-grade.model";
 import { ProfessorModel } from "./professor.model";
 import { SisuGradeModel } from "./sisu-grade.model";
 import { PopularityModel } from "./popularity.model";
+import { OasAboutCourseProperty, OasExpertiseAreasCourseProperty, OasHistoryCourseProperty, OasIngressCourseProperty, OasJobMarketCourseProperty, OasNameCourseProperty, OasPpcCourseProperty, OasProfileCourseProperty } from "src/docs/decorators";
 
 export type CourseField = keyof CourseModel;
 
 @Entity({ name: 'tbl_course' })
 export class CourseModel extends BaseModel {
 
-  @ApiProperty()
+  @OasNameCourseProperty()
   @Column()
   public name: string;
   
-  @ApiProperty()
+  @OasAboutCourseProperty()
   @Column()
   public about: string;
   
-  @ApiProperty()
+  @OasProfileCourseProperty()
   @Column()
   public profile: string;
   
-  @ApiProperty()
+  @OasHistoryCourseProperty()
   @Column()
   public history: string;
   
-  @ApiProperty()
+  @OasExpertiseAreasCourseProperty()
   @Column()
   public expertiseAreas: string;
   
-  @ApiProperty()
+  @OasJobMarketCourseProperty()
   @Column()
   public jobMarket: string;
   
-  @ApiProperty()
+  @OasIngressCourseProperty()
   @Column()
   public ingress: string;
 
-  @ApiProperty()
+  @OasPpcCourseProperty()
   @Column()
   public ppcUrl: string;
 
