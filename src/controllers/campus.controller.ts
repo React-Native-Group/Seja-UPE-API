@@ -1,9 +1,11 @@
-import { Body, Controller, Get, Param, ParseIntPipe, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, Param, ParseIntPipe, Post, UseGuards } from "@nestjs/common";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
+import { OasAppVersionHeader } from "src/docs/decorators";
 import { AuthorizeGuard, Permission, Permissions } from "src/security";
 import { CourseService } from "src/services";
 import { CampusOptionsValidator } from "src/validators";
 
+@OasAppVersionHeader()
 @ApiBearerAuth()
 @ApiTags("Campus")
 @UseGuards(AuthorizeGuard)
@@ -14,7 +16,7 @@ export class CampusController {
     private courseService: CourseService){}
 
   @Permissions(Permission.DEFAULT_LEVEL)
-  @Get()
+  @Post()
   async onCampusRequested(@Body() options: CampusOptionsValidator){
     return await this.courseService.fetchCampus(options.relations);
   }

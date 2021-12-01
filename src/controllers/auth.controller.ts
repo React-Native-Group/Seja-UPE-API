@@ -31,7 +31,7 @@ export class AuthController {
     if (await this.authService.getPreviousAuthorization(body.idToken, payload)){
       await this.mailerService.sendWelcomeMail(name, email);
     }
-
+    
     return {
       bearer: await this.authService.buildToken(payload),
       payload
