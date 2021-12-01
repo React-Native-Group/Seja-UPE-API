@@ -13,17 +13,21 @@ export const OasAuthOperation = () => ApiOperation({
 
 
 export const OasIdTokenProperty = () => ApiProperty({
-  description: 'Token enviado pelo Google ao autenticar.'
+  description: 'Token enviado pelo Google ao autenticar.',
+  example: 'eyJhbGciOiJSUzI1NiIsImtpZCI6IjkzNDFhYmM0MDkyYjZmYzAzOGU0MDNjOTEwMjJkZDNlNDQ1MzliNTYiLCJ0eXAiO...'
 })
 
-export const OasEmailProperty = () => ({
-  description: 'Email enviado pelo Google ao autenticar.'
+export const OasRelationsProperty = () => ApiProperty({
+  description: 'Customiza retorno das informações do Campus.',
+  example: ['courses', 'courses.professors']
 })
 
 export const OasCreatedAtProperty = () => ApiProperty({
-  description: 'Momento em que o objeto foi criado no banco de dados.'
+  description: 'Momento em que o objeto foi criado no banco de dados.',
+  example: 1638377733776
 })
 
-export const OasUpdtaedAtProperty = () => ApiProperty({
-  description: 'Momento em que o objeto é atualizado no banco de dados.'
+export const OasUpdatedAtProperty = () => ApiProperty({
+  description: 'Momento em que o objeto é atualizado no banco de dados.',
+  example: 1638378459598
 })

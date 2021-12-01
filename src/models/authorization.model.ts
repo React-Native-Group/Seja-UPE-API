@@ -1,7 +1,6 @@
 import { Column, Entity } from "typeorm";
 import { IsDefined, IsEmail, IsInt, IsNotEmpty, IsString } from "class-validator";
 import { BaseModel } from "./base.model";
-import { OasEmailProperty, OasIdTokenProperty } from "src/docs/decorators";
 
 @Entity({ name: 'tbl_authorization' })
 export class AuthorizationModel extends BaseModel {

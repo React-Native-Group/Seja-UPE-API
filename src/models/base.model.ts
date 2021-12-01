@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsInt, IsOptional, validate } from "class-validator";
-import { OasCreatedAtProperty, OasUpdtaedAtProperty } from "src/docs/decorators";
+import { OasCreatedAtProperty, OasUpdatedAtProperty } from "src/docs/decorators";
 import { InvalidObjectException } from "src/exceptions";
 import {
   BaseEntity,
@@ -20,7 +20,7 @@ export class BaseModel extends BaseEntity {
   @Column()
   public createdAt: number = +new Date;
 
-  @OasUpdtaedAtProperty()
+  @OasUpdatedAtProperty()
   @IsOptional()
   @IsInt()
   @Column({ nullable: true })
