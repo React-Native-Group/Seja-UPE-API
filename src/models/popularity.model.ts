@@ -1,7 +1,7 @@
 import { Column, Entity, ManyToOne } from "typeorm";
 import { CourseModel } from "./course.model";
 import { BaseModel } from "./base.model";
-import { OasValuePopularity } from "src/docs/decorators";
+import { OasValuePopularityProperty } from "src/docs/decorators";
 
 export type PopularityType = 'like' | 'dislike';
 
@@ -10,7 +10,7 @@ export type PopularityField = keyof PopularityModel;
 @Entity({ name: 'tbl_popularity' })
 export class PopularityModel extends BaseModel {
 
-  @OasValuePopularity()
+  @OasValuePopularityProperty()
   @Column()
   public value: PopularityType;
 

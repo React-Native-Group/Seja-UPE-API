@@ -2,29 +2,30 @@ import { Column, Entity, ManyToOne } from "typeorm";
 import { ApiProperty } from "@nestjs/swagger";
 import { BaseModel } from "./base.model";
 import { CourseModel } from "./course.model";
+import { OasEmailProfessorProperty, OasLattesProfessorProperty, OasNameProfessorProperty, OasPhotoProfessorProperty, OasShortbioProfessorProperty } from "src/docs/decorators";
 
 export type ProfessorField = keyof ProfessorModel;
 
 @Entity({ name: 'tbl_professor' })
 export class ProfessorModel extends BaseModel {
 
-  @ApiProperty()
+  @OasNameProfessorProperty()
   @Column()
   public name: string;
 
-  @ApiProperty()
+  @OasShortbioProfessorProperty()
   @Column()
   public shortbio: string;
   
-  @ApiProperty()
+  @OasEmailProfessorProperty()
   @Column()
   public email: string;
 
-  @ApiProperty()
+  @OasLattesProfessorProperty()
   @Column()
   public lattesUrl: string;
 
-  @ApiProperty()
+  @OasPhotoProfessorProperty()
   @Column()
   public photoUrl: string;
 

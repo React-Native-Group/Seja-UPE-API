@@ -125,7 +125,32 @@ export const OasLinkEventProperty = () => ApiProperty({
   example: 'http://www.upe.br/garanhuns/semanas-cientificas-do-agreste-pernambucano/'
 })
 
-export const OasValuePopularity = () => ApiProperty({
+export const OasValuePopularityProperty = () => ApiProperty({
   description: 'Avaliação referente a um curso da Universidade de Pernambuco.',
   example: 'like'
+})
+
+export const OasNameProfessorProperty = () => ApiProperty({
+  description: 'Nome de um docente de um curso da Universidade de Pernambuco.',
+  example: 'Helaine Solange Lins Barreiros'
+})
+
+export const OasShortbioProfessorProperty = () => ApiProperty({
+  description: 'Breve descrição referente a um docente de um curso da Universidade de Pernambuco.',
+  example: 'Mestre em Ciência da Computação pelo Centro de Informática da UFPE (2015) com pesquisa direcionada à Computação em Nuvem. Experiência em Ciência da Computação, com ênfase em Linguagem de Programação WEB. Possui mais de 16 anos de experiência no desenvolvimento de sistemas para empresas nacionais e internacionais, predominantemente em empresas do Porto Digital do Recife. Atualmente seus trabalhos de pesquisa focam em Arquitetura de Software.'
+})
+
+export const OasEmailProfessorProperty = () => ApiProperty({
+  description: 'Email de um docente de um curso da Universidade de Pernambuco.',
+  example: 'helaine.barreiros@upe.br'
+})
+
+export const OasLattesProfessorProperty = () => ApiProperty({
+  description: 'Link do currículo Lattes de um docente de um curso da Universidade de Pernambuco.',
+  example: 'http://lattes.cnpq.br/8314520403747891'
+})
+
+export const OasPhotoProfessorProperty = () => ApiProperty({
+  description: 'Fotografia para identificação de um docente de um curso da Universidade de Pernambuco.',
+  example: 'https://i.imgur.com/h257qbK.jpg'
 })
