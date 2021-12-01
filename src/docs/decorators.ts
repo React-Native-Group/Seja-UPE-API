@@ -1,4 +1,6 @@
-import { ApiHeader, ApiOperation, ApiProperty } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiHeader, ApiOperation, ApiProperty, ApiTags } from "@nestjs/swagger";
+
+export const OasBearerAuth = () => ApiBearerAuth();
 
 export const OasAppVersionHeader = () => ApiHeader({
   name: 'X-App-Version',
@@ -9,6 +11,16 @@ export const OasAuthOperation = () => ApiOperation({
   summary: '[Autenticação] Realiza a autenticação com o Google OAuth2 API.',
   description: 'Esta API verifica se um determinado Token ID é válido e retorna um Bearer token que possa ser utilizado para realizar requisições futuras ao Seja UPE API.'
 });
+
+export const OasRating = () => ApiOperation({
+  summary: '[Avaliações] Realiza a avaliação das sugestões.',
+  description: 'Esta API captura avaliação imposta pelo usuário pelas sugestões inferidas após realização do questionario.'
+})
+
+export const OasPopularity = () => ApiOperation({
+  summary: '[Avaliações] Realiza a avaliação de um curso.',
+  description: 'Esta API captura avaliação imposta pelo usuário após entrar em um curso.'
+})
 
 export const OasIdTokenProperty = () => ApiProperty({
   description: 'Token enviado pelo Google ao autenticar.',
