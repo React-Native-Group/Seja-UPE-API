@@ -1,7 +1,7 @@
 {
   "path": "",
   "title": "Seja UPE - Documentação API",
-  "description": "Documentação dos endpoints do Webservice Seja UPE.",
+  "description": "Os endpoints aqui descritos deverão ser capazes de sugerir cursos para os futuros ingressantes e atuais vestibulandos, deverá mostrar informações referentes ao curso, ao Campus e ao mercado de trabalho dessa área, além de fornecer a possibilidade de as pessoas conhecerem em maiores detalhes a infraestrutura da universidade. Para extrair as informações necessárias para funcionar, o Webservice necessitará interagir com outros sistemas ou fontes de dados externas, preferencialmente automatizadas. As notas de corte dos cursos, por exemplo, foram extraídas de planilhas ou fontes oficiais da universidade, e em caso de extrema necessidade, extraídos de serviços como o querobolsa.com.br que contemplam as notas de corte do SISU.",
   "version": "1.0",
   "tag": "upe, cursos, documentação, api, endpoints, oas3, swagger, nestjs",
   "authorEmail": "muryllo.pimenta@upe.br",

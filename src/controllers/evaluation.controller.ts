@@ -1,18 +1,19 @@
 import { Body, Controller, Param, ParseIntPipe, Post, UseGuards } from "@nestjs/common";
-import { ApiTags } from "@nestjs/swagger";
 import { EvaluationService } from "src/services";
 import { PopularityValidator } from "src/validators";
 import { AuthorizeGuard, Permission, Permissions } from "src/security";
-import { OasBearerAuth, OasPopularityOperation, OasRatingOperation } from "src/docs/decorators";
+import { OasAppVersionHeader, OasBearerAuth, OasControllerTags, OasPopularityOperation, OasRatingNoteParam, OasRatingOperation } from "src/docs/decorators";
 
 @OasBearerAuth()
-@ApiTags("Avaliações")
+@OasAppVersionHeader()
+@OasControllerTags("Avaliações")
 @UseGuards(AuthorizeGuard)
 @Controller("evaluation")
 export class EvaluationController {
 
   constructor(private evaluationService: EvaluationService){}
 
+  @OasRatingNoteParam()
   @OasRatingOperation()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Post("/rating/survey/:note")

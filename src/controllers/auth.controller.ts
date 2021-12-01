@@ -1,13 +1,12 @@
 import { Body, Controller, HttpCode, HttpStatus, Post } from "@nestjs/common";
-import { ApiExtension, ApiOkResponse, ApiTags } from "@nestjs/swagger";
 
 import { AuthorizationValidator } from "src/validators";
 import { OAuth2UnauthorizedException } from "src/exceptions";
 import { AuthService, MailerService, OAuth2Service } from "src/services";
-import { OasAppVersionHeader, OasAuthOperation } from "src/docs/decorators";
+import { OasAppVersionHeader, OasAuthOperation, OasControllerTags } from "src/docs/decorators";
 
 @OasAppVersionHeader()
-@ApiTags("Autenticação")
+@OasControllerTags("Autenticação")
 @Controller("auth")
 export class AuthController {
 
