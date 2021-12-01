@@ -3,7 +3,7 @@ import { ApiTags } from "@nestjs/swagger";
 import { EvaluationService } from "src/services";
 import { PopularityValidator } from "src/validators";
 import { AuthorizeGuard, Permission, Permissions } from "src/security";
-import { OasBearerAuth, OasPopularity, OasRating } from "src/docs/decorators";
+import { OasBearerAuth, OasPopularityOperation, OasRatingOperation } from "src/docs/decorators";
 
 @OasBearerAuth()
 @ApiTags("Avaliações")
@@ -13,7 +13,7 @@ export class EvaluationController {
 
   constructor(private evaluationService: EvaluationService){}
 
-  @OasRating()
+  @OasRatingOperation()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Post("/rating/survey/:note")
   async onRatingSent(@Param('note', ParseIntPipe) note: number)
@@ -21,7 +21,7 @@ export class EvaluationController {
     return await this.evaluationService.submitRating(note);
   }
 
-  @OasPopularity()
+  @OasPopularityOperation()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Post("popularity/course")
   async onPopularitySent(@Body() data: PopularityValidator)

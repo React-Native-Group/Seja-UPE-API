@@ -12,12 +12,12 @@ export const OasAuthOperation = () => ApiOperation({
   description: 'Esta API verifica se um determinado Token ID é válido e retorna um Bearer token que possa ser utilizado para realizar requisições futuras ao Seja UPE API.'
 });
 
-export const OasRating = () => ApiOperation({
+export const OasRatingOperation = () => ApiOperation({
   summary: '[Avaliações] Realiza a avaliação das sugestões.',
   description: 'Esta API captura avaliação imposta pelo usuário pelas sugestões inferidas após realização do questionario.'
 })
 
-export const OasPopularity = () => ApiOperation({
+export const OasPopularityOperation = () => ApiOperation({
   summary: '[Avaliações] Realiza a avaliação de um curso.',
   description: 'Esta API captura avaliação imposta pelo usuário após entrar em um curso.'
 })
