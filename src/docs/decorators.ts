@@ -124,3 +124,8 @@ export const OasLinkEventProperty = () => ApiProperty({
   description: 'Link de acesso a um evento de um determinado Campus.',
   example: 'http://www.upe.br/garanhuns/semanas-cientificas-do-agreste-pernambucano/'
 })
+
+export const OasValuePopularity = () => ApiProperty({
+  description: 'Avaliação referente a um curso da Universidade de Pernambuco.',
+  example: 'like'
+})
