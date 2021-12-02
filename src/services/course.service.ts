@@ -28,7 +28,7 @@ export class CourseService {
 
   async fetchCampus(campusId?: number){
     const relations = ['events', 'contacts', 'socialNetworks'];
-    if (!!campusId)
+    if (!campusId)
       return await this.campus.find({ relations });
     return await this.campus.find({ where: { id: campusId }, relations });
   }
@@ -37,7 +37,7 @@ export class CourseService {
     let campus = await this.campus.findOne({ id: campusId });
     if (!campus)
       throw new CampusNotFoundException();
-    return await this.course.find({ where: {campus}, relations: ['professors', 'ssaGrades', 'sisuGrades', 'popularity'] });
+    return await this.course.find({ where: {campus}, relations: ['professors', 'ssaGrades', 'sisuGrades'] });
   }
 
   async fetchCampusEvents(campusId: number){
