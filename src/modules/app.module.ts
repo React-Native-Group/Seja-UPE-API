@@ -1,4 +1,6 @@
 import { CacheModule, Module } from '@nestjs/common';
+import { CacheInterceptorProvider } from 'src/hooks';
+
 import { AuthModule } from './auth.module';
 import { CampusModule } from './campus.module';
 import { ServicesModule } from './services.module';
@@ -7,8 +9,6 @@ import { WebsocketModule } from './websocket.module';
 import { EvaluationModule } from './evaluation.module';
 import { CourseModule } from './course.module';
 import { ProfessorModule } from './professor.module';
-import { SecurityModule } from './security.module';
-import { CacheInterceptorProvider } from 'src/hooks';
 
 @Module({
   imports: [
@@ -23,8 +23,7 @@ import { CacheInterceptorProvider } from 'src/hooks';
     EvaluationModule,
     WebsocketModule,
     ProfessorModule,
-    CourseModule,
-    SecurityModule
+    CourseModule
   ],
   providers: [
     CacheInterceptorProvider

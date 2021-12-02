@@ -1,4 +1,5 @@
 import compression from 'compression';
+import limiter from 'express-rate-limit';
 import { NestFactory } from '@nestjs/core';
 import { WsAdapter } from '@nestjs/platform-ws';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
@@ -31,6 +32,7 @@ async function bootstrap() {
   app.setGlobalPrefix(Server.globalPreffix);
   app.enableCors();
   app.use(compression());
+  app.use(limiter({ windowMs: 60000, max: 60 }))
   app.useWebSocketAdapter(new WsAdapter(app));
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
   app.useGlobalFilters(new HttpExceptionFilter());
