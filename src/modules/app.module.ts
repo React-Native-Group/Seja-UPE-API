@@ -5,6 +5,8 @@ import { ServicesModule } from './services.module';
 import { DatabaseModule } from './database.module';
 import { WebsocketModule } from './websocket.module';
 import { EvaluationModule } from './evaluation.module';
+import { CourseModule } from './course.module';
+import { ProfessorModule } from './professor.module';
 
 @Module({
   imports: [
@@ -13,7 +15,9 @@ import { EvaluationModule } from './evaluation.module';
     AuthModule,
     CampusModule,
     EvaluationModule,
-    WebsocketModule
+    WebsocketModule,
+    ProfessorModule,
+    CourseModule
   ]
 })
 export class AppModule {}
