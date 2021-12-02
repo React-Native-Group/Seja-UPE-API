@@ -56,7 +56,7 @@ export class EvaluationService {
     let total = ratings.length;
     let average = sum / total;
 
-    return { average, total }
+    return { average, total };
   }
 
   async fetchPopularity(courseId: number): Promise<PopularityInfo>

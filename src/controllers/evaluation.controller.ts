@@ -1,4 +1,4 @@
-import { Body, Controller, Param, ParseIntPipe, Post, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, Param, ParseIntPipe, Post, UseGuards } from "@nestjs/common";
 import { EvaluationService } from "src/services";
 import { PopularityValidator } from "src/validators";
 import { AuthorizeGuard, Permission, Permissions } from "src/security";
@@ -28,6 +28,20 @@ export class EvaluationController {
   async onPopularitySent(@Body() data: PopularityValidator)
   {
     return await this.evaluationService.submitCoursePopularity(data);
+  }
+
+  @Permissions(Permission.DEFAULT_LEVEL)
+  @Get("/rating/survey")
+  async onRatingsRequested()
+  {
+    return await this.evaluationService.fetchRatings();
+  }
+
+  @Permissions(Permission.DEFAULT_LEVEL)
+  @Get("/popularity/course/:courseId")
+  async onPopularityRequested(@Param('courseId', ParseIntPipe) courseId: number)
+  {
+    return await this.evaluationService.fetchPopularity(courseId);
   }
 
 }
