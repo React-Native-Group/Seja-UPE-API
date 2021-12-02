@@ -6,3 +6,5 @@ export * from './services.module';
 export * from './websocket.module';
 export * from './course.module';
 export * from './professor.module';
+export * from './security.module';
+export * from './features.module';

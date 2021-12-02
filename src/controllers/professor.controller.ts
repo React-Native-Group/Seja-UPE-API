@@ -1,4 +1,4 @@
-import { Controller, Get, Param, ParseIntPipe, UseGuards } from "@nestjs/common";
+import { Controller, Get, Param, ParseIntPipe, UseGuards, UseInterceptors } from "@nestjs/common";
 import { CourseService } from "src/services";
 import { AuthorizeGuard, Permission, Permissions } from "src/security";
 
@@ -9,10 +9,12 @@ import {
   OasCourseIdParam,
   OasProfessorsOperation
 } from "src/docs/decorators";
+import { CacheRequestInterceptor } from "src/hooks";
 
 @OasBearerAuth()
 @OasAppVersionHeader()
 @OasControllerTags("Professores")
+@UseInterceptors(CacheRequestInterceptor)
 @UseGuards(AuthorizeGuard)
 @Controller("professors")
 export class ProfessorController {
@@ -25,7 +27,7 @@ export class ProfessorController {
   @Get("course/:courseId")
   async onProfessorsRequested(@Param('courseId', ParseIntPipe) courseId: number)
   {
-    return await this.courseService.fetchProfessors(courseId);
+    return await this.courseService.fetchCourseProfessors(courseId);
   }
 
 }

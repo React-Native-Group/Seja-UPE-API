@@ -1,4 +1,4 @@
-import { Controller, Get, Param, ParseIntPipe, UseGuards } from "@nestjs/common";
+import { Controller, Get, Param, ParseIntPipe, UseGuards, UseInterceptors } from "@nestjs/common";
 import { CourseService } from "src/services";
 import { AuthorizeGuard, Permission, Permissions } from "src/security";
 
@@ -11,10 +11,12 @@ import {
   OasCourseOperation,
   OasProfessorsOperation
 } from "src/docs/decorators";
+import { CacheRequestInterceptor } from "src/hooks";
 
 @OasBearerAuth()
 @OasAppVersionHeader()
 @OasControllerTags("Cursos")
+@UseInterceptors(CacheRequestInterceptor)
 @UseGuards(AuthorizeGuard)
 @Controller("courses")
 export class CourseController {
