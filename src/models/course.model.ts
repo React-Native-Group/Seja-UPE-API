@@ -55,7 +55,7 @@ export class CourseModel extends BaseModel {
   @Column()
   public ppcUrl: string;
 
-  @ManyToOne(() => CampusModel, campus => campus.events)
+  @ManyToOne(() => CampusModel, campus => campus.courses)
   public campus: CampusModel;
 
   @OneToMany(() => SsaGradeModel, grade => grade.course)
