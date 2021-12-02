@@ -15,9 +15,6 @@ export class CourseService {
     @InjectRepository(CourseModel)
     private course: Repository<CourseModel>,
 
-    @InjectRepository(ProfessorModel)
-    private professor: Repository<ProfessorModel>,
-
     @InjectRepository(EventModel)
     private event: Repository<EventModel>,
 
@@ -62,13 +59,6 @@ export class CourseService {
     if (!campus)
       throw new CampusNotFoundException();
     return await this.social.find({ where: {campus} });
-  }
-
-  async fetchCourseProfessors(courseId: number){
-    let course = await this.course.findOne({ id: courseId });
-    if (!course)
-      throw new CourseNotFoundException();
-    return await this.professor.find({ course });
   }
 
 }

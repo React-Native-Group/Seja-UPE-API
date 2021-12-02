@@ -1,4 +1,5 @@
 import { CacheInterceptor, ExecutionContext, Injectable } from '@nestjs/common';
+import { APP_INTERCEPTOR } from '@nestjs/core';
 import { Request } from 'express';
 
 @Injectable()
@@ -15,3 +16,5 @@ export class CacheRequestInterceptor extends CacheInterceptor {
   }
 
 }
+
+export const CacheInterceptorProvider = { provide: APP_INTERCEPTOR, useClass: CacheInterceptor };

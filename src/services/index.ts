@@ -5,3 +5,4 @@ export * from './oauth2.service';
 export * from './mailer.service';
 export * from './mining.service';
 export * from './jwt.strategy.service';
+export * from './professor.service';

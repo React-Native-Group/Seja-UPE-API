@@ -11,7 +11,8 @@ import {
   EvaluationService,
   JwtStrategy,
   MailerService,
-  OAuth2Service
+  OAuth2Service,
+  ProfessorService
 } from 'src/services';
 
 import {
@@ -49,7 +50,8 @@ import {
     CourseService, 
     JwtStrategy, 
     OAuth2Service,
-    EvaluationService
+    EvaluationService,
+    ProfessorService
   ],
   exports: [
     MailerService, 
@@ -57,7 +59,8 @@ import {
     CourseService, 
     JwtStrategy, 
     OAuth2Service,
-    EvaluationService
+    EvaluationService,
+    ProfessorService
   ]
 })
 export class ServicesModule {}
