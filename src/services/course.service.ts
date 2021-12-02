@@ -1,7 +1,7 @@
 import { Repository } from "typeorm";
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { CampusModel, CourseModel, ProfessorModel } from "src/models";
+import { CampusModel, ContactModel, CourseModel, EventModel, ProfessorModel, SocialModel } from "src/models";
 import { CampusNotFoundException, CourseNotFoundException } from "src/exceptions";
 
 @Injectable()
@@ -16,7 +16,16 @@ export class CourseService {
     private course: Repository<CourseModel>,
 
     @InjectRepository(ProfessorModel)
-    private professor: Repository<ProfessorModel>
+    private professor: Repository<ProfessorModel>,
+
+    @InjectRepository(EventModel)
+    private event: Repository<EventModel>,
+
+    @InjectRepository(ContactModel)
+    private contact: Repository<ContactModel>,
+
+    @InjectRepository(SocialModel)
+    private social: Repository<SocialModel>
 
   ){}
 
@@ -27,14 +36,35 @@ export class CourseService {
     return await this.campus.find({ where: { id: campusId }, relations });
   }
 
-  async fetchCourses(campusId: number){
+  async fetchCampusCourses(campusId: number){
     let campus = await this.campus.findOne({ id: campusId });
     if (!campus)
       throw new CampusNotFoundException();
-    return await this.course.find({ where: {campus}, relations:['professors', 'ssaGrades', 'sisuGrades', 'popularity'] });
+    return await this.course.find({ where: {campus}, relations: ['professors', 'ssaGrades', 'sisuGrades', 'popularity'] });
   }
 
-  async fetchProfessors(courseId: number){
+  async fetchCampusEvents(campusId: number){
+    let campus = await this.campus.findOne({ id: campusId });
+    if (!campus)
+      throw new CampusNotFoundException();
+    return await this.event.find({ where: {campus} });
+  }
+
+  async fetchCampusContacts(campusId: number){
+    let campus = await this.campus.findOne({ id: campusId });
+    if (!campus)
+      throw new CampusNotFoundException();
+    return await this.contact.find({ where: {campus} });
+  }
+
+  async fetchCampusSocialNetworks(campusId: number){
+    let campus = await this.campus.findOne({ id: campusId });
+    if (!campus)
+      throw new CampusNotFoundException();
+    return await this.social.find({ where: {campus} });
+  }
+
+  async fetchCourseProfessors(courseId: number){
     let course = await this.course.findOne({ id: courseId });
     if (!course)
       throw new CourseNotFoundException();

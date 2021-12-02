@@ -24,19 +24,19 @@ export class CourseController {
   @OasCampusIdParam()
   @OasCourseOperation()
   @Permissions(Permission.DEFAULT_LEVEL)
-  @Get(":campusId/courses")
+  @Get("campus/:campusId")
   async onCourseRequested(@Param('campusId', ParseIntPipe) campusId: number)
   {
-    return await this.courseService.fetchCourses(campusId);
+    return await this.courseService.fetchCampusCourses(campusId);
   }
 
   @OasCourseIdParam()
   @OasProfessorsOperation()
   @Permissions(Permission.DEFAULT_LEVEL)
-  @Get("all/course/:courseId/professors")
+  @Get(":courseId/professors")
   async onProfessorsRequested(@Param('courseId', ParseIntPipe) courseId: number)
   {
-    return await this.courseService.fetchProfessors(courseId);
+    return await this.courseService.fetchCourseProfessors(courseId);
   }
 
 }

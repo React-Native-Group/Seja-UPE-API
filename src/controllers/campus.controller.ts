@@ -27,7 +27,31 @@ export class CampusController {
   @Get(":campusId")
   async onCampusRequested(@Param('campusId', ParseIntPipe) campusId: number)
   {
-    return await this.courseService.fetchCampus();
+    return await this.courseService.fetchCampus(campusId);
+  }
+
+  @Permissions(Permission.DEFAULT_LEVEL)
+  @HttpCode(HttpStatus.OK)
+  @Get(":campusId/courses")
+  async onCampusCoursesRequested(@Param('campusId', ParseIntPipe) campusId: number)
+  {
+    return await this.courseService.fetchCampusCourses(campusId);
+  }
+
+  @Permissions(Permission.DEFAULT_LEVEL)
+  @HttpCode(HttpStatus.OK)
+  @Get(":campusId/events")
+  async onCampusEventsRequested(@Param('campusId', ParseIntPipe) campusId: number)
+  {
+    return await this.courseService.fetchCampusEvents(campusId);
+  }
+
+  @Permissions(Permission.DEFAULT_LEVEL)
+  @HttpCode(HttpStatus.OK)
+  @Get(":campusId/contacts")
+  async onCampusContactsRequested(@Param('campusId', ParseIntPipe) campusId: number)
+  {
+    return await this.courseService.fetchCampusContacts(campusId);
   }
 
 }
