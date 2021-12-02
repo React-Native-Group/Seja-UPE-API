@@ -6,7 +6,17 @@ import { SsaGradeModel } from "./ssa-grade.model";
 import { ProfessorModel } from "./professor.model";
 import { SisuGradeModel } from "./sisu-grade.model";
 import { PopularityModel } from "./popularity.model";
-import { OasAboutCourseProperty, OasExpertiseAreasCourseProperty, OasHistoryCourseProperty, OasIngressCourseProperty, OasJobMarketCourseProperty, OasNameCourseProperty, OasPpcCourseProperty, OasProfileCourseProperty } from "src/docs/decorators";
+
+import {
+  OasAboutCourseProperty,
+  OasExpertiseAreasCourseProperty,
+  OasHistoryCourseProperty,
+  OasIngressCourseProperty,
+  OasJobMarketCourseProperty,
+  OasNameCourseProperty,
+  OasPpcCourseProperty,
+  OasProfileCourseProperty
+} from "src/docs/decorators";
 
 export type CourseField = keyof CourseModel;
 

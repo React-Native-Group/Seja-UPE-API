@@ -59,7 +59,7 @@ export const OasIdTokenProperty = () => ApiProperty({
 
 export const OasRelationsProperty = () => ApiProperty({
   description: 'Customiza retorno das informações do Campus.',
-  example: ['courses', 'courses.professors']
+  example: ['courses', 'courses.professors', 'courses.ssaGrades', 'courses.sisuGrades', 'events', 'contacts', 'socialNetworks']
 });
 
 export const OasCourseIdProperty = () => ApiProperty({
@@ -201,3 +201,69 @@ export const OasRatingProperty = () => ApiProperty({
   description: 'Avaliação referente a sugestão de cursos após realizar questionário.',
   example: 4
 });
+
+export const OasYearSsaGradeProperty = () => ApiProperty({
+  description: 'O ano ao qual pertencem as notas e informações de concorrência.',
+  example: 2017
+});
+
+export const OasShareholderHighestSsaGradeProperty = () => ApiProperty({
+  description: 'A maior nota obtida no SSA dentre os cotistas.',
+  example: 42.55
+});
+
+export const OasShareholderLowestSsaGradeProperty = () => ApiProperty({
+  description: 'A menor nota obtida no SSA dentre os cotistas.',
+  example: 39.44
+});
+
+export const OasHighestSsaGradeProperty = () => ApiProperty({
+  description: 'A maior nota obtida no SSA em ampla concorrência.',
+  example: 57.44
+});
+
+export const OasLowestSsaGradeProperty = () => ApiProperty({
+  description: 'A menor nota obtida no SSA em ampla concorrência.',
+  example: 49.32
+});
+
+export const OasConcurrenceSsaGradeProperty = () => ApiProperty({
+  description: 'O número de pessoas concorrendo por uma única vaga.',
+  example: 12
+});
+
+export const OasNameSocialProperty = () => ApiProperty({
+  description: 'O nome da rede social.',
+  example: 'instagram'
+});
+
+export const OasValueSocialProperty = () => ApiProperty({
+  description: 'A url da rede social.',
+  example: 'https://www.instagram.com/upemulticampi/'
+});
+
+export const OasYearSisuGradeProperty = () => ApiProperty({
+  description: 'O ano ao qual pertencem as notas e informações de concorrência.',
+  example: 2017
+});
+
+export const OasShareholderHighestSisuGradeProperty = () => ApiProperty({
+  description: 'A maior nota obtida no SISU dentre os cotistas.',
+  example: 43.55
+});
+
+export const OasShareholderLowestSisuGradeProperty = () => ApiProperty({
+  description: 'A menor nota obtida no SISU dentre os cotistas.',
+  example: 39.44
+});
+
+export const OasHighestSisuGradeProperty = () => ApiProperty({
+  description: 'A maior nota obtida no SISU em ampla concorrência.',
+  example: 55.65
+});
+
+export const OasLowestSisuGradeProperty = () => ApiProperty({
+  description: 'A menor nota obtida no SISU em ampla concorrência.',
+  example: 50.34
+});
+

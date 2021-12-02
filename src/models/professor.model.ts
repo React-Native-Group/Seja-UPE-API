@@ -1,8 +1,14 @@
 import { Column, Entity, ManyToOne } from "typeorm";
-import { ApiProperty } from "@nestjs/swagger";
 import { BaseModel } from "./base.model";
 import { CourseModel } from "./course.model";
-import { OasEmailProfessorProperty, OasLattesProfessorProperty, OasNameProfessorProperty, OasPhotoProfessorProperty, OasShortbioProfessorProperty } from "src/docs/decorators";
+
+import {
+  OasEmailProfessorProperty,
+  OasLattesProfessorProperty,
+  OasNameProfessorProperty,
+  OasPhotoProfessorProperty,
+  OasShortbioProfessorProperty
+} from "src/docs/decorators";
 
 export type ProfessorField = keyof ProfessorModel;
 

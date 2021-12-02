@@ -20,7 +20,7 @@ export class ContactModel extends BaseModel {
   @Column()
   public value: string;
 
-  @ManyToOne(() => CampusModel, campus => campus.events)
+  @ManyToOne(() => CampusModel, campus => campus.contacts)
   public campus: CampusModel;
 
 }

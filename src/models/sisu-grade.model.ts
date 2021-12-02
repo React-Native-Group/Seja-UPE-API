@@ -1,8 +1,8 @@
 import { Column, Entity, ManyToOne } from "typeorm";
 import { IsInt, Matches } from "class-validator";
-import { ApiProperty } from "@nestjs/swagger";
 import { BaseModel } from "./base.model";
 import { CourseModel } from "./course.model";
+import { OasHighestSisuGradeProperty, OasLowestSisuGradeProperty, OasShareholderHighestSisuGradeProperty, OasShareholderLowestSisuGradeProperty, OasYearSisuGradeProperty } from "src/docs/decorators";
 
 const GRADE_PATTERN = new RegExp(/^\d{1,3}(?:\.\d{1,2}$)?/);
 
@@ -11,27 +11,27 @@ export type SisuGradeField = keyof SisuGradeModel;
 @Entity({ name: 'tbl_sisu_grade' })
 export class SisuGradeModel extends BaseModel {
 
-  @ApiProperty()
+  @OasYearSisuGradeProperty()
   @IsInt()
   @Column()
   public year: number;
 
-  @ApiProperty()
+  @OasShareholderHighestSisuGradeProperty()
   @Matches(GRADE_PATTERN)
   @Column()
   public shareholderHighest: string;
 
-  @ApiProperty()
+  @OasShareholderLowestSisuGradeProperty()
   @Matches(GRADE_PATTERN)
   @Column()
   public shareholderLowest: string;
 
-  @ApiProperty()
+  @OasHighestSisuGradeProperty()
   @Matches(GRADE_PATTERN)
   @Column()
   public highest: string;
 
-  @ApiProperty()
+  @OasLowestSisuGradeProperty()
   @Matches(GRADE_PATTERN)
   @Column()
   public lowest: string;
