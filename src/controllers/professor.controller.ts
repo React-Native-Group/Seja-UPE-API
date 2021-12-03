@@ -5,7 +5,9 @@ import { AuthorizeGuard, Permission, Permissions } from "src/security";
 import {
   OasAppVersionHeader,
   OasBearerAuth,
-  OasControllerTags
+  OasControllerTags,
+  OasProfessorOperation,
+  OasProfessorsOperation
 } from "src/docs/decorators";
 
 @OasBearerAuth()
@@ -17,6 +19,7 @@ export class ProfessorController {
 
   constructor(private professorService: ProfessorService){}
 
+  @OasProfessorsOperation()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get()
   async onProfessorsRequested()
@@ -24,6 +27,7 @@ export class ProfessorController {
     return await this.professorService.fetchProfessors();
   }
 
+  @OasProfessorOperation()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get(":professorId")
   async onProfessorRequested(@Param('professorId', ParseIntPipe) professorId: number)
