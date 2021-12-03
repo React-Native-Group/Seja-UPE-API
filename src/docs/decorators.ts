@@ -72,6 +72,16 @@ export const OasProfessorOperation = () => ApiOperation({
   description: 'Esta API realiza a requisição de um professor (docente) em específico.'
 });
 
+export const OasPopularitySurveyOperation = () => ApiOperation({
+  summary: '[Avaliações] Realiza a avaliação do teste vocacional.',
+  description: 'Esta API realiza a avaliação das sugestões impostas no teste vocacional.'
+});
+
+export const OasPopularityCourseOperation = () => ApiOperation({
+  summary: '[Avaliações] Realiza a avaliação de um curso.',
+  description: 'Esta API realiza a avaliação de um curso que o usuário adentrou.'
+});
+
 export const OasIdTokenProperty = () => ApiProperty({
   description: 'Token enviado pelo Google ao autenticar.',
   example: 'eyJhbGciOiJSUzI1NiIsImtpZCI6IjkzNDFhYmM0MDkyYjZmYzAzOGU0MDNjOTEwMjJkZDNlNDQ1MzliNTYiLCJ0eXAiO...'
