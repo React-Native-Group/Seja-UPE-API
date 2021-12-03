@@ -42,6 +42,21 @@ export const OasCampusOperation = () => ApiOperation({
   description: 'Esta API realiza a requisição das determinadas informações de um curso escolhido.'
 });
 
+export const OasCampusCourseOperation = () => ApiOperation({
+  summary: '[Campus] Realiza a requisição dos cursos de um campus.',
+  description: 'Esta API realiza a requisição de todos os cursos de um determinado campus.'
+});
+
+export const OasCampusContactsOperation = () => ApiOperation({
+  summary: '[Campus] Realiza a requisição dos contatos de um campus.',
+  description: 'Esta API realiza a requisição de todos os contatos de um determinado campus.'
+});
+
+export const OasCampusEventsOperation = () => ApiOperation({
+  summary: '[Campus] Realiza a requisição dos eventos de um campus.',
+  description: 'Esta API realiza a requisição de todos os eventos de um determinado campus.'
+});
+
 export const OasCourseOperation = () => ApiOperation({
   summary: '[Campus] Realiza a requisição dos cursos de um campus.',
   description: 'Esta API realiza a requisição das informações de um determinado curso escolhido.'
