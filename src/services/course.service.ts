@@ -26,6 +26,10 @@ export class CourseService {
 
   ){}
 
+  async fetchCourses(){
+    return await this.course.find({ relations: ['professors', 'ssaGrades', 'sisuGrades'] });
+  }
+
   async fetchCampus(campusId?: number){
     const relations = ['events', 'contacts', 'socialNetworks'];
     if (!campusId)

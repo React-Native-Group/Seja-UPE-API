@@ -1,7 +1,17 @@
 import { Controller, Get, HttpCode, HttpStatus, Param, ParseIntPipe, UseGuards } from "@nestjs/common";
-import { CourseService } from "src/services";
 import { AuthorizeGuard, Permission, Permissions } from "src/security";
-import { OasAppVersionHeader, OasBearerAuth, OasCampusContactsOperation, OasCampusCourseOperation, OasCampusEventsOperation, OasCampusOperation, OasControllerTags } from "src/docs/decorators";
+import { CourseService } from "src/services";
+
+import {
+  OasAppVersionHeader,
+  OasBearerAuth,
+  OasCampusContactsOperation,
+  OasCampusCourseOperation,
+  OasCampusEventsOperation,
+  OasCampusIdParam,
+  OasCampusOperation,
+  OasControllerTags
+} from "src/docs/decorators";
 
 @OasBearerAuth()
 @OasAppVersionHeader()
@@ -21,15 +31,16 @@ export class CampusController {
     return await this.courseService.fetchCampus();
   }
 
+  @OasCampusIdParam()
   @OasCampusOperation()
   @Permissions(Permission.DEFAULT_LEVEL)
-  @HttpCode(HttpStatus.OK)
   @Get(":campusId")
   async onCampusRequested(@Param('campusId', ParseIntPipe) campusId: number)
   {
     return await this.courseService.fetchCampus(campusId);
   }
 
+  @OasCampusIdParam()
   @OasCampusCourseOperation()
   @Permissions(Permission.DEFAULT_LEVEL)
   @HttpCode(HttpStatus.OK)
@@ -39,6 +50,7 @@ export class CampusController {
     return await this.courseService.fetchCampusCourses(campusId);
   }
 
+  @OasCampusIdParam()
   @OasCampusEventsOperation()
   @Permissions(Permission.DEFAULT_LEVEL)
   @HttpCode(HttpStatus.OK)
@@ -48,9 +60,9 @@ export class CampusController {
     return await this.courseService.fetchCampusEvents(campusId);
   }
 
+  @OasCampusIdParam()
   @OasCampusContactsOperation()
   @Permissions(Permission.DEFAULT_LEVEL)
-  @HttpCode(HttpStatus.OK)
   @Get(":campusId/contacts")
   async onCampusContactsRequested(@Param('campusId', ParseIntPipe) campusId: number)
   {

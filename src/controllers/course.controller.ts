@@ -1,14 +1,16 @@
 import { Controller, Get, Param, ParseIntPipe, UseGuards } from "@nestjs/common";
-import { CourseService, ProfessorService } from "src/services";
 import { AuthorizeGuard, Permission, Permissions } from "src/security";
+import { CourseService, ProfessorService } from "src/services";
 
 import {
+  OasAllCoursesOperation,
   OasAppVersionHeader,
   OasBearerAuth,
   OasCampusIdParam,
   OasControllerTags,
   OasCourseIdParam,
   OasCourseOperation,
+  OasCourseProfessorsOperation,
   OasProfessorsOperation
 } from "src/docs/decorators";
 
@@ -23,6 +25,14 @@ export class CourseController {
     private courseService: CourseService,
     private professorService: ProfessorService){}
 
+  @OasAllCoursesOperation()
+  @Permissions(Permission.DEFAULT_LEVEL)
+  @Get()
+  async onAllCoursesRequested()
+  {
+    return await this.courseService.fetchCourses();
+  }
+
   @OasCampusIdParam()
   @OasCourseOperation()
   @Permissions(Permission.DEFAULT_LEVEL)
@@ -33,7 +43,7 @@ export class CourseController {
   }
 
   @OasCourseIdParam()
-  @OasProfessorsOperation()
+  @OasCourseProfessorsOperation()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get(":courseId/professors")
   async onProfessorsRequested(@Param('courseId', ParseIntPipe) courseId: number)

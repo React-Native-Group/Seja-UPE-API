@@ -23,7 +23,7 @@ export const OasRatingNoteParam = () => ApiParam({
 });
 
 export const OasAuthOperation = () => ApiOperation({
-  summary: '[Autenticação] Realiza a autenticação com o Google OAuth2 API.',
+  summary: '[Autorização] Realiza a autenticação com o Google OAuth2 API.',
   description: 'Esta API verifica se um determinado Token ID é válido e retorna um Bearer token que possa ser utilizado para realizar requisições futuras ao Seja UPE API.'
 });
 
@@ -37,14 +37,24 @@ export const OasPopularityOperation = () => ApiOperation({
   description: 'Esta API captura avaliação imposta pelo usuário após entrar em um curso.'
 });
 
+export const OasFetchRatingOperation = () => ApiOperation({
+  summary: '[Avaliações] Realiza a requisição das avaliações do Teste Vocacional.',
+  description: 'Esta API retorna o número de avaliações feitas ao teste vocacional e sua média de notas.'
+});
+
+export const OasFetchPopularityOperation = () => ApiOperation({
+  summary: '[Avaliações] Realiza a requisição do nível de popularidade de um curso.',
+  description: 'Esta API retorna o número de likes e dislikes que um determinado curso recebeu.'
+});
+
 export const OasCampusOperation = () => ApiOperation({
   summary: '[Campus] Realiza a requisição das infos do Campus.',
-  description: 'Esta API realiza a requisição das determinadas informações de um curso escolhido.'
+  description: 'Esta API realiza a requisição das informações dos campus da universidade, mas não entra em detalhes sobre seus cursos.'
 });
 
 export const OasCampusCourseOperation = () => ApiOperation({
   summary: '[Campus] Realiza a requisição dos cursos de um campus.',
-  description: 'Esta API realiza a requisição de todos os cursos de um determinado campus.'
+  description: 'Esta API realiza a requisição das informações de um determinado campus da universidade, mas não entra em detalhes sobre seus cursos.'
 });
 
 export const OasCampusContactsOperation = () => ApiOperation({
@@ -58,17 +68,27 @@ export const OasCampusEventsOperation = () => ApiOperation({
 });
 
 export const OasCourseOperation = () => ApiOperation({
-  summary: '[Campus] Realiza a requisição dos cursos de um campus.',
-  description: 'Esta API realiza a requisição das informações de um determinado curso escolhido.'
+  summary: '[Curso] Realiza a requisição dos cursos de um campus.',
+  description: 'Esta API realiza a requisição das informações dos cursos de um determinado campus.'
+});
+
+export const OasAllCoursesOperation = () => ApiOperation({
+  summary: '[Curso] Realiza a requisição de todos os cursos da universidade.',
+  description: 'Esta API realiza a requisição de todos os cursos da universidade que estão ativos no momento.'
+});
+
+export const OasCourseProfessorsOperation = () => ApiOperation({
+  summary: '[Curso] Realiza a requisição de todos os professores de um curso.',
+  description: 'Esta API realiza a requisição de todos os docentes do curso especificado.'
 });
 
 export const OasProfessorsOperation = () => ApiOperation({
-  summary: '[Campus] Realiza a requisição dos docentes de um curso.',
-  description: 'Esta API realiza a requisição dos professores (docentes) de um determinado curso escolhido.'
+  summary: '[Professores] Realiza a requisição dos docentes da universidade.',
+  description: 'Esta API realiza a requisição dos professores (docentes) de toda a universidade, todos os cursos e campus.'
 });
 
 export const OasProfessorOperation = () => ApiOperation({
-  summary: '[Campus] Realiza a requisição de um docente.',
+  summary: '[Professores] Realiza a requisição de um docente.',
   description: 'Esta API realiza a requisição de um professor (docente) em específico.'
 });
 
@@ -79,7 +99,7 @@ export const OasPopularitySurveyOperation = () => ApiOperation({
 
 export const OasPopularityCourseOperation = () => ApiOperation({
   summary: '[Avaliações] Realiza a avaliação de um curso.',
-  description: 'Esta API realiza a avaliação de um curso que o usuário adentrou.'
+  description: 'Esta API realiza a avaliação de um curso que o usuário adentrou. Os valores possíveis para a avaliação são "like" e "dislike"'
 });
 
 export const OasIdTokenProperty = () => ApiProperty({

@@ -2,7 +2,19 @@ import { Body, Controller, Get, Param, ParseIntPipe, Post, UseGuards } from "@ne
 import { EvaluationService } from "src/services";
 import { PopularityValidator } from "src/validators";
 import { AuthorizeGuard, Permission, Permissions } from "src/security";
-import { OasAppVersionHeader, OasBearerAuth, OasControllerTags, OasPopularityCourseOperation, OasPopularityOperation, OasPopularitySurveyOperation, OasRatingNoteParam, OasRatingOperation } from "src/docs/decorators";
+
+import {
+  OasAppVersionHeader,
+  OasBearerAuth,
+  OasControllerTags,
+  OasFetchPopularityOperation,
+  OasFetchRatingOperation,
+  OasPopularityCourseOperation,
+  OasPopularityOperation,
+  OasPopularitySurveyOperation,
+  OasRatingNoteParam,
+  OasRatingOperation
+} from "src/docs/decorators";
 
 @OasBearerAuth()
 @OasAppVersionHeader()
@@ -30,7 +42,7 @@ export class EvaluationController {
     return await this.evaluationService.submitCoursePopularity(data);
   }
 
-  @OasPopularitySurveyOperation()
+  @OasFetchRatingOperation()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get("/rating/survey")
   async onRatingsRequested()
@@ -38,7 +50,7 @@ export class EvaluationController {
     return await this.evaluationService.fetchRatings();
   }
 
-  @OasPopularityCourseOperation()
+  @OasFetchPopularityOperation()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get("/popularity/course/:courseId")
   async onPopularityRequested(@Param('courseId', ParseIntPipe) courseId: number)

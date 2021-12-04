@@ -1,6 +1,6 @@
 import { Controller, Get, Param, ParseIntPipe, UseGuards } from "@nestjs/common";
-import { ProfessorService } from "src/services";
 import { AuthorizeGuard, Permission, Permissions } from "src/security";
+import { ProfessorService } from "src/services";
 
 import {
   OasAppVersionHeader,

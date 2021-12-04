@@ -6,7 +6,7 @@ import { AuthService, MailerService, OAuth2Service } from "src/services";
 import { OasAppVersionHeader, OasAuthOperation, OasControllerTags } from "src/docs/decorators";
 
 @OasAppVersionHeader()
-@OasControllerTags("Autenticação")
+@OasControllerTags("Autorização")
 @Controller("auth")
 export class AuthController {
 
