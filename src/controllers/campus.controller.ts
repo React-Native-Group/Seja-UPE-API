@@ -24,13 +24,20 @@ export class CampusController {
 
   @OasCampusOperation()
   @Permissions(Permission.DEFAULT_LEVEL)
-  @HttpCode(HttpStatus.OK)
-  @Get()
+  @Get("courses")
   async onAllCampusRequested()
   {
     return await this.courseService.fetchCampus();
   }
 
+  @OasCampusOperation()
+  @Permissions(Permission.DEFAULT_LEVEL)
+  @Get()
+  async onAllCampusWithCoursesRequested()
+  {
+    return await this.courseService.fetchCampusWithCourses();
+  }
+  
   @OasCampusIdParam()
   @OasCampusOperation()
   @Permissions(Permission.DEFAULT_LEVEL)
@@ -43,7 +50,6 @@ export class CampusController {
   @OasCampusIdParam()
   @OasCampusCourseOperation()
   @Permissions(Permission.DEFAULT_LEVEL)
-  @HttpCode(HttpStatus.OK)
   @Get(":campusId/courses")
   async onCampusCoursesRequested(@Param('campusId', ParseIntPipe) campusId: number)
   {
@@ -53,7 +59,6 @@ export class CampusController {
   @OasCampusIdParam()
   @OasCampusEventsOperation()
   @Permissions(Permission.DEFAULT_LEVEL)
-  @HttpCode(HttpStatus.OK)
   @Get(":campusId/events")
   async onCampusEventsRequested(@Param('campusId', ParseIntPipe) campusId: number)
   {

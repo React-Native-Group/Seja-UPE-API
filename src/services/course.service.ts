@@ -40,16 +40,19 @@ export class CourseService {
   async fetchCampusWithCourses(){
     let allCampus = await this.fetchCampus();
     for (let k = 0; k < allCampus.length; k++){
-      allCampus[k].courses = await this.fetchCampusCourses(allCampus[k].id);
+      allCampus[k].courses = await this.fetchCampusCourses(allCampus[k].id, false);
     }
     return allCampus;
   }
 
-  async fetchCampusCourses(campusId: number){
+  async fetchCampusCourses(campusId: number, includeProfessors: boolean = true){
     let campus = await this.campus.findOne({ id: campusId });
     if (!campus)
       throw new CampusNotFoundException();
-    return await this.course.find({ where: {campus}, relations: ['professors', 'ssaGrades', 'sisuGrades'] });
+    let relations = ['ssaGrades', 'sisuGrades'];
+    if (includeProfessors)
+      relations.push('professors');
+    return await this.course.find({ where: {campus}, relations });
   }
 
   async fetchCampusEvents(campusId: number){

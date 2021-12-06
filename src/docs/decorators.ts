@@ -47,6 +47,11 @@ export const OasFetchPopularityOperation = () => ApiOperation({
   description: 'Esta API retorna o número de likes e dislikes que um determinado curso recebeu.'
 });
 
+export const OasCampusCoursesOperation = () => ApiOperation({
+  summary: '[Campus] Realiza a requisição dos Campus e seus Cursos.',
+  description: 'Esta API realiza a requisição das informações dos campus da universidade e também seus cursos, não incluindo apenas os professores.'
+});
+
 export const OasCampusOperation = () => ApiOperation({
   summary: '[Campus] Realiza a requisição das infos do Campus.',
   description: 'Esta API realiza a requisição das informações dos campus da universidade, mas não entra em detalhes sobre seus cursos.'
