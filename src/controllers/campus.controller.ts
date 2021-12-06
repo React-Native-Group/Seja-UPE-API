@@ -23,17 +23,17 @@ export class CampusController {
 
   constructor(private courseService: CourseService){}
 
-  @OasCampusCoursesOperation()
+  @OasCampusOperation()
   @Permissions(Permission.DEFAULT_LEVEL)
-  @Get("courses")
+  @Get()
   async onAllCampusRequested()
   {
     return await this.courseService.fetchCampus();
   }
 
-  @OasCampusOperation()
+  @OasCampusCoursesOperation()
   @Permissions(Permission.DEFAULT_LEVEL)
-  @Get()
+  @Get("courses")
   async onAllCampusWithCoursesRequested()
   {
     return await this.courseService.fetchCampusWithCourses();
