@@ -7,6 +7,7 @@ import {
   OasBearerAuth,
   OasCampusContactsOperation,
   OasCampusCourseOperation,
+  OasCampusCoursesOperation,
   OasCampusEventsOperation,
   OasCampusIdParam,
   OasCampusOperation,
@@ -22,7 +23,7 @@ export class CampusController {
 
   constructor(private courseService: CourseService){}
 
-  @OasCampusOperation()
+  @OasCampusCoursesOperation()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get("courses")
   async onAllCampusRequested()
