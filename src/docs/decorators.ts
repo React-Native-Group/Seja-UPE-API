@@ -247,6 +247,11 @@ export const OasPhotoProfessorProperty = () => ApiProperty({
   example: 'https://i.imgur.com/h257qbK.jpg'
 });
 
+export const OasAreasProfessorProperty = () => ApiProperty({
+  description: 'Fotografia para identificação de um docente de um curso da Universidade de Pernambuco.',
+  example: ['Engenharia', 'Ciências Exatas', 'Computação']
+});
+
 export const OasRatingProperty = () => ApiProperty({
   description: 'Avaliação referente a sugestão de cursos após realizar questionário.',
   example: 4

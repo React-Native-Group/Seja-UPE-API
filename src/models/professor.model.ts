@@ -3,6 +3,7 @@ import { BaseModel } from "./base.model";
 import { CourseModel } from "./course.model";
 
 import {
+  OasAreasProfessorProperty,
   OasEmailProfessorProperty,
   OasLattesProfessorProperty,
   OasNameProfessorProperty,
@@ -34,6 +35,9 @@ export class ProfessorModel extends BaseModel {
   @OasPhotoProfessorProperty()
   @Column()
   public photoUrl: string;
+
+  @OasAreasProfessorProperty()
+  public areas: string[];
 
   @ManyToOne(() => CourseModel, course => course.professors)
   public course: CourseModel;

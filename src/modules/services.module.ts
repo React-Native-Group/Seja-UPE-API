@@ -11,6 +11,7 @@ import {
   EvaluationService,
   JwtStrategy,
   MailerService,
+  MiningService,
   OAuth2Service,
   ProfessorService
 } from 'src/services';
@@ -51,6 +52,7 @@ import {
     JwtStrategy, 
     OAuth2Service,
     EvaluationService,
+    MiningService,
     ProfessorService
   ],
   exports: [
@@ -60,6 +62,7 @@ import {
     JwtStrategy, 
     OAuth2Service,
     EvaluationService,
+    MiningService,
     ProfessorService
   ]
 })
