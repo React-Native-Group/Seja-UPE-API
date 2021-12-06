@@ -15,7 +15,9 @@ export class MiningService {
 
   getShortbioAreas(shortbio: string) {
     return shortbio.match(/(?:ENGENHARIA|ADMINISTRAÇÃO|SOFTWARE|COMPUTAÇÃO|EXATAS|MATEMÁTICA|DIREITO|BIOLOGIA|EDUCAÇÃO|ENFERMAGEM|AUTOMAÇÃO|ELÉTRICA|ELETRÔNICA|TELECOMUNICAÇÕES|MECÂNICA|MEDICINA|LOGÍSTICA|SAÚDE|PSICOLOGIA|ODONTOLOGIA|NUTRIÇÃO|GEOGRAFIA|CIÊNCIAS\sSOCIAIS|CIÊNCIAS\sBIOLÓGICAS|CIÊNCIAS\sEXATAS|CIÊNCIAS\sDAS\sNATUREZAS|QUÍMICA|HISTÓRIA|LETRAS|ESPANHOL|INGLÊS|PEDAGOGIA|GESTÃO|SEGURANÇA|CIBERSEGURANÇA|INFORMÁTICA|INTELIGÊNCIA\sARTIFICIAL)/igm)
-      ?.map(s => s.toLocaleLowerCase()).filter((v, i, a) => a.indexOf(v) === i).map(s => this.capitalizeString(s)) ?? [];
+      ?.map(s => s.toLocaleLowerCase())
+      .filter((v, i, a) => a.indexOf(v) === i)
+      .map(s => this.capitalizeString(s)) ?? [];
   }
 
 }

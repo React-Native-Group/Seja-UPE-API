@@ -37,6 +37,14 @@ export class CourseService {
     return await this.campus.find({ where: { id: campusId }, relations });
   }
 
+  async fetchCampusWithCourses(){
+    let allCampus = await this.fetchCampus();
+    for (let k = 0; k < allCampus.length; k++){
+      allCampus[k].courses = await this.fetchCampusCourses(allCampus[k].id);
+    }
+    return allCampus;
+  }
+
   async fetchCampusCourses(campusId: number){
     let campus = await this.campus.findOne({ id: campusId });
     if (!campus)
