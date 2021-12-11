@@ -1,9 +1,10 @@
+import { ApiOkResponse, getSchemaPath } from "@nestjs/swagger";
 import { Body, Controller, HttpCode, HttpStatus, Post } from "@nestjs/common";
 
 import { AuthorizationValidator } from "src/validators";
 import { OAuth2UnauthorizedException } from "src/exceptions";
 import { AuthService, MailerService, OAuth2Service } from "src/services";
-import { OasAppVersionHeader, OasAuthOperation, OasControllerTags } from "src/docs/decorators";
+import { OasAppVersionHeader, OasAuthOperation, OasAuthorizeResponse, OasControllerTags, OasInvalidObjectResponse } from "src/docs/decorators";
 
 @OasAppVersionHeader()
 @OasControllerTags("Autorização")
@@ -19,6 +20,8 @@ export class AuthController {
   @OasAuthOperation()
   @HttpCode(HttpStatus.OK)
   @Post("authorize")
+  @OasAuthorizeResponse()
+  @OasInvalidObjectResponse()
   async onAuthRequested(@Body() body: AuthorizationValidator)
   {
     let payload = await this.oauth2Service.verifyIdToken(body.idToken);

@@ -1,4 +1,32 @@
-import { ApiBearerAuth, ApiHeader, ApiOperation, ApiParam, ApiProperty, ApiTags } from "@nestjs/swagger";
+import {
+  ApiBadRequestResponse,
+  ApiBearerAuth,
+  ApiCreatedResponse,
+  ApiForbiddenResponse,
+  ApiGoneResponse,
+  ApiHeader,
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiOperation,
+  ApiParam,
+  ApiProperty,
+  ApiRequestTimeoutResponse,
+  ApiTags,
+  ApiUnauthorizedResponse
+} from "@nestjs/swagger";
+
+import { ApiResponse } from "./types";
+
+export const OasApiResponseSchema = (schema: any) => ({ schema: { example: schema } });
+
+export const OasApiCreatedResponse = (schema: any) => ApiCreatedResponse(OasApiResponseSchema(schema));
+export const OasApiOkResponse = (schema: any) => ApiOkResponse(OasApiResponseSchema(schema));
+export const OasApiForbiddenResponse = (schema: any) => ApiForbiddenResponse(OasApiResponseSchema(schema));
+export const OasApiBadRequestResponse = (schema: any) => ApiBadRequestResponse(OasApiResponseSchema(schema));
+export const OasApiUnauthorizedResponse = (schema: any) => ApiUnauthorizedResponse(OasApiResponseSchema(schema));
+export const OasApiNotFoundResponse = (schema: any) => ApiNotFoundResponse(OasApiResponseSchema(schema));
+export const OasApiGoneResponse = (schema: any) => ApiGoneResponse(OasApiResponseSchema(schema));
+export const OasApiRequestTimeoutResponse = (schema: any) => ApiRequestTimeoutResponse(OasApiResponseSchema(schema));
 
 export const OasBearerAuth = () => ApiBearerAuth();
 export const OasControllerTags = (...tags: string[]) => ApiTags(...tags);
@@ -327,3 +355,37 @@ export const OasLowestSisuGradeProperty = () => ApiProperty({
   example: 50.34
 });
 
+export const OasInvalidObjectResponse = () => OasApiBadRequestResponse(new ApiResponse({
+  message: 'string',
+  errors: [
+    {
+      target: 'object',
+      property: 'string',
+      value: 'object',
+      constraints: 'object'
+    }
+  ]
+}));
+
+export const OasAuthorizeResponse = () => OasApiOkResponse(new ApiResponse({
+  bearer: 'string',
+  payload: {
+    iss: 'string',
+    at_hash: 'string',
+    email_verified: 'boolean',
+    sub: 'string',
+    azp: 'string',
+    email: 'string',
+    profile: 'string',
+    picture: 'string',
+    name: 'string',
+    given_name: 'string',
+    family_name: 'string',
+    aud: 'string',
+    iat: 'number',
+    exp: 'number',
+    nonce: 'string',
+    hd: 'string',
+    locale: 'string'
+  }
+}));

@@ -11,6 +11,7 @@ import {
   OasCourseIdParam,
   OasCourseOperation,
   OasCourseProfessorsOperation,
+  OasInvalidObjectResponse,
   OasProfessorsOperation
 } from "src/docs/decorators";
 
@@ -26,6 +27,7 @@ export class CourseController {
     private professorService: ProfessorService){}
 
   @OasAllCoursesOperation()
+  @OasInvalidObjectResponse()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get()
   async onAllCoursesRequested()
@@ -35,6 +37,7 @@ export class CourseController {
 
   @OasCampusIdParam()
   @OasCourseOperation()
+  @OasInvalidObjectResponse()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get("campus/:campusId/all")
   async onCourseRequested(@Param('campusId', ParseIntPipe) campusId: number)
@@ -44,6 +47,7 @@ export class CourseController {
 
   @OasCourseIdParam()
   @OasCourseProfessorsOperation()
+  @OasInvalidObjectResponse()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get(":courseId/professors")
   async onProfessorsRequested(@Param('courseId', ParseIntPipe) courseId: number)

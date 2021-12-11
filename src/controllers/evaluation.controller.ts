@@ -9,6 +9,7 @@ import {
   OasControllerTags,
   OasFetchPopularityOperation,
   OasFetchRatingOperation,
+  OasInvalidObjectResponse,
   OasPopularityCourseOperation,
   OasPopularityOperation,
   OasPopularitySurveyOperation,
@@ -27,6 +28,7 @@ export class EvaluationController {
 
   @OasRatingNoteParam()
   @OasRatingOperation()
+  @OasInvalidObjectResponse()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Post("/rating/survey/:note")
   async onRatingSent(@Param('note', ParseIntPipe) note: number)
@@ -35,6 +37,7 @@ export class EvaluationController {
   }
 
   @OasPopularityOperation()
+  @OasInvalidObjectResponse()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Post("popularity/course")
   async onPopularitySent(@Body() data: PopularityValidator)
@@ -43,6 +46,7 @@ export class EvaluationController {
   }
 
   @OasFetchRatingOperation()
+  @OasInvalidObjectResponse()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get("/rating/survey")
   async onRatingsRequested()
@@ -51,6 +55,7 @@ export class EvaluationController {
   }
 
   @OasFetchPopularityOperation()
+  @OasInvalidObjectResponse()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get("/popularity/course/:courseId")
   async onPopularityRequested(@Param('courseId', ParseIntPipe) courseId: number)

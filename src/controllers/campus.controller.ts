@@ -1,4 +1,4 @@
-import { Controller, Get, HttpCode, HttpStatus, Param, ParseIntPipe, UseGuards } from "@nestjs/common";
+import { Controller, Get, Param, ParseIntPipe, UseGuards } from "@nestjs/common";
 import { AuthorizeGuard, Permission, Permissions } from "src/security";
 import { CourseService } from "src/services";
 
@@ -11,7 +11,8 @@ import {
   OasCampusEventsOperation,
   OasCampusIdParam,
   OasCampusOperation,
-  OasControllerTags
+  OasControllerTags,
+  OasInvalidObjectResponse
 } from "src/docs/decorators";
 
 @OasBearerAuth()
@@ -24,6 +25,7 @@ export class CampusController {
   constructor(private courseService: CourseService){}
 
   @OasCampusOperation()
+  @OasInvalidObjectResponse()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get()
   async onAllCampusRequested()
@@ -32,6 +34,7 @@ export class CampusController {
   }
 
   @OasCampusCoursesOperation()
+  @OasInvalidObjectResponse()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get("courses")
   async onAllCampusWithCoursesRequested()
@@ -41,6 +44,7 @@ export class CampusController {
   
   @OasCampusIdParam()
   @OasCampusOperation()
+  @OasInvalidObjectResponse()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get(":campusId")
   async onCampusRequested(@Param('campusId', ParseIntPipe) campusId: number)
@@ -50,6 +54,7 @@ export class CampusController {
 
   @OasCampusIdParam()
   @OasCampusCourseOperation()
+  @OasInvalidObjectResponse()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get(":campusId/courses")
   async onCampusCoursesRequested(@Param('campusId', ParseIntPipe) campusId: number)
@@ -59,6 +64,7 @@ export class CampusController {
 
   @OasCampusIdParam()
   @OasCampusEventsOperation()
+  @OasInvalidObjectResponse()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get(":campusId/events")
   async onCampusEventsRequested(@Param('campusId', ParseIntPipe) campusId: number)
@@ -68,6 +74,7 @@ export class CampusController {
 
   @OasCampusIdParam()
   @OasCampusContactsOperation()
+  @OasInvalidObjectResponse()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get(":campusId/contacts")
   async onCampusContactsRequested(@Param('campusId', ParseIntPipe) campusId: number)
