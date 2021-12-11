@@ -1,9 +1,11 @@
 import _ from 'lodash';
 import { Request, Response } from 'express';
-import { ArgumentsHost, Catch, ExceptionFilter, HttpException } from '@nestjs/common';
+import { ArgumentsHost, Catch, ExceptionFilter, HttpException, Logger } from '@nestjs/common';
 
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
+
+  private readonly logger = new Logger(HttpExceptionFilter.name);
 
   getExceptionName(exception: HttpException) {
     return _.snakeCase('Status' + exception.name).toLowerCase();
@@ -19,7 +21,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
     delete payload.statusCode;
 
     if (status >= 500 && status < 600){
-      //Log de erro 5xx
+      this.logger.error(exception.message, exception.stack, exception.name);
     }
 
     response.status(status).json({
