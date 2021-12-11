@@ -6,13 +6,19 @@ import {
   OasAppVersionHeader,
   OasBearerAuth,
   OasCampusContactsOperation,
+  OasCampusContactsResponse,
   OasCampusCourseOperation,
+  OasCampusCourseResponse,
   OasCampusCoursesOperation,
+  OasCampusCoursesResponse,
   OasCampusEventsOperation,
+  OasCampusEventsResponse,
   OasCampusIdParam,
   OasCampusOperation,
+  OasCampusResponse,
   OasControllerTags,
-  OasInvalidObjectResponse
+  OasInvalidObjectResponse,
+  OasSingleCampusResponse
 } from "src/docs/decorators";
 
 @OasBearerAuth()
@@ -26,6 +32,7 @@ export class CampusController {
 
   @OasCampusOperation()
   @OasInvalidObjectResponse()
+  @OasCampusResponse()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get()
   async onAllCampusRequested()
@@ -35,6 +42,7 @@ export class CampusController {
 
   @OasCampusCoursesOperation()
   @OasInvalidObjectResponse()
+  @OasCampusCoursesResponse()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get("courses")
   async onAllCampusWithCoursesRequested()
@@ -45,6 +53,7 @@ export class CampusController {
   @OasCampusIdParam()
   @OasCampusOperation()
   @OasInvalidObjectResponse()
+  @OasSingleCampusResponse()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get(":campusId")
   async onCampusRequested(@Param('campusId', ParseIntPipe) campusId: number)
@@ -55,6 +64,7 @@ export class CampusController {
   @OasCampusIdParam()
   @OasCampusCourseOperation()
   @OasInvalidObjectResponse()
+  @OasCampusCourseResponse()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get(":campusId/courses")
   async onCampusCoursesRequested(@Param('campusId', ParseIntPipe) campusId: number)
@@ -65,6 +75,7 @@ export class CampusController {
   @OasCampusIdParam()
   @OasCampusEventsOperation()
   @OasInvalidObjectResponse()
+  @OasCampusEventsResponse()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get(":campusId/events")
   async onCampusEventsRequested(@Param('campusId', ParseIntPipe) campusId: number)
@@ -75,6 +86,7 @@ export class CampusController {
   @OasCampusIdParam()
   @OasCampusContactsOperation()
   @OasInvalidObjectResponse()
+  @OasCampusContactsResponse()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get(":campusId/contacts")
   async onCampusContactsRequested(@Param('campusId', ParseIntPipe) campusId: number)

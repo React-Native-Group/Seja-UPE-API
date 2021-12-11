@@ -367,7 +367,7 @@ export const OasInvalidObjectResponse = () => OasApiBadRequestResponse(new ApiRe
   ]
 }));
 
-export const OasAuthorizeResponse = () => OasApiOkResponse(new ApiResponse({
+export const OasAuthResponse = () => OasApiOkResponse(new ApiResponse({
   bearer: 'string',
   payload: {
     iss: 'string',
@@ -389,3 +389,183 @@ export const OasAuthorizeResponse = () => OasApiOkResponse(new ApiResponse({
     locale: 'string'
   }
 }));
+
+export const OasAuthUnauthorizedResponse = () => OasApiUnauthorizedResponse(new ApiResponse({
+  message: 'string',
+  error: 'string'
+}));
+
+export const OasCampusResponse = () => OasApiOkResponse(new ApiResponse([{
+  name: 'string',
+  description: 'string',
+  latitude: 'string',
+  longitude: 'string',
+  events: [
+    {
+      name: 'string',
+      link: 'string'
+    }
+  ],
+  socialNetworks: [
+    {
+      categoryName: 'string',
+      fieldIcon: 'string',
+      value: 'string'
+    }
+  ],
+  contacts: [
+    {
+      name: 'string',
+      value: 'string'
+    }
+  ]
+}]));
+
+export const OasCampusCoursesResponse = () => OasApiOkResponse(new ApiResponse([{
+  name: 'string',
+  description: 'string',
+  latitude: 'string',
+  longitude: 'string',
+  events: [
+    {
+      name: 'string',
+      link: 'string'
+    }
+  ],
+  socialNetworks: [
+    {
+      categoryName: 'string',
+      fieldIcon: 'string',
+      value: 'string'
+    }
+  ],
+  contacts: [
+    {
+      name: 'string',
+      value: 'string'
+    }
+  ],
+  courses: [
+    {
+      name: 'string',
+      about: 'string',
+      profile: 'string',
+      history: 'string',
+      expertiseAreas: 'string',
+      jobMarket: 'string',
+      ingress: 'string',
+      ppcUrl: 'string',
+      ssaGrades: [
+        {
+          year: 'number',
+          shareholderHighest: 'string',
+          shareholderLowest: 'string',
+          highest: 'string',
+          lowest: 'string',
+          concurrence: 'number'
+        }
+      ],
+      sisuGrades: [
+        {
+          year: 'number',
+          shareholderHighest: 'string',
+          shareholderLowest: 'string',
+          highest: 'string',
+          lowest: 'string'
+        }
+      ],
+      professors: [
+        {
+          name: 'string',
+          shortbio: 'string',
+          email: 'string',
+          lattesUrl: 'string',
+          photoUrl: 'string',
+          areas: 'string[]'
+        }
+      ]
+    }
+  ]
+}]));
+
+export const OasSingleCampusResponse = () => OasApiOkResponse(new ApiResponse({
+  name: 'string',
+  description: 'string',
+  latitude: 'string',
+  longitude: 'string',
+  events: [
+    {
+      name: 'string',
+      link: 'string'
+    }
+  ],
+  socialNetworks: [
+    {
+      categoryName: 'string',
+      fieldIcon: 'string',
+      value: 'string'
+    }
+  ],
+  contacts: [
+    {
+      name: 'string',
+      value: 'string'
+    }
+  ]
+}));
+
+export const OasCampusCourseResponse = () => OasApiOkResponse(new ApiResponse([
+  {
+    name: 'string',
+    about: 'string',
+    profile: 'string',
+    history: 'string',
+    expertiseAreas: 'string',
+    jobMarket: 'string',
+    ingress: 'string',
+    ppcUrl: 'string',
+    ssaGrades: [
+      {
+        year: 'number',
+        shareholderHighest: 'string',
+        shareholderLowest: 'string',
+        highest: 'string',
+        lowest: 'string',
+        concurrence: 'number'
+      }
+    ],
+    sisuGrades: [
+      {
+        year: 'number',
+        shareholderHighest: 'string',
+        shareholderLowest: 'string',
+        highest: 'string',
+        lowest: 'string'
+      }
+    ],
+    professors: [
+      {
+        name: 'string',
+        shortbio: 'string',
+        email: 'string',
+        lattesUrl: 'string',
+        photoUrl: 'string',
+        areas: 'string[]'
+      }
+    ]
+  }
+]));
+
+export const OasCampusEventsResponse = () => OasApiOkResponse(new ApiResponse([
+  {
+    name: 'string',
+    link: 'string'
+  }
+]));
+
+export const OasCampusContactsResponse = () => OasApiOkResponse(new ApiResponse([
+  {
+    name: 'string',
+    value: 'string'
+  }
+]));
