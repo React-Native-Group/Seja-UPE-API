@@ -9,7 +9,7 @@ import { requiredClientVersion } from "src/config/client.json";
 export class VersionInterceptor implements NestInterceptor {
 
   checkLoaderStresser(request: Request) {
-    return request.baseUrl.includes("loaderio-022767dc0449f0ebeaecc33271dc3004");
+    return request.url.includes("loaderio-022767dc0449f0ebeaecc33271dc3004");
   }
 
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
