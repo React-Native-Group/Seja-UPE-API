@@ -41,4 +41,8 @@ export class AuthService {
     return !(count > 0); //Can send welcome mail?
   }
 
+  async authorizeGoogleToken(idToken: string){
+    
+  }
+
 }

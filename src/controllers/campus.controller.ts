@@ -17,12 +17,17 @@ import {
   OasCampusOperation,
   OasCampusResponse,
   OasControllerTags,
+  OasForbiddenResponse,
   OasInvalidObjectResponse,
+  OasRequestTimeoutResponse,
   OasSingleCampusResponse
 } from "src/docs/decorators";
 
 @OasBearerAuth()
 @OasAppVersionHeader()
+@OasInvalidObjectResponse()
+@OasRequestTimeoutResponse()
+@OasForbiddenResponse()
 @OasControllerTags("Campus")
 @UseGuards(AuthorizeGuard)
 @Controller("campus")
@@ -31,7 +36,6 @@ export class CampusController {
   constructor(private courseService: CourseService){}
 
   @OasCampusOperation()
-  @OasInvalidObjectResponse()
   @OasCampusResponse()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get()
@@ -41,7 +45,6 @@ export class CampusController {
   }
 
   @OasCampusCoursesOperation()
-  @OasInvalidObjectResponse()
   @OasCampusCoursesResponse()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get("courses")
@@ -52,7 +55,6 @@ export class CampusController {
   
   @OasCampusIdParam()
   @OasCampusOperation()
-  @OasInvalidObjectResponse()
   @OasSingleCampusResponse()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get(":campusId")
@@ -63,7 +65,6 @@ export class CampusController {
 
   @OasCampusIdParam()
   @OasCampusCourseOperation()
-  @OasInvalidObjectResponse()
   @OasCampusCourseResponse()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get(":campusId/courses")
@@ -74,7 +75,6 @@ export class CampusController {
 
   @OasCampusIdParam()
   @OasCampusEventsOperation()
-  @OasInvalidObjectResponse()
   @OasCampusEventsResponse()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get(":campusId/events")
@@ -85,7 +85,6 @@ export class CampusController {
 
   @OasCampusIdParam()
   @OasCampusContactsOperation()
-  @OasInvalidObjectResponse()
   @OasCampusContactsResponse()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get(":campusId/contacts")

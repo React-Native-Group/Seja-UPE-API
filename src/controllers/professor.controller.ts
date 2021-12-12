@@ -6,13 +6,18 @@ import {
   OasAppVersionHeader,
   OasBearerAuth,
   OasControllerTags,
+  OasForbiddenResponse,
   OasInvalidObjectResponse,
   OasProfessorOperation,
-  OasProfessorsOperation
+  OasProfessorsOperation,
+  OasRequestTimeoutResponse
 } from "src/docs/decorators";
 
 @OasBearerAuth()
 @OasAppVersionHeader()
+@OasInvalidObjectResponse()
+@OasRequestTimeoutResponse()
+@OasForbiddenResponse()
 @OasControllerTags("Professores")
 @UseGuards(AuthorizeGuard)
 @Controller("professors")
@@ -21,7 +26,6 @@ export class ProfessorController {
   constructor(private professorService: ProfessorService){}
 
   @OasProfessorsOperation()
-  @OasInvalidObjectResponse()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get()
   async onProfessorsRequested()
@@ -30,7 +34,6 @@ export class ProfessorController {
   }
 
   @OasProfessorOperation()
-  @OasInvalidObjectResponse()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get(":professorId")
   async onProfessorRequested(@Param('professorId', ParseIntPipe) professorId: number)

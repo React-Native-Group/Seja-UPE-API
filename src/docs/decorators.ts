@@ -17,6 +17,8 @@ import {
 
 import { ApiResponse } from "./types";
 
+//#region [ SWAGGER BASE DECORATORS ]
+
 export const OasApiResponseSchema = (schema: any) => ({ schema: { example: schema } });
 
 export const OasApiCreatedResponse = (schema: any) => ApiCreatedResponse(OasApiResponseSchema(schema));
@@ -35,20 +37,28 @@ export const OasAppVersionHeader = () => ApiHeader({
   description: 'A versão do aplicativo cliente que se conecta. A versão fornecida deve estar em conformidade com o padrão de versionamento semântico.'
 });
 
-export const OasCourseIdParam = () => ApiParam({ 
+//#endregion
+
+//#region [ SWAGGER PARAMETERS DEFINITIONS ]
+
+export const OasCourseIdParam = () => ApiParam({
   name: 'courseId',
   description: 'O identificador do curso no banco de dados.'
 });
 
-export const OasCampusIdParam = () => ApiParam({ 
+export const OasCampusIdParam = () => ApiParam({
   name: 'campusId',
   description: 'O identificador do campus no banco de dados.'
 });
 
-export const OasRatingNoteParam = () => ApiParam({ 
+export const OasRatingNoteParam = () => ApiParam({
   name: 'note',
   description: 'A nota variando de 1 à 5 avaliando o teste vocacional.'
 });
+
+//#endregion
+
+//#region [ SWAGGER APIS DEFINITIONS ]
 
 export const OasAuthOperation = () => ApiOperation({
   summary: '[Autorização] Realiza a autenticação com o Google OAuth2 API.',
@@ -125,15 +135,9 @@ export const OasProfessorOperation = () => ApiOperation({
   description: 'Esta API realiza a requisição de um professor (docente) em específico.'
 });
 
-export const OasPopularitySurveyOperation = () => ApiOperation({
-  summary: '[Avaliações] Realiza a avaliação do teste vocacional.',
-  description: 'Esta API realiza a avaliação das sugestões impostas no teste vocacional.'
-});
+//#endregion
 
-export const OasPopularityCourseOperation = () => ApiOperation({
-  summary: '[Avaliações] Realiza a avaliação de um curso.',
-  description: 'Esta API realiza a avaliação de um curso que o usuário adentrou. Os valores possíveis para a avaliação são "like" e "dislike"'
-});
+//#region [ SWAGGER PROPERTY DEFINITIONS ]
 
 export const OasIdTokenProperty = () => ApiProperty({
   description: 'Token enviado pelo Google ao autenticar.',
@@ -355,6 +359,10 @@ export const OasLowestSisuGradeProperty = () => ApiProperty({
   example: 50.34
 });
 
+//#endregion
+
+//#region [ SWAGGER RESPONSE SCHEMAS ]
+
 export const OasInvalidObjectResponse = () => OasApiBadRequestResponse(new ApiResponse({
   message: 'string',
   errors: [
@@ -365,6 +373,21 @@ export const OasInvalidObjectResponse = () => OasApiBadRequestResponse(new ApiRe
       constraints: 'object'
     }
   ]
+}));
+
+export const OasRequestTimeoutResponse = () => OasApiRequestTimeoutResponse(new ApiResponse({
+  message: 'string',
+  error: 'string'
+}));
+
+export const OasOutdatedVersionResponse = () => OasApiGoneResponse(new ApiResponse({
+  message: 'string',
+  error: 'string'
+}));
+
+export const OasForbiddenResponse = () => OasApiForbiddenResponse(new ApiResponse({
+  message: 'string',
+  error: 'string'
 }));
 
 export const OasAuthResponse = () => OasApiOkResponse(new ApiResponse({
@@ -664,3 +687,41 @@ export const OasCourseProfessorsResponse = () => OasApiOkResponse(new ApiRespons
     areas: 'string[]'
   }
 ]));
+
+export const OasRatingResponse = () => OasApiCreatedResponse(new ApiResponse({
+  note: 'number'
+}));
+
+export const OasPopularityResponse = () => OasApiCreatedResponse(new ApiResponse({
+  value: 'string'
+}));
+
+export const OasFetchRatingResponse = () => OasApiOkResponse(new ApiResponse([{
+  note: 'number'
+}]));
+
+export const OasFetchPopularityResponse = () => OasApiOkResponse(new ApiResponse([{
+  value: 'string'
+}]));
+
+export const OasProfessorsResponse = () => OasApiOkResponse(new ApiResponse([
+  {
+    name: 'string',
+    shortbio: 'string',
+    email: 'string',
+    lattesUrl: 'string',
+    photoUrl: 'string',
+    areas: 'string[]'
+  }
+]));
+
+export const OasProfessorResponse = () => OasApiOkResponse(new ApiResponse({
+  name: 'string',
+  shortbio: 'string',
+  email: 'string',
+  lattesUrl: 'string',
+  photoUrl: 'string',
+  areas: 'string[]'
+}));
+
+//#endregion

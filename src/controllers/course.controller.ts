@@ -14,12 +14,16 @@ import {
   OasCourseProfessorsOperation,
   OasCourseProfessorsResponse,
   OasCoursesResponse,
+  OasForbiddenResponse,
   OasInvalidObjectResponse,
-  OasProfessorsOperation
+  OasRequestTimeoutResponse
 } from "src/docs/decorators";
 
 @OasBearerAuth()
 @OasAppVersionHeader()
+@OasInvalidObjectResponse()
+@OasRequestTimeoutResponse()
+@OasForbiddenResponse()
 @OasControllerTags("Cursos")
 @UseGuards(AuthorizeGuard)
 @Controller("courses")
@@ -30,7 +34,6 @@ export class CourseController {
     private professorService: ProfessorService){}
 
   @OasAllCoursesOperation()
-  @OasInvalidObjectResponse()
   @OasAllCoursesResponse()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get()
@@ -41,7 +44,6 @@ export class CourseController {
 
   @OasCampusIdParam()
   @OasCourseOperation()
-  @OasInvalidObjectResponse()
   @OasCoursesResponse()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get("campus/:campusId/all")
@@ -52,7 +54,6 @@ export class CourseController {
 
   @OasCourseIdParam()
   @OasCourseProfessorsOperation()
-  @OasInvalidObjectResponse()
   @OasCourseProfessorsResponse()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get(":courseId/professors")

@@ -3,9 +3,22 @@ import { Body, Controller, HttpCode, HttpStatus, Post } from "@nestjs/common";
 import { AuthorizationValidator } from "src/validators";
 import { OAuth2UnauthorizedException } from "src/exceptions";
 import { AuthService, MailerService, OAuth2Service } from "src/services";
-import { OasAppVersionHeader, OasAuthOperation, OasAuthResponse, OasAuthUnauthorizedResponse, OasControllerTags, OasInvalidObjectResponse } from "src/docs/decorators";
+
+import {
+  OasAppVersionHeader,
+  OasAuthOperation,
+  OasAuthResponse,
+  OasAuthUnauthorizedResponse,
+  OasControllerTags,
+  OasInvalidObjectResponse,
+  OasOutdatedVersionResponse,
+  OasRequestTimeoutResponse
+} from "src/docs/decorators";
 
 @OasAppVersionHeader()
+@OasInvalidObjectResponse()
+@OasRequestTimeoutResponse()
+@OasOutdatedVersionResponse()
 @OasControllerTags("Autorização")
 @Controller("auth")
 export class AuthController {
@@ -17,7 +30,6 @@ export class AuthController {
   ){}
   
   @OasAuthOperation()
-  @OasInvalidObjectResponse()
   @OasAuthResponse()
   @OasAuthUnauthorizedResponse()
   @HttpCode(HttpStatus.OK)
@@ -27,7 +39,7 @@ export class AuthController {
     let payload = await this.oauth2Service.verifyIdToken(body.idToken);
     if (!payload)
       throw new OAuth2UnauthorizedException();
-
+    
     const { email, name } = payload;
 
     if (await this.authService.getPreviousAuthorization(body.idToken, payload)){
