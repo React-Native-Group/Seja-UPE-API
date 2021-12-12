@@ -5,6 +5,8 @@ import { WsAdapter } from "@nestjs/platform-ws";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import { INestApplication, ValidationPipe } from "@nestjs/common";
 
+import { Request, Response } from "express";
+
 import { AppModule } from "./modules";
 import { HttpExceptionFilter, UnhandledErrorFilter } from "./filters";
 import { ResponseInterceptor, TimeoutInterceptor, VersionInterceptor } from "./hooks";
@@ -32,7 +34,7 @@ async function bootstrap() {
   app.setGlobalPrefix(Server.globalPreffix);
   app.enableCors();
   app.use(compression());
-  app.use(limiter({ windowMs: 60000, max: 60 }))
+  app.use(limiter({ windowMs: 60000, max: 60 }));
   app.useWebSocketAdapter(new WsAdapter(app));
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
   app.useGlobalFilters(
@@ -42,6 +44,10 @@ async function bootstrap() {
     new ResponseInterceptor(), 
     new TimeoutInterceptor(), 
     new VersionInterceptor());
+
+  app.use((req: Request, res: Response) => {
+    res.send('loaderio-022767dc0449f0ebeaecc33271dc3004');
+  });
 
   setupSwagger(app);
 
