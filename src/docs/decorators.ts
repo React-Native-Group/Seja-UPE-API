@@ -569,3 +569,98 @@ export const OasCampusContactsResponse = () => OasApiOkResponse(new ApiResponse(
     value: 'string'
   }
 ]));
+
+export const OasAllCoursesResponse = () => OasApiOkResponse(new ApiResponse([
+  {
+    name: 'string',
+    about: 'string',
+    profile: 'string',
+    history: 'string',
+    expertiseAreas: 'string',
+    jobMarket: 'string',
+    ingress: 'string',
+    ppcUrl: 'string',
+    ssaGrades: [
+      {
+        year: 'number',
+        shareholderHighest: 'string',
+        shareholderLowest: 'string',
+        highest: 'string',
+        lowest: 'string',
+        concurrence: 'number'
+      }
+    ],
+    sisuGrades: [
+      {
+        year: 'number',
+        shareholderHighest: 'string',
+        shareholderLowest: 'string',
+        highest: 'string',
+        lowest: 'string'
+      }
+    ],
+    professors: [
+      {
+        name: 'string',
+        shortbio: 'string',
+        email: 'string',
+        lattesUrl: 'string',
+        photoUrl: 'string',
+        areas: 'string[]'
+      }
+    ]
+  }
+]));
+
+export const OasCoursesResponse = () => OasApiOkResponse(new ApiResponse([
+  {
+    name: 'string',
+    about: 'string',
+    profile: 'string',
+    history: 'string',
+    expertiseAreas: 'string',
+    jobMarket: 'string',
+    ingress: 'string',
+    ppcUrl: 'string',
+    ssaGrades: [
+      {
+        year: 'number',
+        shareholderHighest: 'string',
+        shareholderLowest: 'string',
+        highest: 'string',
+        lowest: 'string',
+        concurrence: 'number'
+      }
+    ],
+    sisuGrades: [
+      {
+        year: 'number',
+        shareholderHighest: 'string',
+        shareholderLowest: 'string',
+        highest: 'string',
+        lowest: 'string'
+      }
+    ],
+    professors: [
+      {
+        name: 'string',
+        shortbio: 'string',
+        email: 'string',
+        lattesUrl: 'string',
+        photoUrl: 'string',
+        areas: 'string[]'
+      }
+    ]
+  }
+]));
+
+export const OasCourseProfessorsResponse = () => OasApiOkResponse(new ApiResponse([
+  {
+    name: 'string',
+    shortbio: 'string',
+    email: 'string',
+    lattesUrl: 'string',
+    photoUrl: 'string',
+    areas: 'string[]'
+  }
+]));

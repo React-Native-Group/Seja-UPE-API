@@ -4,6 +4,7 @@ import { CourseService, ProfessorService } from "src/services";
 
 import {
   OasAllCoursesOperation,
+  OasAllCoursesResponse,
   OasAppVersionHeader,
   OasBearerAuth,
   OasCampusIdParam,
@@ -11,6 +12,8 @@ import {
   OasCourseIdParam,
   OasCourseOperation,
   OasCourseProfessorsOperation,
+  OasCourseProfessorsResponse,
+  OasCoursesResponse,
   OasInvalidObjectResponse,
   OasProfessorsOperation
 } from "src/docs/decorators";
@@ -28,6 +31,7 @@ export class CourseController {
 
   @OasAllCoursesOperation()
   @OasInvalidObjectResponse()
+  @OasAllCoursesResponse()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get()
   async onAllCoursesRequested()
@@ -38,6 +42,7 @@ export class CourseController {
   @OasCampusIdParam()
   @OasCourseOperation()
   @OasInvalidObjectResponse()
+  @OasCoursesResponse()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get("campus/:campusId/all")
   async onCourseRequested(@Param('campusId', ParseIntPipe) campusId: number)
@@ -48,6 +53,7 @@ export class CourseController {
   @OasCourseIdParam()
   @OasCourseProfessorsOperation()
   @OasInvalidObjectResponse()
+  @OasCourseProfessorsResponse()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get(":courseId/professors")
   async onProfessorsRequested(@Param('courseId', ParseIntPipe) courseId: number)
