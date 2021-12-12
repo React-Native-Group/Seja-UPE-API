@@ -7,13 +7,15 @@ import { OnGatewayConnection, OnGatewayDisconnect } from "@nestjs/websockets";
 export class WebSockGateway implements OnGatewayConnection, OnGatewayDisconnect {
   
   public clients: WebSocket[] = [];
+  public messages: any[] = [];
   
   handleConnection(client: WebSocket, ...args: any[]) 
   {
     this.clients.push(client);
+    this.messages.slice(-50).forEach(m => client.send(JSON.stringify(m.data)));
   }
   
-  handleDisconnect(client: any) 
+  handleDisconnect(client: WebSocket) 
   {
     let k = this.clients.indexOf(client);
     this.clients.splice(k, 1);
@@ -22,6 +24,8 @@ export class WebSockGateway implements OnGatewayConnection, OnGatewayDisconnect 
   @SubscribeMessage("broadcast")
   onBroadcast(@MessageBody() data: any)
   {
+    this.messages.push({ timestamp: +new Date, data });
+    this.messages.sort((a, b) => a.timestamp - b.timestamp);
     this.clients.forEach(s => s.send(JSON.stringify(data)));
   }
 

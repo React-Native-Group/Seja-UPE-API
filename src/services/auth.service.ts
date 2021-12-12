@@ -53,7 +53,7 @@ export class AuthService {
     
     const { email, name } = payload;
 
-    if (await this.getPreviousAuthorization(idToken, payload)){
+    if (!await this.getPreviousAuthorization(idToken, payload)){
       await this.mailerService.sendWelcomeMail(name, email);
     }
     
