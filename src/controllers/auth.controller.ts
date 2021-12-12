@@ -23,11 +23,7 @@ import {
 @Controller("auth")
 export class AuthController {
 
-  constructor(
-    private oauth2Service: OAuth2Service,
-    private authService: AuthService,
-    private mailerService: MailerService
-  ){}
+  constructor(private authService: AuthService){}
   
   @OasAuthOperation()
   @OasAuthResponse()
@@ -36,20 +32,7 @@ export class AuthController {
   @Post("authorize")
   async onAuthRequested(@Body() body: AuthorizationValidator)
   {
-    let payload = await this.oauth2Service.verifyIdToken(body.idToken);
-    if (!payload)
-      throw new OAuth2UnauthorizedException();
-    
-    const { email, name } = payload;
-
-    if (await this.authService.getPreviousAuthorization(body.idToken, payload)){
-      await this.mailerService.sendWelcomeMail(name, email);
-    }
-    
-    return {
-      bearer: await this.authService.buildToken(payload),
-      payload
-    };
+    return await this.authService.authorizeGoogleToken(body.idToken);
   }
 
 }

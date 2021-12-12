@@ -5,7 +5,10 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { TokenPayload } from "google-auth-library";
 import { AuthorizationModel } from "src/models";
 
-import { getNumberFromPermissions, Permission } from 'src/security'
+import { getNumberFromPermissions, Permission } from "src/security"
+import { OAuth2UnauthorizedException } from "src/exceptions";
+import { MailerService } from "./mailer.service";
+import { OAuth2Service } from "./oauth2.service";
 
 @Injectable()
 export class AuthService {
@@ -13,7 +16,9 @@ export class AuthService {
   constructor(
     @InjectRepository(AuthorizationModel)
     private authorizations: Repository<AuthorizationModel>,
-    private jwtService: JwtService){}
+    private jwtService: JwtService,
+    private oauth2Service: OAuth2Service,
+    private mailerService: MailerService){}
 
   /**Constrói o Json Web Token a ser enviado para o usuário.
    * 
@@ -42,7 +47,20 @@ export class AuthService {
   }
 
   async authorizeGoogleToken(idToken: string){
+    let payload = await this.oauth2Service.verifyIdToken(idToken);
+    if (!payload)
+      throw new OAuth2UnauthorizedException();
     
+    const { email, name } = payload;
+
+    if (await this.getPreviousAuthorization(idToken, payload)){
+      await this.mailerService.sendWelcomeMail(name, email);
+    }
+    
+    return {
+      bearer: await this.buildToken(payload),
+      payload
+    };
   }
 
 }

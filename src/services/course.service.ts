@@ -1,8 +1,8 @@
 import { Repository } from "typeorm";
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { CampusModel, ContactModel, CourseModel, EventModel, ProfessorModel, SocialModel } from "src/models";
-import { CampusNotFoundException, CourseNotFoundException } from "src/exceptions";
+import { CampusNotFoundException } from "src/exceptions";
+import { CampusModel, ContactModel, CourseModel, EventModel, SocialModel } from "src/models";
 
 @Injectable()
 export class CourseService {
