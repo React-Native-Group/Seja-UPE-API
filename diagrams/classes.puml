@@ -1,10 +1,24 @@
-@startuml Seja UPE
+@startuml
+class ApiResponse<T> {
+    +timestamp: string
+    +path: string
+    +error: string
+    +status: string
+    +code: string
+    +response: T
+}
 class AuthorizationValidator {
     +idToken: string
 }
 class CampusOptionsValidator {
     +relations: string[]
 }
+class CampusNotFoundException extends NotFoundException
+class CourseNotFoundException extends NotFoundException
+class InvalidObjectException extends BadRequestException
+class OutdatedVersionException extends HttpException
+class ServerTimeoutException extends RequestTimeoutException
+class OAuth2UnauthorizedException extends UnauthorizedException
 class BaseModel extends BaseEntity {
     +id: number
     +createdAt: number
@@ -37,6 +51,7 @@ class ProfessorModel extends BaseModel {
     +email: string
     +lattesUrl: string
     +photoUrl: string
+    +areas: string[]
     +course: CourseModel
 }
 class SisuGradeModel extends BaseModel {
@@ -100,42 +115,16 @@ class PopularityValidator {
 class CourseService {
     -campus: Repository<CampusModel>
     -course: Repository<CourseModel>
-    -professor: Repository<ProfessorModel>
-    +fetchCampus(relations: string[]): Promise<CampusModel[]>
-    +fetchCourses(campusId: number): Promise<CourseModel[]>
-    +fetchProfessors(courseId: number): Promise<ProfessorModel[]>
-}
-class AuthService {
-    -authorizations: Repository<AuthorizationModel>
-    -jwtService: JwtService
-    +buildToken(payload: TokenPayload): Promise<string>
-    +getPreviousAuthorization(idToken: string, payload: TokenPayload): Promise<boolean>
-}
-class EvaluationService {
-    -courses: Repository<CourseModel>
-    -rating: Repository<RatingModel>
-    -popularity: Repository<PopularityModel>
-    +submitRating(note: number): Promise<RatingModel>
-    +submitCoursePopularity(__0: PopularityValidator): Promise<PopularityModel>
-}
-class OAuth2Service {
-    +verifyIdToken(token: string): Promise<false | TokenPayload>
-}
-class MailerService {
-    +sendWelcomeMail(userName: string, address: string): Promise<boolean>
-}
-class MiningService {
-    +capitalizeString(str: string): string
-    +getShortbioAreas(shortbio: string): string[]
-}
-class JwtStrategy {
-    +validate(payload: any): Promise<any>
-}
-class AuthController {
-    -oauth2Service: OAuth2Service
-    -authService: AuthService
-    -mailerService: MailerService
-    +onAuthRequested(body: AuthorizationValidator): Promise<{ bearer: string; payload: TokenPayload; }>
+    -event: Repository<EventModel>
+    -contact: Repository<ContactModel>
+    -social: Repository<SocialModel>
+    +fetchCourses(): Promise<CourseModel[]>
+    +fetchCampus(campusId?: number): Promise<CampusModel[]>
+    +fetchCampusWithCourses(): Promise<CampusModel[]>
+    +fetchCampusCourses(campusId: number, includeProfessors?: boolean): Promise<CourseModel[]>
+    +fetchCampusEvents(campusId: number): Promise<EventModel[]>
+    +fetchCampusContacts(campusId: number): Promise<ContactModel[]>
+    +fetchCampusSocialNetworks(campusId: number): Promise<SocialModel[]>
 }
 class JwtAuthGuard {
     +canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean>
@@ -145,9 +134,62 @@ class AuthorizeGuard implements CanActivate {
     -reflector: Reflector
     +canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean>
 }
+class MailerService {
+    +sendWelcomeMail(userName: string, address: string): Promise<boolean>
+}
+class OAuth2Service {
+    +verifyIdToken(token: string): Promise<false | TokenPayload>
+}
+class AuthService {
+    -authorizations: Repository<AuthorizationModel>
+    -jwtService: JwtService
+    -oauth2Service: OAuth2Service
+    -mailerService: MailerService
+    +buildToken(payload: any, permissions?: ["DEFAULT_LEVEL"]): Promise<string>
+    +getPreviousAuthorization(idToken: string, payload: TokenPayload): Promise<boolean>
+    +authorizeGoogleToken(idToken: string): Promise<{ bearer: string; payload: TokenPayload; }>
+}
+class EvaluationService {
+    -courses: Repository<CourseModel>
+    -rating: Repository<RatingModel>
+    -popularity: Repository<PopularityModel>
+    +submitRating(note: number): Promise<RatingModel>
+    +submitCoursePopularity(__0: PopularityValidator): Promise<PopularityModel>
+    +fetchRatings(): Promise<{ average: number; total: number; }>
+    +fetchPopularity(courseId: number): Promise<PopularityInfo>
+}
+class MiningService {
+    +capitalizeString(str: string): string
+    +getShortbioAreas(shortbio: string): string[]
+}
+class JwtStrategy {
+    +validate(payload: any): Promise<any>
+}
+class ProfessorService {
+    -course: Repository<CourseModel>
+    -professor: Repository<ProfessorModel>
+    -miningService: MiningService
+    +fetchProfessors(): Promise<ProfessorModel[]>
+    +fetchProfessorById(professorId: number): Promise<ProfessorModel>
+    +fetchCourseProfessors(courseId: number): Promise<ProfessorModel[]>
+}
+class AuthController {
+    -authService: AuthService
+    +onAuthRequested(body: AuthorizationValidator): Promise<{ bearer: string; payload: TokenPayload; }>
+}
 class CampusController {
     -courseService: CourseService
-    +onCampusRequested(options: CampusOptionsValidator): Promise<CampusModel[]>
+    +onAllCampusRequested(): Promise<CampusModel[]>
+    +onAllCampusWithCoursesRequested(): Promise<CampusModel[]>
+    +onCampusRequested(campusId: number): Promise<CampusModel[]>
+    +onCampusCoursesRequested(campusId: number): Promise<CourseModel[]>
+    +onCampusEventsRequested(campusId: number): Promise<EventModel[]>
+    +onCampusContactsRequested(campusId: number): Promise<ContactModel[]>
+}
+class CourseController {
+    -courseService: CourseService
+    -professorService: ProfessorService
+    +onAllCoursesRequested(): Promise<CourseModel[]>
     +onCourseRequested(campusId: number): Promise<CourseModel[]>
     +onProfessorsRequested(courseId: number): Promise<ProfessorModel[]>
 }
@@ -155,10 +197,26 @@ class EvaluationController {
     -evaluationService: EvaluationService
     +onRatingSent(note: number): Promise<RatingModel>
     +onPopularitySent(data: PopularityValidator): Promise<PopularityModel>
+    +onRatingsRequested(): Promise<{ average: number; total: number; }>
+    +onPopularityRequested(courseId: number): Promise<PopularityInfo>
+}
+class ProfessorController {
+    -professorService: ProfessorService
+    +onProfessorsRequested(): Promise<ProfessorModel[]>
+    +onProfessorRequested(professorId: number): Promise<ProfessorModel>
 }
 class HttpExceptionFilter implements ExceptionFilter {
+    -logger: Logger
     +getExceptionName(exception: HttpException): string
     +catch(exception: HttpException, host: ArgumentsHost): Promise<void>
+}
+class UnhandledErrorFilter implements ExceptionFilter {
+    -logger: Logger
+    +getExceptionName(exception: Error): string
+    +catch(exception: Error, host: ArgumentsHost): Promise<void>
+}
+class CacheRequestInterceptor extends CacheInterceptor {
+    +trackBy(context: ExecutionContext): string
 }
 class ResponseInterceptor implements NestInterceptor {
     +intercept(context: ExecutionContext, next: CallHandler<any>): Observable<any>
@@ -169,63 +227,74 @@ class TimeoutInterceptor implements NestInterceptor {
 class VersionInterceptor implements NestInterceptor {
     +intercept(context: ExecutionContext, next: CallHandler<any>): Observable<any>
 }
+class ServicesModule
+class AuthModule
+class CampusModule
+class DatabaseModule
 class WebSockGateway implements OnGatewayConnection, OnGatewayDisconnect {
     +clients: WebSocket[]
     +handleConnection(client: WebSocket, args: any[]): void
     +handleDisconnect(client: any): void
     +onBroadcast(data: any): void
 }
-class ServicesModule
-class AuthModule
-class CampusModule
-class DatabaseModule
 class WebsocketModule
 class EvaluationModule
+class CourseModule
+class ProfessorModule
 class AppModule
-class CampusNotFoundException extends NotFoundException
-class CourseNotFoundException extends NotFoundException
-class InvalidObjectException extends BadRequestException
-class OutdatedVersionException extends HttpException
-class ServerTimeoutException extends RequestTimeoutException
-class OAuth2UnauthorizedException extends UnauthorizedException
-CourseModel --> "1" CampusModel
-CourseModel --> "*" SsaGradeModel
-CourseModel --> "*" SisuGradeModel
-CourseModel --> "*" PopularityModel
-CourseModel --> "*" ProfessorModel
-ContactModel --> "1" CampusModel
 EventModel --> "1" CampusModel
 SocialModel --> "1" CampusModel
 SsaGradeModel --> "1" CourseModel
 ProfessorModel --> "1" CourseModel
 SisuGradeModel --> "1" CourseModel
 PopularityModel --> "1" CourseModel
+CourseModel --> "1" CampusModel
+CourseModel --> "*" SsaGradeModel
+CourseModel --> "*" SisuGradeModel
+CourseModel --> "*" PopularityModel
+CourseModel --> "*" ProfessorModel
+ContactModel --> "1" CampusModel
 CampusModel --> "*" EventModel
 CampusModel --> "*" SocialModel
 CampusModel --> "*" ContactModel
 CampusModel --> "*" CourseModel
 CourseService --> "1" CampusModel
 CourseService --> "1" CourseModel
-CourseService --> "1" ProfessorModel
-CourseService --> "*" CampusModel
+CourseService --> "1" EventModel
+CourseService --> "1" ContactModel
+CourseService --> "1" SocialModel
 CourseService --> "*" CourseModel
-CourseService --> "*" ProfessorModel
+CourseService --> "*" CampusModel
+CourseService --> "*" EventModel
+CourseService --> "*" ContactModel
+CourseService --> "*" SocialModel
 AuthService --> "1" AuthorizationModel
+AuthService --> "1" OAuth2Service
+AuthService --> "1" MailerService
 EvaluationService --> "1" CourseModel
 EvaluationService --> "1" RatingModel
 EvaluationService --> "1" PopularityModel
 EvaluationService --> "1" PopularityValidator
+ProfessorService --> "1" CourseModel
+ProfessorService --> "1" ProfessorModel
+ProfessorService --> "1" MiningService
+ProfessorService --> "*" ProfessorModel
+AuthController --> "1" AuthService
+AuthController --> "1" AuthorizationValidator
+CampusController --> "1" CourseService
+CampusController --> "*" CampusModel
+CampusController --> "*" CourseModel
+CampusController --> "*" EventModel
+CampusController --> "*" ContactModel
+CourseController --> "1" CourseService
+CourseController --> "1" ProfessorService
+CourseController --> "*" CourseModel
+CourseController --> "*" ProfessorModel
 EvaluationController --> "1" EvaluationService
 EvaluationController --> "1" RatingModel
 EvaluationController --> "1" PopularityValidator
 EvaluationController --> "1" PopularityModel
-AuthController --> "1" OAuth2Service
-AuthController --> "1" AuthService
-AuthController --> "1" MailerService
-AuthController --> "1" AuthorizationValidator
-CampusController --> "1" CourseService
-CampusController --> "1" CampusOptionsValidator
-CampusController --> "*" CampusModel
-CampusController --> "*" CourseModel
-CampusController --> "*" ProfessorModel
+ProfessorController --> "1" ProfessorService
+ProfessorController --> "*" ProfessorModel
+ProfessorController --> "1" ProfessorModel
 @enduml
