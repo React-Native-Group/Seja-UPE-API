@@ -1,16 +1,16 @@
-import compression from 'compression';
-import limiter from 'express-rate-limit';
-import { NestFactory } from '@nestjs/core';
-import { WsAdapter } from '@nestjs/platform-ws';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { INestApplication, ValidationPipe } from '@nestjs/common';
+import compression from "compression";
+import limiter from "express-rate-limit";
+import { NestFactory } from "@nestjs/core";
+import { WsAdapter } from "@nestjs/platform-ws";
+import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
+import { INestApplication, ValidationPipe } from "@nestjs/common";
 
-import { AppModule } from './modules';
-import { HttpExceptionFilter } from './filters';
-import { ResponseInterceptor, TimeoutInterceptor, VersionInterceptor } from './hooks';
+import { AppModule } from "./modules";
+import { HttpExceptionFilter, UnhandledErrorFilter } from "./filters";
+import { ResponseInterceptor, TimeoutInterceptor, VersionInterceptor } from "./hooks";
 
-import Server from './config/server.json';
-import Swagger from './docs/swagger.json';
+import Server from "./config/server.json";
+import Swagger from "./docs/swagger.json";
 
 declare const module: any;
 
@@ -35,7 +35,9 @@ async function bootstrap() {
   app.use(limiter({ windowMs: 60000, max: 60 }))
   app.useWebSocketAdapter(new WsAdapter(app));
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
-  app.useGlobalFilters(new HttpExceptionFilter());
+  app.useGlobalFilters(
+    new UnhandledErrorFilter(),
+    new HttpExceptionFilter());
   app.useGlobalInterceptors(
     new ResponseInterceptor(), 
     new TimeoutInterceptor(), 

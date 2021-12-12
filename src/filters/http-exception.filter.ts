@@ -1,6 +1,6 @@
-import _ from 'lodash';
-import { Request, Response } from 'express';
-import { ArgumentsHost, Catch, ExceptionFilter, HttpException, Logger } from '@nestjs/common';
+import _ from "lodash";
+import { Request, Response } from "express";
+import { ArgumentsHost, Catch, ExceptionFilter, HttpException, Logger } from "@nestjs/common";
 
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
@@ -8,7 +8,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
   private readonly logger = new Logger(HttpExceptionFilter.name);
 
   getExceptionName(exception: HttpException) {
-    return _.snakeCase('Status' + exception.name).toLowerCase();
+    return _.snakeCase("Status" + exception.name).toLowerCase();
   }
 
   async catch(exception: HttpException, host: ArgumentsHost) {
