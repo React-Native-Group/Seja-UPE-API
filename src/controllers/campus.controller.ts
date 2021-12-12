@@ -19,6 +19,7 @@ import {
   OasControllerTags,
   OasForbiddenResponse,
   OasInvalidObjectResponse,
+  OasOutdatedVersionResponse,
   OasRequestTimeoutResponse,
   OasSingleCampusResponse
 } from "src/docs/decorators";
@@ -28,6 +29,7 @@ import {
 @OasInvalidObjectResponse()
 @OasRequestTimeoutResponse()
 @OasForbiddenResponse()
+@OasOutdatedVersionResponse()
 @OasControllerTags("Campus")
 @UseGuards(AuthorizeGuard)
 @Controller("campus")
@@ -58,7 +60,7 @@ export class CampusController {
   @OasSingleCampusResponse()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get(":campusId")
-  async onCampusRequested(@Param('campusId', ParseIntPipe) campusId: number)
+  async onCampusRequested(@Param("campusId", ParseIntPipe) campusId: number)
   {
     return await this.courseService.fetchCampus(campusId);
   }
@@ -68,7 +70,7 @@ export class CampusController {
   @OasCampusCourseResponse()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get(":campusId/courses")
-  async onCampusCoursesRequested(@Param('campusId', ParseIntPipe) campusId: number)
+  async onCampusCoursesRequested(@Param("campusId", ParseIntPipe) campusId: number)
   {
     return await this.courseService.fetchCampusCourses(campusId);
   }
@@ -78,7 +80,7 @@ export class CampusController {
   @OasCampusEventsResponse()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get(":campusId/events")
-  async onCampusEventsRequested(@Param('campusId', ParseIntPipe) campusId: number)
+  async onCampusEventsRequested(@Param("campusId", ParseIntPipe) campusId: number)
   {
     return await this.courseService.fetchCampusEvents(campusId);
   }
@@ -88,7 +90,7 @@ export class CampusController {
   @OasCampusContactsResponse()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get(":campusId/contacts")
-  async onCampusContactsRequested(@Param('campusId', ParseIntPipe) campusId: number)
+  async onCampusContactsRequested(@Param("campusId", ParseIntPipe) campusId: number)
   {
     return await this.courseService.fetchCampusContacts(campusId);
   }

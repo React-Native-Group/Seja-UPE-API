@@ -20,7 +20,7 @@ import {
 
 export type CourseField = keyof CourseModel;
 
-@Entity({ name: 'tbl_course' })
+@Entity({ name: "tbl_course" })
 export class CourseModel extends BaseModel {
 
   @OasNameCourseProperty()

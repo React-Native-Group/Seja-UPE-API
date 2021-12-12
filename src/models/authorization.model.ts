@@ -2,7 +2,7 @@ import { Column, Entity } from "typeorm";
 import { IsEmail, IsInt, IsNotEmpty, IsString } from "class-validator";
 import { BaseModel } from "./base.model";
 
-@Entity({ name: 'tbl_authorization' })
+@Entity({ name: "tbl_authorization" })
 export class AuthorizationModel extends BaseModel {
 
   @IsString()

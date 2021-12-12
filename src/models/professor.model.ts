@@ -13,7 +13,7 @@ import {
 
 export type ProfessorField = keyof ProfessorModel;
 
-@Entity({ name: 'tbl_professor' })
+@Entity({ name: "tbl_professor" })
 export class ProfessorModel extends BaseModel {
 
   @OasNameProfessorProperty()

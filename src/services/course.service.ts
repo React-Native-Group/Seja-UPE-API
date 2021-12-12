@@ -27,11 +27,11 @@ export class CourseService {
   ){}
 
   async fetchCourses(){
-    return await this.course.find({ relations: ['professors', 'ssaGrades', 'sisuGrades'] });
+    return await this.course.find({ relations: ["professors", "ssaGrades", "sisuGrades"] });
   }
 
   async fetchCampus(campusId?: number){
-    const relations = ['events', 'contacts', 'socialNetworks'];
+    const relations = ["events", "contacts", "socialNetworks"];
     if (!campusId)
       return await this.campus.find({ relations });
     return await this.campus.find({ where: { id: campusId }, relations });
@@ -49,9 +49,9 @@ export class CourseService {
     let campus = await this.campus.findOne({ id: campusId });
     if (!campus)
       throw new CampusNotFoundException();
-    let relations = ['ssaGrades', 'sisuGrades'];
+    let relations = ["ssaGrades", "sisuGrades"];
     if (includeProfessors)
-      relations.push('professors');
+      relations.push("professors");
     return await this.course.find({ where: {campus}, relations });
   }
 

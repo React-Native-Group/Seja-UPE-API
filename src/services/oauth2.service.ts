@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { OAuth2Client } from "google-auth-library";
-import { OAuth2 } from 'src/config/server.json';
+import { OAuth2 } from "src/config/server.json";
 
 const client = new OAuth2Client(OAuth2.realClientId);
 

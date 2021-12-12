@@ -1,6 +1,6 @@
 import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from "@nestjs/common";
 import { Observable, map } from "rxjs";
-import { Request, Response } from 'express';
+import { Request, Response } from "express";
 
 @Injectable()
 export class ResponseInterceptor implements NestInterceptor {
@@ -16,7 +16,7 @@ export class ResponseInterceptor implements NestInterceptor {
         path: request.path,
         error: false,
         status: response.statusCode,
-        code: 'status_success',
+        code: "status_success",
         response: data
       }
     }));

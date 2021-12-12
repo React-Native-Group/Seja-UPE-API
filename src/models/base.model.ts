@@ -11,7 +11,7 @@ import {
 
 export class BaseModel extends BaseEntity {
 
-  @PrimaryGeneratedColumn('increment')
+  @PrimaryGeneratedColumn("increment")
   public id: number;
 
   @OasCreatedAtProperty()

@@ -13,7 +13,7 @@ export class PopularityValidator {
   @OasValueProperty()
   @IsNotEmpty()
   @IsString()
-  @IsIn(['like', 'dislike'])
+  @IsIn(["like", "dislike"])
   public value: PopularityType;
 
 }

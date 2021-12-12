@@ -6,7 +6,7 @@ import { OasRatingProperty } from "src/docs/decorators";
 
 export type RatingField = keyof RatingModel;
 
-@Entity({ name: 'tbl_rating' })
+@Entity({ name: "tbl_rating" })
 export class RatingModel extends BaseModel {
 
   @OasRatingProperty()

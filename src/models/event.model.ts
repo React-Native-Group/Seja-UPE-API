@@ -6,7 +6,7 @@ import { OasLinkEventProperty, OasNameEventProperty } from "src/docs/decorators"
 export type EventField = keyof EventModel;
 
 
-@Entity({ name: 'tbl_event' })
+@Entity({ name: "tbl_event" })
 export class EventModel extends BaseModel {
   
   @OasNameEventProperty()

@@ -8,7 +8,7 @@ const GRADE_PATTERN = new RegExp(/^\d{1,3}(?:\.\d{1,2}$)?/);
 
 export type SisuGradeField = keyof SisuGradeModel;
 
-@Entity({ name: 'tbl_sisu_grade' })
+@Entity({ name: "tbl_sisu_grade" })
 export class SisuGradeModel extends BaseModel {
 
   @OasYearSisuGradeProperty()

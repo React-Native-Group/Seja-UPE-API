@@ -65,8 +65,8 @@ export class EvaluationService {
     if (!course)
       throw new CourseNotFoundException();
 
-    let likes = await this.popularity.count({ course, value: 'like' });
-    let dislikes = await this.popularity.count({ course, value: 'dislike' });
+    let likes = await this.popularity.count({ course, value: "like" });
+    let dislikes = await this.popularity.count({ course, value: "dislike" });
 
     return { likes, dislikes };
   }

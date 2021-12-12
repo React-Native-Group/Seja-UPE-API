@@ -1,9 +1,9 @@
-import { Module } from '@nestjs/common';
-import { JwtModule } from '@nestjs/jwt';
-import { HttpModule } from '@nestjs/axios';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { Module } from "@nestjs/common";
+import { JwtModule } from "@nestjs/jwt";
+import { HttpModule } from "@nestjs/axios";
+import { TypeOrmModule } from "@nestjs/typeorm";
 
-import { jwtSecretKey } from 'src/config/server.json';
+import { jwtSecretKey } from "src/config/server.json";
 
 import {
   AuthService,
@@ -14,7 +14,7 @@ import {
   MiningService,
   OAuth2Service,
   ProfessorService
-} from 'src/services';
+} from "src/services";
 
 import {
   AuthorizationModel,
@@ -28,7 +28,7 @@ import {
   SisuGradeModel,
   SocialModel,
   SsaGradeModel
-} from 'src/models';
+} from "src/models";
 
 @Module({
   imports: [

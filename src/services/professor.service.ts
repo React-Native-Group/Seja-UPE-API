@@ -3,7 +3,7 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { CourseNotFoundException } from "src/exceptions";
 import { CourseModel, ProfessorModel } from "src/models";
-import { MiningService } from ".";
+import { MiningService } from "./mining.service";
 
 @Injectable()
 export class ProfessorService {

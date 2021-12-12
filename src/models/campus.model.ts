@@ -10,7 +10,7 @@ import { OasDescriptionCampusProperty, OasLatitudePropery, OasLongitudePropery, 
 
 export type CampusField = keyof CampusModel;
 
-@Entity({ name: 'tbl_campus' })
+@Entity({ name: "tbl_campus" })
 export class CampusModel extends BaseModel {
 
   @OasNameCampusProperty()

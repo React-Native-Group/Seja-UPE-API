@@ -1,5 +1,5 @@
 export const Permission = {
-  DEFAULT_LEVEL: 'default'
+  DEFAULT_LEVEL: "default"
 }
 
 export const PermissionKeys = Object.values(Permission);

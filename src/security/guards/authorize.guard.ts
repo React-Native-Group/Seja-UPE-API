@@ -1,7 +1,7 @@
-import { Observable } from 'rxjs';
-import { Reflector } from '@nestjs/core';
-import { getPermissionsFromNumber } from '../permissions.enum';
-import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
+import { Observable } from "rxjs";
+import { Reflector } from "@nestjs/core";
+import { getPermissionsFromNumber } from "../permissions.enum";
+import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
 
 @Injectable()
 export class AuthorizeGuard implements CanActivate {
@@ -9,7 +9,7 @@ export class AuthorizeGuard implements CanActivate {
   constructor(private reflector: Reflector){}
 
   canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
-    const requiredPerms = this.reflector.getAllAndOverride<string[]>('permissions', [
+    const requiredPerms = this.reflector.getAllAndOverride<string[]>("permissions", [
       context.getHandler(),
       context.getClass()
     ]);

@@ -13,6 +13,7 @@ import {
   OasFetchRatingResponse,
   OasForbiddenResponse,
   OasInvalidObjectResponse,
+  OasOutdatedVersionResponse,
   OasPopularityOperation,
   OasPopularityResponse,
   OasRatingNoteParam,
@@ -25,6 +26,7 @@ import {
 @OasAppVersionHeader()
 @OasInvalidObjectResponse()
 @OasRequestTimeoutResponse()
+@OasOutdatedVersionResponse()
 @OasForbiddenResponse()
 @OasControllerTags("Avaliações")
 @UseGuards(AuthorizeGuard)
@@ -38,7 +40,7 @@ export class EvaluationController {
   @OasRatingResponse()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Post("/rating/survey/:note")
-  async onRatingSent(@Param('note', ParseIntPipe) note: number)
+  async onRatingSent(@Param("note", ParseIntPipe) note: number)
   {
     return await this.evaluationService.submitRating(note);
   }
@@ -65,7 +67,7 @@ export class EvaluationController {
   @OasFetchPopularityResponse()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get("/popularity/course/:courseId")
-  async onPopularityRequested(@Param('courseId', ParseIntPipe) courseId: number)
+  async onPopularityRequested(@Param("courseId", ParseIntPipe) courseId: number)
   {
     return await this.evaluationService.fetchPopularity(courseId);
   }

@@ -3,11 +3,11 @@ import { CourseModel } from "./course.model";
 import { BaseModel } from "./base.model";
 import { OasValuePopularityProperty } from "src/docs/decorators";
 
-export type PopularityType = 'like' | 'dislike';
+export type PopularityType = "like" | "dislike";
 
 export type PopularityField = keyof PopularityModel;
 
-@Entity({ name: 'tbl_popularity' })
+@Entity({ name: "tbl_popularity" })
 export class PopularityModel extends BaseModel {
 
   @OasValuePopularityProperty()

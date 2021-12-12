@@ -1,14 +1,14 @@
-import { CacheModule, Module } from '@nestjs/common';
-import { CacheInterceptorProvider } from 'src/hooks';
+import { CacheModule, Module } from "@nestjs/common";
+import { CacheInterceptorProvider } from "src/hooks";
 
-import { AuthModule } from './auth.module';
-import { CampusModule } from './campus.module';
-import { ServicesModule } from './services.module';
-import { DatabaseModule } from './database.module';
-import { WebsocketModule } from './websocket.module';
-import { EvaluationModule } from './evaluation.module';
-import { CourseModule } from './course.module';
-import { ProfessorModule } from './professor.module';
+import { AuthModule } from "./auth.module";
+import { CampusModule } from "./campus.module";
+import { ServicesModule } from "./services.module";
+import { DatabaseModule } from "./database.module";
+import { WebsocketModule } from "./websocket.module";
+import { EvaluationModule } from "./evaluation.module";
+import { CourseModule } from "./course.module";
+import { ProfessorModule } from "./professor.module";
 
 @Module({
   imports: [

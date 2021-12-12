@@ -16,6 +16,7 @@ import {
   OasCoursesResponse,
   OasForbiddenResponse,
   OasInvalidObjectResponse,
+  OasOutdatedVersionResponse,
   OasRequestTimeoutResponse
 } from "src/docs/decorators";
 
@@ -23,6 +24,7 @@ import {
 @OasAppVersionHeader()
 @OasInvalidObjectResponse()
 @OasRequestTimeoutResponse()
+@OasOutdatedVersionResponse()
 @OasForbiddenResponse()
 @OasControllerTags("Cursos")
 @UseGuards(AuthorizeGuard)
@@ -47,7 +49,7 @@ export class CourseController {
   @OasCoursesResponse()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get("campus/:campusId/all")
-  async onCourseRequested(@Param('campusId', ParseIntPipe) campusId: number)
+  async onCourseRequested(@Param("campusId", ParseIntPipe) campusId: number)
   {
     return await this.courseService.fetchCampusCourses(campusId);
   }
@@ -57,7 +59,7 @@ export class CourseController {
   @OasCourseProfessorsResponse()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get(":courseId/professors")
-  async onProfessorsRequested(@Param('courseId', ParseIntPipe) courseId: number)
+  async onProfessorsRequested(@Param("courseId", ParseIntPipe) courseId: number)
   {
     return await this.professorService.fetchCourseProfessors(courseId);
   }

@@ -1,6 +1,6 @@
-import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { AuthorizationModel, CampusModel, ContactModel, CourseModel, EventModel, PopularityModel, ProfessorModel, RatingModel, SisuGradeModel, SocialModel, SsaGradeModel } from 'src/models';
+import { Module } from "@nestjs/common";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { AuthorizationModel, CampusModel, ContactModel, CourseModel, EventModel, PopularityModel, ProfessorModel, RatingModel, SisuGradeModel, SocialModel, SsaGradeModel } from "src/models";
 
 @Module({
   imports: [

@@ -8,6 +8,7 @@ import {
   OasControllerTags,
   OasForbiddenResponse,
   OasInvalidObjectResponse,
+  OasOutdatedVersionResponse,
   OasProfessorOperation,
   OasProfessorsOperation,
   OasRequestTimeoutResponse
@@ -17,6 +18,7 @@ import {
 @OasAppVersionHeader()
 @OasInvalidObjectResponse()
 @OasRequestTimeoutResponse()
+@OasOutdatedVersionResponse()
 @OasForbiddenResponse()
 @OasControllerTags("Professores")
 @UseGuards(AuthorizeGuard)
@@ -36,7 +38,7 @@ export class ProfessorController {
   @OasProfessorOperation()
   @Permissions(Permission.DEFAULT_LEVEL)
   @Get(":professorId")
-  async onProfessorRequested(@Param('professorId', ParseIntPipe) professorId: number)
+  async onProfessorRequested(@Param("professorId", ParseIntPipe) professorId: number)
   {
     return await this.professorService.fetchProfessorById(professorId);
   }

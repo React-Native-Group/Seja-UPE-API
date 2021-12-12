@@ -4,13 +4,13 @@ import { Injectable } from "@nestjs/common";
 export class MiningService {
   
   capitalizeString(str: string) {
-    let exploded = str.toLocaleLowerCase().split(' ');
+    let exploded = str.toLocaleLowerCase().split(" ");
     for (let i = 0; i < exploded.length; i++) {
-      if (['de', 'da', 'do', 'das'].includes(exploded[i]))
+      if (["de", "da", "do", "das"].includes(exploded[i]))
         continue;
       exploded[i] = exploded[i].charAt(0).toLocaleUpperCase() + exploded[i].substring(1);
     }
-    return exploded.join(' ');
+    return exploded.join(" ");
   }
 
   getShortbioAreas(shortbio: string) {

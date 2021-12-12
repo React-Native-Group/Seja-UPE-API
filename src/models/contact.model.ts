@@ -5,7 +5,7 @@ import { OasCategoryNamePropery, OasFieldIconPropery, OasValueContactPropery } f
 
 export type ContactField = keyof ContactModel;
 
-@Entity({ name: 'tbl_contact' })
+@Entity({ name: "tbl_contact" })
 export class ContactModel extends BaseModel {
 
   @OasCategoryNamePropery()
