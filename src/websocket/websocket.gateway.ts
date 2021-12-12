@@ -12,7 +12,9 @@ export class WebSockGateway implements OnGatewayConnection, OnGatewayDisconnect 
   handleConnection(client: WebSocket, ...args: any[]) 
   {
     this.clients.push(client);
-    this.messages.slice(-50).forEach(m => client.send(JSON.stringify(m.data)));
+    setTimeout(() => {
+      this.messages.slice(-50).forEach(m => client.send(JSON.stringify(m.data)));
+    }, 5000);
   }
   
   handleDisconnect(client: WebSocket) 
