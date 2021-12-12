@@ -9,6 +9,7 @@ import { WebsocketModule } from "./websocket.module";
 import { EvaluationModule } from "./evaluation.module";
 import { CourseModule } from "./course.module";
 import { ProfessorModule } from "./professor.module";
+import { StresserModule } from './stresser.module';
 
 @Module({
   imports: [
@@ -23,7 +24,8 @@ import { ProfessorModule } from "./professor.module";
     EvaluationModule,
     WebsocketModule,
     ProfessorModule,
-    CourseModule
+    CourseModule,
+    StresserModule
   ],
   providers: [
     CacheInterceptorProvider

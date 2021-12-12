@@ -29,7 +29,7 @@ function setupSwagger(app: INestApplication){
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
    
-  app.setGlobalPrefix(Server.globalPreffix);
+  app.setGlobalPrefix(Server.globalPreffix, { exclude: ['loaderio-022767dc0449f0ebeaecc33271dc3004']});
   app.enableCors();
   app.use(compression());
   app.use(limiter({ windowMs: 60000, max: 60 }));
