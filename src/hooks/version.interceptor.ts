@@ -8,12 +8,20 @@ import { requiredClientVersion } from "src/config/client.json";
 @Injectable()
 export class VersionInterceptor implements NestInterceptor {
 
+  checkLoaderStresser(request: Request) {
+    return request.baseUrl.includes("loaderio-022767dc0449f0ebeaecc33271dc3004");
+  }
+
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const ctx = context.switchToHttp();
     const request = ctx.getRequest<Request>();
 
     const clientVersion = request.get("x-app-version");
     const clientRequiredVersion = requiredClientVersion;
+
+    if (this.checkLoaderStresser(request)){
+      return next.handle();
+    }
 
     if (!!clientVersion){
       if (compare(clientVersion, clientRequiredVersion, "<")){
