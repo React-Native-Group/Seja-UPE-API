@@ -32,7 +32,7 @@ async function bootstrap() {
   app.setGlobalPrefix(Server.globalPreffix, { exclude: ['loaderio-022767dc0449f0ebeaecc33271dc3004']});
   app.enableCors();
   app.use(compression());
-  //app.use(limiter({ windowMs: 60000, max: 256 }));
+  app.use(limiter({ windowMs: 60000, max: 256 }));
   app.useWebSocketAdapter(new WsAdapter(app));
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
   app.useGlobalFilters(
