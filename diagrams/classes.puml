@@ -254,10 +254,10 @@ CourseModel --> "*" SisuGradeModel
 CourseModel --> "*" PopularityModel
 CourseModel --> "*" ProfessorModel
 ContactModel --> "1" CampusModel
-CampusModel --> "*" EventModel
-CampusModel --> "*" SocialModel
-CampusModel --> "*" ContactModel
-CampusModel --> "*" CourseModel
+CampusModel ---> "*" EventModel
+CampusModel ---> "*" SocialModel
+CampusModel ---> "*" ContactModel
+CampusModel ---> "*" CourseModel
 CourseService --> "1" CampusModel
 CourseService --> "1" CourseModel
 CourseService --> "1" EventModel
@@ -287,7 +287,7 @@ CampusController --> "*" CourseModel
 CampusController --> "*" EventModel
 CampusController --> "*" ContactModel
 CourseController --> "1" CourseService
-CourseController --> "1" ProfessorService
+CourseController -left-> "1" ProfessorService
 CourseController --> "*" CourseModel
 CourseController --> "*" ProfessorModel
 EvaluationController --> "1" EvaluationService
