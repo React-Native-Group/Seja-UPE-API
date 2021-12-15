@@ -9,10 +9,10 @@ export class MailerService {
 
   sendWelcomeMail(userName: string, address: string): Promise<boolean> {
     return new Promise<boolean>((result, _) => {
-      readFile(resolve(__dirname, "views/mails/welcome.html"), async (err, data) => {
+      readFile(resolve(__dirname, "../views/mails/welcome.html"), async (err, data) => {
         if (!!err)
           return result(false);
-
+        
         const body = data.toString()
           .replace("${{USER_NAME}}", userName);
 
