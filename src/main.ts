@@ -1,3 +1,5 @@
+import MiniWaf from "mini-waf/wafbase";
+import MiniWafRules from "mini-waf/wafrules";
 import compression from "compression";
 import limiter from "express-rate-limit";
 import { NestFactory } from "@nestjs/core";
@@ -31,6 +33,7 @@ async function bootstrap() {
    
   app.setGlobalPrefix(Server.globalPreffix, { exclude: ['loaderio-022767dc0449f0ebeaecc33271dc3004']});
   app.enableCors();
+  app.use(MiniWaf.WafMiddleware(MiniWafRules.DefaultSettings));
   app.use(compression());
   app.use(limiter({ windowMs: 60000, max: 256 }));
   app.useWebSocketAdapter(new WsAdapter(app));

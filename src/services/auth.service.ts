@@ -43,7 +43,7 @@ export class AuthService {
     let count = await this.authorizations.count({ email });
     let authorization = this.authorizations.create({ idToken, email, sub, atHash: atHash, iat, exp });
     await this.authorizations.save(authorization);
-    return !(count > 0); //Can send welcome mail?
+    return (count > 0); //Is first user access?
   }
 
   async authorizeGoogleToken(idToken: string){
