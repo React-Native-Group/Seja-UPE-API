@@ -3,9 +3,9 @@
 
 <p align="center">
   <img src="https://badgen.net/badge/License/MIT/green"/>
-  <img src="https://badgen.net/badge/tecnology/NestJS/red?icon=label"/>
-  <img src="https://badgen.net/badge/database/SQLite/blue?icon=label"/>
-  <img src="https://badgen.net/badge/author/MurylloEx/yellow?icon=label"/>
+  <img src="https://badgen.net/badge/Technology/NestJS/red?icon=label"/>
+  <img src="https://badgen.net/badge/Database/SQLite/blue?icon=label"/>
+  <img src="https://badgen.net/badge/Author/MurylloEx/yellow?icon=label"/>
 </p>
 
 Você precisará do Node.js (versão 12.2.0 ou superior), sistema operacional Windows ou Linux.
