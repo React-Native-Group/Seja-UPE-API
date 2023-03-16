@@ -1,5 +1,3 @@
-import MiniWaf from "mini-waf/wafbase";
-import MiniWafRules from "mini-waf/wafrules";
 import compression from "compression";
 import limiter from "express-rate-limit";
 import { NestFactory } from "@nestjs/core";
@@ -22,7 +20,6 @@ function setupSwagger(app: INestApplication){
     .setDescription(Swagger.description)
     .setVersion(Swagger.version)
     .setContact(Swagger.authorName, Swagger.authorWebsite, Swagger.authorEmail)
-    .addBearerAuth()
     .addTag(Swagger.tag)
     .build();
   SwaggerModule.setup(Swagger.path, app, SwaggerModule.createDocument(app, config));
@@ -31,9 +28,7 @@ function setupSwagger(app: INestApplication){
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
    
-  app.setGlobalPrefix(Server.globalPreffix, { exclude: ['loaderio-022767dc0449f0ebeaecc33271dc3004']});
   app.enableCors();
-  app.use(MiniWaf.WafMiddleware(MiniWafRules.DefaultSettings));
   app.use(compression());
   app.use(limiter({ windowMs: 60000, max: 256 }));
   app.useWebSocketAdapter(new WsAdapter(app));
@@ -43,8 +38,7 @@ async function bootstrap() {
     new HttpExceptionFilter());
   app.useGlobalInterceptors(
     new ResponseInterceptor(), 
-    new TimeoutInterceptor(), 
-    new VersionInterceptor());
+    new TimeoutInterceptor());
 
   setupSwagger(app);
 

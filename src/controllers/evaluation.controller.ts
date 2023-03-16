@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Param, ParseIntPipe, Post, UseGuards } from "@nestjs/common";
+import { PopularityModel, RatingModel } from "src/models";
 import { EvaluationService } from "src/services";
 import { PopularityValidator } from "src/validators";
 import { AuthorizeGuard, Permission, Permissions } from "src/security";
@@ -22,14 +23,14 @@ import {
   OasRequestTimeoutResponse
 } from "src/docs/decorators";
 
-@OasBearerAuth()
-@OasAppVersionHeader()
+// @OasBearerAuth()
+// @OasAppVersionHeader()
 @OasInvalidObjectResponse()
 @OasRequestTimeoutResponse()
-@OasOutdatedVersionResponse()
+// @OasOutdatedVersionResponse()
 @OasForbiddenResponse()
 @OasControllerTags("Avaliações")
-@UseGuards(AuthorizeGuard)
+// @UseGuards(AuthorizeGuard)
 @Controller("evaluation")
 export class EvaluationController {
 
@@ -38,25 +39,25 @@ export class EvaluationController {
   @OasRatingNoteParam()
   @OasRatingOperation()
   @OasRatingResponse()
-  @Permissions(Permission.DEFAULT_LEVEL)
+  // @Permissions(Permission.DEFAULT_LEVEL)
   @Post("/rating/survey/:note")
-  async onRatingSent(@Param("note", ParseIntPipe) note: number)
+  async onRatingSent(@Param("note", ParseIntPipe) note: number): Promise<RatingModel>
   {
     return await this.evaluationService.submitRating(note);
   }
 
   @OasPopularityOperation()
   @OasPopularityResponse()
-  @Permissions(Permission.DEFAULT_LEVEL)
+  // @Permissions(Permission.DEFAULT_LEVEL)
   @Post("popularity/course")
-  async onPopularitySent(@Body() data: PopularityValidator)
+  async onPopularitySent(@Body() data: PopularityValidator): Promise<PopularityModel>
   {
     return await this.evaluationService.submitCoursePopularity(data);
   }
 
   @OasFetchRatingOperation()
   @OasFetchRatingResponse()
-  @Permissions(Permission.DEFAULT_LEVEL)
+  // @Permissions(Permission.DEFAULT_LEVEL)
   @Get("/rating/survey")
   async onRatingsRequested()
   {
@@ -65,7 +66,7 @@ export class EvaluationController {
 
   @OasFetchPopularityOperation()
   @OasFetchPopularityResponse()
-  @Permissions(Permission.DEFAULT_LEVEL)
+  // @Permissions(Permission.DEFAULT_LEVEL)
   @Get("/popularity/course/:courseId")
   async onPopularityRequested(@Param("courseId", ParseIntPipe) courseId: number)
   {

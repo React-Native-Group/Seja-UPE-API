@@ -1,3 +1,4 @@
+import { ApiExcludeController } from "@nestjs/swagger";
 import { Body, Controller, HttpCode, HttpException, HttpStatus, Post } from "@nestjs/common";
 
 import { AuthorizationValidator } from "src/validators";
@@ -15,6 +16,7 @@ import {
   OasRequestTimeoutResponse
 } from "src/docs/decorators";
 
+@ApiExcludeController()
 @OasAppVersionHeader()
 @OasInvalidObjectResponse()
 @OasRequestTimeoutResponse()

@@ -1,6 +1,7 @@
 import { Controller, Get, Param, ParseIntPipe, UseGuards } from "@nestjs/common";
-import { AuthorizeGuard, Permission, Permissions } from "src/security";
 import { CourseService } from "src/services";
+import { AuthorizeGuard, Permission, Permissions } from "src/security";
+import { CampusModel, ContactModel, CourseModel, EventModel } from "src/models";
 
 import {
   OasAppVersionHeader,
@@ -24,14 +25,14 @@ import {
   OasSingleCampusResponse
 } from "src/docs/decorators";
 
-@OasBearerAuth()
-@OasAppVersionHeader()
+// @OasBearerAuth()
+// @OasAppVersionHeader()
 @OasInvalidObjectResponse()
 @OasRequestTimeoutResponse()
 @OasForbiddenResponse()
-@OasOutdatedVersionResponse()
+// @OasOutdatedVersionResponse()
 @OasControllerTags("Campus")
-@UseGuards(AuthorizeGuard)
+// @UseGuards(AuthorizeGuard)
 @Controller("campus")
 export class CampusController {
 
@@ -39,18 +40,18 @@ export class CampusController {
 
   @OasCampusOperation()
   @OasCampusResponse()
-  @Permissions(Permission.DEFAULT_LEVEL)
+  // @Permissions(Permission.DEFAULT_LEVEL)
   @Get()
-  async onAllCampusRequested()
+  async onAllCampusRequested(): Promise<CampusModel[]>
   {
     return await this.courseService.fetchCampus();
   }
 
   @OasCampusCoursesOperation()
   @OasCampusCoursesResponse()
-  @Permissions(Permission.DEFAULT_LEVEL)
+  // @Permissions(Permission.DEFAULT_LEVEL)
   @Get("courses")
-  async onAllCampusWithCoursesRequested()
+  async onAllCampusWithCoursesRequested(): Promise<CampusModel[]>
   {
     return await this.courseService.fetchCampusWithCourses();
   }
@@ -58,9 +59,9 @@ export class CampusController {
   @OasCampusIdParam()
   @OasCampusOperation()
   @OasSingleCampusResponse()
-  @Permissions(Permission.DEFAULT_LEVEL)
+  // @Permissions(Permission.DEFAULT_LEVEL)
   @Get(":campusId")
-  async onCampusRequested(@Param("campusId", ParseIntPipe) campusId: number)
+  async onCampusRequested(@Param("campusId", ParseIntPipe) campusId: number): Promise<CampusModel[]>
   {
     return await this.courseService.fetchCampus(campusId);
   }
@@ -68,9 +69,9 @@ export class CampusController {
   @OasCampusIdParam()
   @OasCampusCourseOperation()
   @OasCampusCourseResponse()
-  @Permissions(Permission.DEFAULT_LEVEL)
+  // @Permissions(Permission.DEFAULT_LEVEL)
   @Get(":campusId/courses")
-  async onCampusCoursesRequested(@Param("campusId", ParseIntPipe) campusId: number)
+  async onCampusCoursesRequested(@Param("campusId", ParseIntPipe) campusId: number): Promise<CourseModel[]>
   {
     return await this.courseService.fetchCampusCourses(campusId);
   }
@@ -78,9 +79,9 @@ export class CampusController {
   @OasCampusIdParam()
   @OasCampusEventsOperation()
   @OasCampusEventsResponse()
-  @Permissions(Permission.DEFAULT_LEVEL)
+  // @Permissions(Permission.DEFAULT_LEVEL)
   @Get(":campusId/events")
-  async onCampusEventsRequested(@Param("campusId", ParseIntPipe) campusId: number)
+  async onCampusEventsRequested(@Param("campusId", ParseIntPipe) campusId: number): Promise<EventModel[]>
   {
     return await this.courseService.fetchCampusEvents(campusId);
   }
@@ -88,9 +89,9 @@ export class CampusController {
   @OasCampusIdParam()
   @OasCampusContactsOperation()
   @OasCampusContactsResponse()
-  @Permissions(Permission.DEFAULT_LEVEL)
+  // @Permissions(Permission.DEFAULT_LEVEL)
   @Get(":campusId/contacts")
-  async onCampusContactsRequested(@Param("campusId", ParseIntPipe) campusId: number)
+  async onCampusContactsRequested(@Param("campusId", ParseIntPipe) campusId: number): Promise<ContactModel[]>
   {
     return await this.courseService.fetchCampusContacts(campusId);
   }

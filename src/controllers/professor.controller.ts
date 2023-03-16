@@ -1,6 +1,7 @@
 import { Controller, Get, Param, ParseIntPipe, UseGuards } from "@nestjs/common";
 import { AuthorizeGuard, Permission, Permissions } from "src/security";
 import { ProfessorService } from "src/services";
+import { ProfessorModel } from "src/models";
 
 import {
   OasAppVersionHeader,
@@ -14,31 +15,31 @@ import {
   OasRequestTimeoutResponse
 } from "src/docs/decorators";
 
-@OasBearerAuth()
-@OasAppVersionHeader()
+// @OasBearerAuth()
+// @OasAppVersionHeader()
 @OasInvalidObjectResponse()
 @OasRequestTimeoutResponse()
-@OasOutdatedVersionResponse()
+// @OasOutdatedVersionResponse()
 @OasForbiddenResponse()
 @OasControllerTags("Professores")
-@UseGuards(AuthorizeGuard)
+// @UseGuards(AuthorizeGuard)
 @Controller("professors")
 export class ProfessorController {
 
   constructor(private professorService: ProfessorService){}
 
   @OasProfessorsOperation()
-  @Permissions(Permission.DEFAULT_LEVEL)
+  // @Permissions(Permission.DEFAULT_LEVEL)
   @Get()
-  async onProfessorsRequested()
+  async onProfessorsRequested(): Promise<ProfessorModel[]>
   {
     return await this.professorService.fetchProfessors();
   }
 
   @OasProfessorOperation()
-  @Permissions(Permission.DEFAULT_LEVEL)
+  // @Permissions(Permission.DEFAULT_LEVEL)
   @Get(":professorId")
-  async onProfessorRequested(@Param("professorId", ParseIntPipe) professorId: number)
+  async onProfessorRequested(@Param("professorId", ParseIntPipe) professorId: number): Promise<ProfessorModel>
   {
     return await this.professorService.fetchProfessorById(professorId);
   }

@@ -1,6 +1,7 @@
 import { Controller, Get, Param, ParseIntPipe, UseGuards } from "@nestjs/common";
 import { AuthorizeGuard, Permission, Permissions } from "src/security";
 import { CourseService, ProfessorService } from "src/services";
+import { CourseModel, ProfessorModel } from "src/models";
 
 import {
   OasAllCoursesOperation,
@@ -20,14 +21,14 @@ import {
   OasRequestTimeoutResponse
 } from "src/docs/decorators";
 
-@OasBearerAuth()
-@OasAppVersionHeader()
+// @OasBearerAuth()
+// @OasAppVersionHeader()
 @OasInvalidObjectResponse()
 @OasRequestTimeoutResponse()
-@OasOutdatedVersionResponse()
+// @OasOutdatedVersionResponse()
 @OasForbiddenResponse()
 @OasControllerTags("Cursos")
-@UseGuards(AuthorizeGuard)
+// @UseGuards(AuthorizeGuard)
 @Controller("courses")
 export class CourseController {
 
@@ -37,9 +38,9 @@ export class CourseController {
 
   @OasAllCoursesOperation()
   @OasAllCoursesResponse()
-  @Permissions(Permission.DEFAULT_LEVEL)
+  // @Permissions(Permission.DEFAULT_LEVEL)
   @Get()
-  async onAllCoursesRequested()
+  async onAllCoursesRequested(): Promise<CourseModel[]>
   {
     return await this.courseService.fetchCourses();
   }
@@ -47,9 +48,9 @@ export class CourseController {
   @OasCampusIdParam()
   @OasCourseOperation()
   @OasCoursesResponse()
-  @Permissions(Permission.DEFAULT_LEVEL)
+  // @Permissions(Permission.DEFAULT_LEVEL)
   @Get("campus/:campusId/all")
-  async onCourseRequested(@Param("campusId", ParseIntPipe) campusId: number)
+  async onCourseRequested(@Param("campusId", ParseIntPipe) campusId: number): Promise<CourseModel[]>
   {
     return await this.courseService.fetchCampusCourses(campusId);
   }
@@ -57,9 +58,9 @@ export class CourseController {
   @OasCourseIdParam()
   @OasCourseProfessorsOperation()
   @OasCourseProfessorsResponse()
-  @Permissions(Permission.DEFAULT_LEVEL)
+  // @Permissions(Permission.DEFAULT_LEVEL)
   @Get(":courseId/professors")
-  async onProfessorsRequested(@Param("courseId", ParseIntPipe) courseId: number)
+  async onProfessorsRequested(@Param("courseId", ParseIntPipe) courseId: number): Promise<ProfessorModel[]>
   {
     return await this.professorService.fetchCourseProfessors(courseId);
   }
